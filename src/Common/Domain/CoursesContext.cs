@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Microsoft.Data.Entity;
+using System.Data.Entity;
 
 namespace Domain
 {
