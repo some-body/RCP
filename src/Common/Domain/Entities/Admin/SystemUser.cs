@@ -2,7 +2,7 @@
 {
     public enum SystemRole { Teacher = 0, Admin = 1 };
 
-    class SystemUser : Entity
+    public class SystemUser : Entity
     {
         public SystemRole Role { get; set; }
 

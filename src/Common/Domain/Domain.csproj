@@ -57,6 +57,7 @@
     <Compile Include="Entities\Course\Question.cs" />
     <Compile Include="Entities\Admin\SystemUser.cs" />
     <Compile Include="Entities\Worker\Worker.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
