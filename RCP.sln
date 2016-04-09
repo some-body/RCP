@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{67AE751E-3B10-4BA9-98AF-925045222539}"
 EndProject
@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backends", "Backends", "{B5478B11-66C4-4FF3-AE9C-7C88737CAECF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Domain", "Domain\Domain.xproj", "{6AE61AEE-A5BE-4F14-931A-8AF41D111C61}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Domain", "src\Common\Domain\Domain.xproj", "{6AE61AEE-A5BE-4F14-931A-8AF41D111C61}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AdminFrontend", "src\AdminFrontend\AdminFrontend.xproj", "{6B5F1BA7-FC73-4107-876D-F997CABB8FC8}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AdminFrontend", "src\Frontends\AdminFrontend\AdminFrontend.xproj", "{6B5F1BA7-FC73-4107-876D-F997CABB8FC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
