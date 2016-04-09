@@ -1,4 +1,5 @@
 ﻿using AdminFrontend.ViewModels;
+using RCPAuthorization;
 using System;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -7,20 +8,30 @@ namespace AdminFrontend.Controllers
 {
     public class AuthController : Controller
     {
-        [HttpGet]
-        public ActionResult LogOn()
+        private SystemUserAuthProvider _systemUserAuthProvider;
+
+        public AuthController()
         {
-            return View(new LogOnViewModel());
+            _systemUserAuthProvider = new SystemUserAuthProvider();
+        }
+
+        [HttpGet]
+        public ActionResult LogOn(string ReturnUrl)
+        {
+            return View(new LogOnViewModel
+            {
+                ReturnUrl = ReturnUrl
+            });
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnViewModel model, string returnUrl)
+        public ActionResult LogOn(LogOnViewModel model)
         {
             if (ModelState.IsValid)
             {
-                throw new NotImplementedException();
-                // TODO: Заменить на свою проверку.
-                if (Membership.ValidateUser(model.Login, model.Password))
+                var returnUrl = model.ReturnUrl;
+                var user = _systemUserAuthProvider.GetUser(model.Login, model.Password);
+                if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Login, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -39,7 +50,6 @@ namespace AdminFrontend.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
     }

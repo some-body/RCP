@@ -9,11 +9,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>LogOn</title>
+    <title>Авторизация</title>
 </head>
 <body>
     <div> 
-        Авторизация
+        <h1>Авторизация</h1>
+        @Html.BeginForm("LogOn", "Auth", "POST")
+        {
+            <table>
+                <tr>
+                    <td>Логин</td>
+                    <td>@Html.TextBoxFor(m => m.Login)</td>
+                </tr>
+                <tr>
+                    <td>Пароль</td>
+                    <td>@Html.TextBoxFor(m => m.Password)</td>
+                </tr>
+                <tr>
+                    <td>Запомнить меня</td>
+                    <td>@Html.CheckBoxFor(m => m.RememberMe)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => m.ReturnUrl);
+                        <input type="submit" value="Вход" />
+                    </td>
+                </tr>
+            </table>
+        }
     </div>
 </body>
 </html>

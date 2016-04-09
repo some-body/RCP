@@ -125,6 +125,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\RCPAuthorization\RCPAuthorization.csproj">
+      <Project>{34e15b25-3c4e-430e-9968-9e8a3f9d874d}</Project>
+      <Name>RCPAuthorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Domain\Domain.csproj">
       <Project>{58fcad76-8d1a-420d-b720-baf4032bd3df}</Project>
       <Name>Domain</Name>
