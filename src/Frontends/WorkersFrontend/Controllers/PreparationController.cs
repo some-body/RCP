@@ -13,7 +13,7 @@ namespace WorkersFrontend.Controllers
 
         public PreparationController()
         {
-            var backendUrl = Properties.Resources.CoursesBackendURL;
+            var backendUrl = Properties.Resources.PreparationBackendURL;
             _courseQueryProvider = new ApiQueryProvider<ICollection<CourseDto>, Course>(backendUrl, "Courses");
         }
 

@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoursesBackendURL" xml:space="preserve">
-    <value>http://localhost:5001</value>
+  <data name="ExamBackendURL" xml:space="preserve">
+    <value>http://localhost:5003</value>
+  </data>
+  <data name="PreparationBackendURL" xml:space="preserve">
+    <value>http://localhost:5002</value>
   </data>
 </root>

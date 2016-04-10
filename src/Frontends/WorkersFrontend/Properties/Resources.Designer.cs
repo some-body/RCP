@@ -61,11 +61,20 @@ namespace WorkersFrontend.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:5001.
+        ///   Looks up a localized string similar to http://localhost:5003.
         /// </summary>
-        internal static string CoursesBackendURL {
+        internal static string ExamBackendURL {
             get {
-                return ResourceManager.GetString("CoursesBackendURL", resourceCulture);
+                return ResourceManager.GetString("ExamBackendURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:5002.
+        /// </summary>
+        internal static string PreparationBackendURL {
+            get {
+                return ResourceManager.GetString("PreparationBackendURL", resourceCulture);
             }
         }
     }

@@ -31,9 +31,16 @@ namespace PreparationBackend.Controllers
         }
 
         // GET: api/Courses/5
-        public Course Get(int id)
+        public PreparationCourseDto Get(int id)
         {
-            return _courseRepository.GetById(id);
+            var course = _courseRepository.GetById(id);
+            return new PreparationCourseDto
+            {
+                Id = course.Id ?? 0,
+                Name = course.Name,
+                Description = course.Description,
+                MaterialTexxt = course.MaterialText
+            };
         }
 
         // POST: api/Courses

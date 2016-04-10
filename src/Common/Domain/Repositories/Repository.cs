@@ -8,11 +8,10 @@ namespace Domain.Repositories
     public abstract class Repository<T> : IRepository<T>
         where T : Entity
     {
-        protected static CoursesContext _dbContext;
+        protected static DbContext _dbContext;
 
         static Repository()
         {
-            _dbContext = new CoursesContext();
         }
 
         public IQueryable<T> GetAll()

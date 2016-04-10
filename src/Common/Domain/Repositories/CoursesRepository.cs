@@ -5,9 +5,14 @@ namespace Domain.Repositories
 {
     public class CoursesRepository : Repository<Course>
     {
+        public CoursesRepository()
+        {
+            _dbContext = new CoursesContext();
+        }
+
         protected override DbSet<Course> GetEntityList()
         {
-            return _dbContext.Courses;
+            return ((CoursesContext)_dbContext).Courses;
         }
     }
 }
