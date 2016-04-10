@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Entities;
+using Domain.Repositories;
 using System.Security.Principal;
 
 namespace AdminFrontend.Auth

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Domain
+namespace Domain.Repositories
 {
     public interface IRepository<T>
     {
