@@ -1,29 +1,43 @@
 ﻿using Distributed;
+using Domain.Dto;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
 {
-    public class CoursesController : Controller
+    public class PreparationController : Controller
     {
-        private ApiQueryProvider<ICollection<Course>, Course> _courseQueryProvider;
+        private ApiQueryProvider<ICollection<CourseDto>, Course> _courseQueryProvider;
 
-        public CoursesController()
+        public PreparationController()
         {
             var backendUrl = Properties.Resources.CoursesBackendURL;
-            _courseQueryProvider = new ApiQueryProvider<ICollection<Course>, Course>(backendUrl, "Courses");
+            _courseQueryProvider = new ApiQueryProvider<ICollection<CourseDto>, Course>(backendUrl, "Courses");
         }
 
         // GET: Courses
         public ActionResult Index()
         {
             var courses = _courseQueryProvider.Get();
-            // TODO: ViewModel-ку.
-            return View();
+            return View(new CoursesViewModel
+            {
+                Courses = courses
+            });
+        }
+
+        public ActionResult Course(int id)
+        {
+            var course = _courseQueryProvider.Get(id);
+            var model = new CoursePreparationViewModel
+            {
+                Name = course.Name,
+                Description = course.Description,
+                MaterialText = course.MaterialText
+            };
+
+            return View(model);
         }
     }
 }

@@ -21,7 +21,12 @@ namespace PreparationBackend.Controllers
         {
             return _courseRepository
                 .GetAll()
-                .Select(e => new CourseDto(e))
+                .Select(e => new CourseDto
+                {
+                    Id = e.Id ?? 0,
+                    Name = e.Name,
+                    Description = e.Description
+                })
                 .AsEnumerable();
         }
 

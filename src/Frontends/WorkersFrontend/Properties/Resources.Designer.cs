@@ -61,7 +61,7 @@ namespace WorkersFrontend.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to localhost:1001.
+        ///   Looks up a localized string similar to http://localhost:5001.
         /// </summary>
         internal static string CoursesBackendURL {
             get {

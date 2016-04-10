@@ -1,0 +1,28 @@
+﻿@model WorkersFrontend.ViewModels.CoursesViewModel
+
+@{
+    ViewBag.Title = "Курсы";
+}
+
+<style>
+    .course-info {
+        
+    }
+</style>
+
+<h2>Курсы</h2>
+
+<div>
+    @foreach(var course in Model.Courses)
+    {
+        <div class="course-info">
+            <h2>
+                @Html.ActionLink(course.Name, "Course", new { id = course.Id })
+            </h2>
+            <div>
+                @course.Description
+            </div>
+            <hr />
+        </div>
+    }
+</div>
