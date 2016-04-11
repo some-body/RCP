@@ -1,0 +1,25 @@
+﻿@model WorkersFrontend.ViewModels.ExamViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Экзамен</h2>
+
+<div>
+    @Html.BeginForm("SubmitExam", "Exam")
+    {
+    @foreach (var q in Model.Questions)
+    {
+        <div>@q.Text</div>
+        foreach (var a in q.Answers)
+        {
+
+            var aId = "answer_" + q.Id + "_" + a.Id;
+            <input type="checkbox" name="@aId" />
+        }
+        <hr />
+    }
+    <input type="submit" />
+    }
+</div>

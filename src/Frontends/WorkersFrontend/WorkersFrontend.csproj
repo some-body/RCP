@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\CoursePreparationViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -131,6 +132,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Exam\StartExam.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -141,7 +144,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Exam\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Distributed\Distributed.csproj">

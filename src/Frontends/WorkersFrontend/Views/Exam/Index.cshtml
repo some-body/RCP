@@ -1,0 +1,22 @@
+﻿@model WorkersFrontend.ViewModels.CoursesViewModel
+
+@{
+    ViewBag.Title = "Экзамен";
+}
+
+<h2>Курсы, по которым необходимо пройти экзамен</h2>
+
+<div>
+    @foreach (var course in Model.Courses)
+    {
+        <div class="course-info">
+            <h2>
+                @Html.ActionLink(course.Name, "StartExam", new { courseId = course.Id })
+            </h2>
+            <div>
+                @course.Description
+            </div>
+            <hr />
+        </div>
+    }
+</div>

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomApiQueryProvider.cs" />
     <Compile Include="ApiQueryProvider.cs" />
     <Compile Include="DistributedQueryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

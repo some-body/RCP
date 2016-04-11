@@ -42,7 +42,19 @@ namespace ExamBackend.Controllers
             // TODO: Запретить кэширование.
             return questions;
         }
-        
+
+        [HttpGet]
+        public int MyGetQuery()
+        {
+            return 3;
+        }
+
+        [HttpPost]
+        public int MyPostQuery()
+        {
+            return 8;
+        }
+
         [HttpPost]
         public void SaveExamResult(ExamResult examResult)
         {
@@ -53,6 +65,9 @@ namespace ExamBackend.Controllers
         [HttpPost]
         public IEnumerable<CourseDto> GetCoursesByIds([FromBody] ICollection<int> ids)
         {
+            if (ids == null && !ids.Any())
+                return null;
+
             return _coursesRepository
                 .GetAll()
                 .Where(e => e.Id.HasValue && ids.Contains(e.Id.Value))
