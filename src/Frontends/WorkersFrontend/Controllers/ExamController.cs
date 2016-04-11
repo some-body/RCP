@@ -1,5 +1,6 @@
 ﻿using Distributed;
 using Domain.Dto;
+using Domain.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,10 +37,33 @@ namespace WorkersFrontend.Controllers
 
         public ActionResult StartExam(int courseId)
         {
+            return View(new StartExamViewModel { CourseId = courseId });
+        }
+
+        public JsonResult GetRandomQuestions(int courseId)
+        {
             var action = "api/Exam/GetRandomQuestionsForCourse";
             var data = "courseId=" + courseId.ToString();
             var questions = _examQueryProvider.Get<ICollection<QuestionDto>>(action, data);
-            return View(new ExamViewModel { Questions = questions });
+
+            return Json(new ExamViewModel
+            {
+                Questions = questions
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public RedirectToRouteResult SubmitExam(SubmitExamViewModel result)
+        {
+            // TODO: Работника проставлять из кук.
+            var result = new ExamResult
+            {
+                WorkerId = 1,
+                CourseId = 
+            }
+
+            _examQueryProvider.Post<bool, ExamResult>()
+
+            return RedirectToAction("Index", "Home", null);
         }
     }
 }

@@ -43,21 +43,13 @@ namespace ExamBackend.Controllers
             return questions;
         }
 
-        [HttpGet]
-        public int MyGetQuery()
-        {
-            return 3;
-        }
-
         [HttpPost]
-        public int MyPostQuery()
+        public void SaveExamResult(int workerId, int courseId, )
         {
-            return 8;
-        }
+            // TODO: Проверять, что ответы верны.
 
-        [HttpPost]
-        public void SaveExamResult(ExamResult examResult)
-        {
+            var examResult = new ExamResult();
+
             examResult.Id = null;
             _examResultsRepository.Save(examResult);
         }

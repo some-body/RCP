@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\ExamResultDto.cs" />
     <Compile Include="Dto\PreparationCourseDto.cs" />
     <Compile Include="ExamContext.cs" />
     <Compile Include="CoursesContext.cs" />

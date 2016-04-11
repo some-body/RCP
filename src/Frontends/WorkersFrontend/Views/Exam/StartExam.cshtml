@@ -1,25 +1,54 @@
-﻿@model WorkersFrontend.ViewModels.ExamViewModel
-
+﻿@model WorkersFrontend.ViewModels.StartExamViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "StartExam";
 }
 
 <h2>Экзамен</h2>
 
-<div>
-    @Html.BeginForm("SubmitExam", "Exam")
-    {
-    @foreach (var q in Model.Questions)
-    {
-        <div>@q.Text</div>
-        foreach (var a in q.Answers)
-        {
-
-            var aId = "answer_" + q.Id + "_" + a.Id;
-            <input type="checkbox" name="@aId" />
-        }
+<div id="question-list">
+    <div data-bind="foreach: Questions">
+        <h3 data-bind="text: Text"></h3>
+        <div data-bind="foreach: Answers">
+            <div>
+                <input class="answer-checkbox" type="checkbox" data-bind="checked: IsChecked" />
+                <span data-bind="text: Text"></span>
+            </div>
+        </div>
         <hr />
-    }
-    <input type="submit" />
-    }
+    </div>
 </div>
+<button id="submit-exam-btn">Завершить</button>
+
+
+<script type="text/javascript">
+    function showQuestions(data) {
+        var viewModel = ko.mapping.fromJS(data);
+        ko.applyBindings(viewModel, $('#question-list')[0]);
+    }
+
+    $(() => {
+        $.get('@Url.Action("GetRandomQuestions", new { courseId = Model.CourseId })',
+           (data) => {
+                showQuestions(data);
+           }
+        );
+    });
+
+    $('#submit-exam-btn').click(() =>{
+        let viewModel = ko.dataFor($('#question-list'));
+
+        let resultData = {
+            'CourseId': @Model.CourseId,
+            'CheckedAnswersIds': []
+        };
+        $('.answer-checkbox:checked').each((i, el) => {
+            let answer = ko.dataFor(el);
+            resultData.CheckedAnswersIds.push(answer.Id());
+        });
+
+        $.post('@Url.Action("SubmitExam")',
+            { 'result': resultData },
+            () => window.location.replace('@Url.Action("Index", "Home", null)')
+        );
+    });
+</script>
