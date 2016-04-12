@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ExamResultDto.cs" />
+    <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\PreparationCourseDto.cs" />
     <Compile Include="Dto\SignInDto.cs" />
     <Compile Include="Dto\Token.cs" />

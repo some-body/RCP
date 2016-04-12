@@ -1,41 +1,34 @@
 ﻿using Domain.Dto;
 using Domain.Entities;
 using Domain.Repositories;
+using SessionBackend.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SessionBackend.Controllers
 {
-    public class TokenRecord
+    public class WorkersController : ApiController
     {
-        public Token Token;
-        public WorkerDto Worker;
-    }
-
-    public class SessionController : ApiController
-    {
-        public static IDictionary<string, TokenRecord> TokensList { get; private set; } = new Dictionary<string, TokenRecord>();
+        public static IDictionary<string, WorkerTokenRecord> TokensList { get; private set; } = new Dictionary<string, WorkerTokenRecord>();
 
         private const int ExpiresInSeconds = 200;
 
         private IRepository<Worker> _workersRepository;
 
-        public SessionController()
+        public WorkersController()
         {
             _workersRepository = new WorkersRepository();
         }
 
         [HttpPost]
-        public SignInDto SignIn([FromBody]string login, [FromBody]string password)
+        public SignInDto SignIn([FromBody]LoginDto loginDto)
         {
-            var passwordHash = Hash(password);
+            var passwordHash = Hash(loginDto.Password);
 
             var worker =  _workersRepository.GetAll()
-                .FirstOrDefault(w => w.Login == login && w.PasswordHash == passwordHash);
+                .FirstOrDefault(w => w.Login == loginDto.Login && w.PasswordHash == passwordHash);
 
             if (worker == null)
             {
@@ -54,7 +47,7 @@ namespace SessionBackend.Controllers
                 FullName = worker.FullName
             };
 
-            TokensList.Add(token.Value, new TokenRecord { Token = token, Worker = workerDto });
+            TokensList.Add(token.Value, new WorkerTokenRecord { Token = token, Worker = workerDto });
 
             return new SignInDto
             {
