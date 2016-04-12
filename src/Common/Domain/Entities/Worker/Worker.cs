@@ -6,5 +6,8 @@ namespace Domain.Entities
     {
         public string FullName { get; set; }
         public virtual ICollection<int> AppointedCoursesIds { get; set; }
+
+        public string Login { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
