@@ -50,9 +50,12 @@
             { 'result': resultData },
             (isPassed) =>
             {
-                alert(isPassed);
-                // TODO: Показывать страницу завершения экзамена.
-                //window.location.replace('@Url.Action("Index", "Home", null)')
+                let msg = isPassed
+                    ? "Экзамен сдан"
+                    : "Экзамен не сдан";
+
+                alert(msg);
+                window.location.replace('@Url.Action("Index", "Exam", null)')
             }
         );
     });
