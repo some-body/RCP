@@ -1,4 +1,6 @@
-﻿namespace Distributed
+﻿using Newtonsoft.Json;
+
+namespace Distributed
 {
     public class ApiQueryProvider<TCollection, TEntity> : DistributedQueryProvider
     {
@@ -40,9 +42,10 @@
             MakePatchQuery(query, EntityToString(data));
         }
 
-        protected virtual string EntityToString(TEntity entity)
-        {
-            return entity.ToString();
-        }
+        //protected virtual string EntityToString(TEntity entity)
+        //{
+        //    //return entity.ToString();
+        //    return JsonConvert.SerializeObject(entity);
+        //}
     }
 }

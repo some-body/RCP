@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Newtonsoft.Json;
+using System.Linq;
 
 namespace Distributed
 {
@@ -29,9 +30,9 @@ namespace Distributed
             return MakePostQuery<TResult>(query, EntityToString(data));
         }
 
-        protected virtual string EntityToString(object entity)
-        {
-            return entity.ToString();
-        }
+        //protected virtual string EntityToString(object entity)
+        //{
+        //    return JsonConvert.SerializeObject(entity);
+        //}
     }
 }

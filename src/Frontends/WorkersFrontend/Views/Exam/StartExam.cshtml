@@ -48,7 +48,12 @@
 
         $.post('@Url.Action("SubmitExam")',
             { 'result': resultData },
-            () => window.location.replace('@Url.Action("Index", "Home", null)')
+            (isPassed) =>
+            {
+                alert(isPassed);
+                // TODO: Показывать страницу завершения экзамена.
+                //window.location.replace('@Url.Action("Index", "Home", null)')
+            }
         );
     });
 </script>

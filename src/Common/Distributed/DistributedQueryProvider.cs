@@ -77,7 +77,12 @@ namespace Distributed
                 webClient.DownloadString(queryUrl);
         }
 
-        public static string StringEncodingConvert(string strText, string strSrcEncoding, string strDestEncoding)
+        protected virtual string EntityToString(object entity)
+        {
+            return JsonConvert.SerializeObject(entity);
+        }
+
+        private static string StringEncodingConvert(string strText, string strSrcEncoding, string strDestEncoding)
         {
             System.Text.Encoding srcEnc = System.Text.Encoding.GetEncoding(strSrcEncoding);
             System.Text.Encoding destEnc = System.Text.Encoding.GetEncoding(strDestEncoding);

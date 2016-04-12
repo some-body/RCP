@@ -44,20 +44,48 @@ namespace ExamBackend.Controllers
         }
 
         [HttpPost]
-        public void SaveExamResult(int workerId, int courseId, )
+        public bool SaveExamResult(ExamResultDto result)
         {
             // TODO: Проверять, что ответы верны.
+            var course = _coursesRepository.GetById(result.CourseId);
+            if (course == null)
+                return false;
 
-            var examResult = new ExamResult();
+            var correctAnswersIds = new List<int>();
+            foreach(var q in course.Questions)
+            {
+                var answers = q.Answers
+                    .Where(a => a.IsCorrect)
+                    .Select(a => a.Id.Value)
+                    .ToList();
+
+                correctAnswersIds.AddRange(answers);
+            }
+
+            var isPassed = correctAnswersIds
+                .OrderBy(a => a)
+                .SequenceEqual(
+                    result.CheckedAnswersIds
+                    .OrderBy(a => a)
+                );
+
+            var examResult = new ExamResult
+            {
+                WorkerId = result.WorkerId,
+                CourseId = result.CourseId,
+                IsSuccess = isPassed
+            };
 
             examResult.Id = null;
             _examResultsRepository.Save(examResult);
+
+            return isPassed;
         }
 
         [HttpPost]
         public IEnumerable<CourseDto> GetCoursesByIds([FromBody] ICollection<int> ids)
         {
-            if (ids == null && !ids.Any())
+            if (ids == null || !ids.Any())
                 return null;
 
             return _coursesRepository
