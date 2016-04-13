@@ -1,8 +1,19 @@
 ﻿@model WorkersFrontend.ViewModels.AuthViewModel
 
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "Авторизация";
 }
 
 <h2>SignIn</h2>
 
+@Html.BeginForm("Authorize", "Auth", "POST")
+{ 
+    @Html.HiddenFor(m => m.ReturnToUrl);
+    <div>
+        Логин: @Html.TextBoxFor(m => m.Login);
+    </div>
+    <div>
+        Пароль: @Html.TextBoxFor(m => m.Password);
+    </div>
+    <div><input type="submit" value="Вход" /></div>
+}

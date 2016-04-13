@@ -32,12 +32,7 @@ namespace SessionBackend.Controllers
 
             if (worker == null)
             {
-                return new SignInDto {
-                    Token = new Token {
-                        Value = "",
-                        ExpiresOn = DateTime.Now.AddDays(-1)
-                    }
-                };
+                return null;
             }
 
             var token = GenerateToken(worker.Login, worker.PasswordHash);

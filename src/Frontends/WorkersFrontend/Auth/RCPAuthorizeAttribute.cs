@@ -26,7 +26,7 @@ namespace WorkersFrontend.Auth
                 return;
             }
 
-            var worker = _sessionQueryProvider.Post<WorkerDto, string>("api/GetWorkerByToken", tokenValue.Value);
+            var worker = _sessionQueryProvider.Post<WorkerDto, string>("api/Workers/GetWorkerByToken", tokenValue.Value);
             if(worker == null)
             {
                 filterContext.HttpContext.Response.Cookies[tokenValue.Name].Expires = DateTime.Now.AddDays(-1);
