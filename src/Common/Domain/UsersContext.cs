@@ -7,5 +7,6 @@ namespace Domain
     {
         public DbSet<SystemUser> SystemUsers { get; set; }
         public DbSet<Worker> Workers { get; set; }
+        public DbSet<AppointedCourse> AppointedCourses { get; set; }
     }
 }

@@ -19,25 +19,39 @@ namespace WorkersFrontend.Controllers
             = new Dictionary<string, ICollection<int>>();
 
         private CustomApiQueryProvider _examQueryProvider;
+        private ApiQueryProvider<ICollection<WorkerDto>, Worker> _workersQueryProvider;
 
         public ExamController()
         {
-            var backendUrl = Properties.Resources.ExamBackendURL;
-            _examQueryProvider = new CustomApiQueryProvider(backendUrl);
+            var examBackendUrl = Properties.Resources.ExamBackendURL;
+            _examQueryProvider = new CustomApiQueryProvider(examBackendUrl);
+
+            var workersBackendUrl = Properties.Resources.WorkersBackendURL;
+            _workersQueryProvider = new ApiQueryProvider<ICollection<WorkerDto>, Worker>(workersBackendUrl, "Workers");
         }
 
         // GET: Exam
         public ActionResult Index()
         {
             var action = "api/Exam/GetCoursesByIds";
-            // TODO: Получать список курсов работника
-            var data = new List<int> { 1, 2 };
 
-            var courses = _examQueryProvider.Post<ICollection<CourseDto>, ICollection<int>>(action, data);
-            return View(new CoursesViewModel
+            var worker = _workersQueryProvider.Get(UserId);
+            var coursesIds = worker.AppointedCourses.Select(e => e.CourseId).ToList();
+            if(coursesIds != null)
             {
-                Courses = courses
-            });
+                var courses = _examQueryProvider.Post<ICollection<CourseDto>, ICollection<int>>(action, coursesIds);
+                return View(new CoursesViewModel
+                {
+                    Courses = courses
+                });
+            }
+            else
+            {
+                return View(new CoursesViewModel
+                {
+                    Courses = new List<CourseDto>()
+                });
+            }
         }
 
         public ActionResult StartExam(int courseId)
@@ -47,8 +61,7 @@ namespace WorkersFrontend.Controllers
 
         public JsonResult GetRandomQuestions(int courseId)
         {
-            // TODO: Работника проставлять из кук.
-            var token = "123";
+            var token = Request.Cookies["token"].Value;
 
             // TODO: Проверка на то, что курс с таким id есть у работника.
 

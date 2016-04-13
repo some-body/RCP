@@ -86,5 +86,14 @@ namespace WorkersFrontend.Properties {
                 return ResourceManager.GetString("SessionBackendURL", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:5005.
+        /// </summary>
+        internal static string WorkersBackendURL {
+            get {
+                return ResourceManager.GetString("WorkersBackendURL", resourceCulture);
+            }
+        }
     }
 }
