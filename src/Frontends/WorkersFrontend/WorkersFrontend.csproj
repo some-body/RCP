@@ -107,9 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\RCPAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\PreparationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RCPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -119,6 +122,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AuthViewModel.cs" />
+    <Compile Include="ViewModels\RedirectViewModel.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\CoursePreparationViewModel.cs" />
     <Compile Include="ViewModels\ExamViewModel.cs" />
@@ -138,6 +143,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\StartExam.cshtml" />
+    <Content Include="Views\Auth\SignIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

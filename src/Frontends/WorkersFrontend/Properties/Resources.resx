@@ -123,4 +123,7 @@
   <data name="PreparationBackendURL" xml:space="preserve">
     <value>http://localhost:5002</value>
   </data>
+  <data name="SessionBackendURL" xml:space="preserve">
+    <value>http://localhost:5004</value>
+  </data>
 </root>

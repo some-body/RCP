@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WorkersFrontend.Auth;
 using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
 {
-    public class ExamController : Controller
+    [RCPAuthorizeAttribute]
+    public class ExamController : RCPController
     {
         public static IDictionary<string, ICollection<int>> _examQuestionsForUser { get; private set; } 
             = new Dictionary<string, ICollection<int>>();
