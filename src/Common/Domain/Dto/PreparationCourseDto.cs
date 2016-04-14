@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-
-namespace Domain.Dto
+﻿namespace Domain.Dto
 {
     public class PreparationCourseDto
     {

@@ -16,26 +16,26 @@ namespace SessionBackend.Controllers
         private const int ExpiresInSeconds = 200;
 
         private IRepository<Worker> _workersRepository;
+        private TokenGenerator _tokenGenerator;
 
         public WorkersController()
         {
             _workersRepository = new WorkersRepository();
+            _tokenGenerator = new TokenGenerator(ExpiresInSeconds);
         }
 
         [HttpPost]
-        public SignInDto SignIn([FromBody]LoginDto loginDto)
+        public WorkerSignInDto SignIn([FromBody]LoginDto loginDto)
         {
-            var passwordHash = Hash(loginDto.Password);
+            var passwordHash = _tokenGenerator.Hash(loginDto.Password);
 
             var worker =  _workersRepository.GetAll()
                 .FirstOrDefault(w => w.Login == loginDto.Login && w.PasswordHash == passwordHash);
 
             if (worker == null)
-            {
                 return null;
-            }
 
-            var token = GenerateToken(worker.Login, worker.PasswordHash);
+            var token = _tokenGenerator.GenerateToken(worker.Login, worker.PasswordHash);
             var workerDto = new WorkerDto
             {
                 Id = worker.Id.Value,
@@ -44,7 +44,7 @@ namespace SessionBackend.Controllers
 
             TokensList.Add(token.Value, new WorkerTokenRecord { Token = token, Worker = workerDto });
 
-            return new SignInDto
+            return new WorkerSignInDto
             {
                 Token = token,
                 Worker = workerDto
@@ -59,7 +59,7 @@ namespace SessionBackend.Controllers
         }
 
         [HttpPost]
-        public WorkerDto GetWorkerByToken([FromBody]string tokenValue)
+        public WorkerDto GetByToken([FromBody]string tokenValue)
         {
             if (tokenValue == null)
                 return null;
@@ -76,32 +76,6 @@ namespace SessionBackend.Controllers
             }
 
             return tokenRecord.Worker;
-        }
-
-        private Token GenerateToken(params string[] strs)
-        {
-            var seed = Hash(string.Concat(strs));
-            var value = GenerateString(seed);
-
-            return new Token
-            {
-                Value = value,
-                ExpiresOn = DateTime.Now.AddSeconds(ExpiresInSeconds),
-            };
-        }
-
-        private static string GenerateString(string seed)
-        {
-            var value = seed + DateTime.Now.ToShortDateString()
-                + DateTime.Now.ToShortTimeString()
-                + DateTime.Now.Millisecond.ToString();
-
-            return Math.Abs(value.GetHashCode()).ToString().PadLeft(10, '5');
-        }
-
-        private string Hash(string str)
-        {
-            return Math.Abs(str.GetHashCode()).ToString();
         }
     }
 }

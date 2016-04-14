@@ -1,18 +1,15 @@
 ﻿using Distributed;
 using Domain.Dto;
 using Domain.Entities;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WorkersFrontend.Auth;
 using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
 {
-    [RCPAuthorizeAttribute]
+    [RCPAuthorize]
     public class ExamController : RCPController
     {
         public static IDictionary<string, ICollection<int>> _examQuestionsForUser { get; private set; } 

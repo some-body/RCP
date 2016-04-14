@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Distributed
+﻿namespace Distributed
 {
     public class ApiQueryProvider<TCollection, TEntity> : DistributedQueryProvider
     {

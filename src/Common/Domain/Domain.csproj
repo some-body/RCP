@@ -52,10 +52,12 @@
     <Compile Include="Dto\ExamResultDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\PreparationCourseDto.cs" />
-    <Compile Include="Dto\SignInDto.cs" />
+    <Compile Include="Dto\SystemUserSignInDto.cs" />
+    <Compile Include="Dto\WorkerSignInDto.cs" />
     <Compile Include="Dto\Token.cs" />
     <Compile Include="Dto\WorkerDto.cs" />
     <Compile Include="Entities\Worker\AppointedCourse.cs" />
+    <Compile Include="Repositories\SystemUsersRepository.cs" />
     <Compile Include="Repositories\WorkersRepository.cs" />
     <Compile Include="UsersContext.cs" />
     <Compile Include="ExamContext.cs" />

@@ -26,7 +26,7 @@ namespace WorkersFrontend.Auth
                 return;
             }
 
-            var worker = _sessionQueryProvider.Post<WorkerDto, string>("api/Workers/GetWorkerByToken", tokenValue.Value);
+            var worker = _sessionQueryProvider.Post<WorkerDto, string>("api/Workers/GetByToken", tokenValue.Value);
             if(worker == null)
             {
                 filterContext.HttpContext.Response.Cookies[tokenValue.Name].Expires = DateTime.Now.AddDays(-1);
@@ -41,11 +41,7 @@ namespace WorkersFrontend.Auth
 
         private void RedirectToAuth(ActionExecutingContext filterContext)
         {
-            //var authUrl = UrlHelper.GenerateUrl("", "SignIn", "Auth", null, null,
-            //        filterContext.RequestContext, false);
-
-            var authUrl = "/Auth/SignIn?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
-
+            var authUrl = "/Auth?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
             filterContext.Result = new RedirectResult(authUrl);
         }
     }

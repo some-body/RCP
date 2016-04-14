@@ -4,9 +4,9 @@
     ViewBag.Title = "Авторизация";
 }
 
-<h2>SignIn</h2>
+<h2>Авторизация</h2>
 
-@Html.BeginForm("Authorize", "Auth", "POST")
+@Html.BeginForm("Index", "Auth", "POST")
 { 
     @Html.HiddenFor(m => m.ReturnToUrl);
     <div>

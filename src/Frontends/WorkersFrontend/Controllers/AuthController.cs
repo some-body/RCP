@@ -1,8 +1,5 @@
 ﻿using Distributed;
 using Domain.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WorkersFrontend.ViewModels;
@@ -19,8 +16,8 @@ namespace WorkersFrontend.Controllers
             _sessionQueryProvider = new CustomApiQueryProvider(backendUrl);
         }
 
-        // GET: Auth
-        public ActionResult SignIn(RedirectViewModel model)
+        [HttpGet]
+        public ActionResult Index(RedirectViewModel model)
         {
             var authViewModel = new AuthViewModel
             {
@@ -30,7 +27,8 @@ namespace WorkersFrontend.Controllers
             return View(authViewModel);
         }
 
-        public ActionResult Authorize(AuthViewModel model)
+        [HttpPost]
+        public ActionResult Index(AuthViewModel model)
         {
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
 
@@ -40,10 +38,10 @@ namespace WorkersFrontend.Controllers
                 Password = model.Password
             };
 
-            var result = _sessionQueryProvider.Post<SignInDto, LoginDto>("api/Workers/SignIn", loginDto);
+            var result = _sessionQueryProvider.Post<WorkerSignInDto, LoginDto>("api/Workers/SignIn", loginDto);
             if(result == null)
             {
-                return RedirectToAction("SignIn", new RedirectViewModel
+                return RedirectToAction("Index", new RedirectViewModel
                 {
                     ReturnToUrl = redirectUrl
                 });

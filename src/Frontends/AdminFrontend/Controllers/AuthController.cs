@@ -1,56 +1,61 @@
-﻿using AdminFrontend.ViewModels;
-using RCPAuthorization;
-using System;
+﻿using Distributed;
+using Domain.Dto;
+using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
+using AdminFrontend.ViewModels;
 
 namespace AdminFrontend.Controllers
 {
     public class AuthController : Controller
     {
-        private SystemUserAuthProvider _systemUserAuthProvider;
+        private CustomApiQueryProvider _sessionQueryProvider;
 
         public AuthController()
         {
-            _systemUserAuthProvider = new SystemUserAuthProvider();
+            var backendUrl = Properties.Resources.SessionBackendURL;
+            _sessionQueryProvider = new CustomApiQueryProvider(backendUrl);
         }
 
         [HttpGet]
-        public ActionResult LogOn(string ReturnUrl)
+        public ActionResult Index(RedirectViewModel model)
         {
-            return View(new LogOnViewModel
+            var authViewModel = new AuthViewModel
             {
-                ReturnUrl = ReturnUrl
-            });
+                ReturnToUrl = model.ReturnToUrl
+            };
+
+            return View(authViewModel);
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnViewModel model)
+        public ActionResult Index(AuthViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var returnUrl = model.ReturnUrl;
-                var user = _systemUserAuthProvider.GetUser(model.Login, model.Password);
-                if (user != null)
-                {
-                    FormsAuthentication.SetAuthCookie(model.Login, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
-            }
+            var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
 
-            return View(model);
+            var loginDto = new LoginDto
+            {
+                Login = model.Login,
+                Password = model.Password
+            };
+
+            var result = _sessionQueryProvider.Post<WorkerSignInDto, LoginDto>("api/SystemUsers/SignIn", loginDto);
+            if(result == null)
+            {
+                return RedirectToAction("Index", new RedirectViewModel
+                {
+                    ReturnToUrl = redirectUrl
+                });
+            }
+            else
+            {
+                var tokenCookie = new HttpCookie("token")
+                {
+                    Value = result.Token.Value,
+                    Expires = result.Token.ExpiresOn
+                };
+                Response.SetCookie(tokenCookie);
+                return Redirect(redirectUrl);
+            }
         }
     }
 }

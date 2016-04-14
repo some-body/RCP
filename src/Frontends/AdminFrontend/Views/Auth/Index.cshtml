@@ -1,0 +1,19 @@
+﻿@model AdminFrontend.ViewModels.AuthViewModel
+
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+<h2>Авторизация</h2>
+
+@Html.BeginForm("Index", "Auth", "POST")
+{
+@Html.HiddenFor(m => m.ReturnToUrl);
+<div>
+    Логин: @Html.TextBoxFor(m => m.Login);
+</div>
+<div>
+    Пароль: @Html.TextBoxFor(m => m.Password);
+</div>
+<div><input type="submit" value="Вход" /></div>
+}
