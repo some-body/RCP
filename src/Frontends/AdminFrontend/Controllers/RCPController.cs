@@ -5,5 +5,6 @@ namespace AdminFrontend.Controllers
     public class RCPController : Controller
     {
         public int UserId { get; set; }
+        public string UserRole { get; set; }
     }
 }

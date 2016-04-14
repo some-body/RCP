@@ -1,7 +1,9 @@
 ﻿using AdminFrontend.Controllers;
 using Distributed;
 using Domain.Dto;
+using Domain.Entities;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace AdminFrontend.Auth
@@ -9,6 +11,8 @@ namespace AdminFrontend.Auth
     public class RCPAuthorizeAttribute : ActionFilterAttribute
     {
         private CustomApiQueryProvider _sessionQueryProvider;
+
+        public string Roles { get; set; } = "Admin, Teacher";
 
         public RCPAuthorizeAttribute()
         {
@@ -18,6 +22,11 @@ namespace AdminFrontend.Auth
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            var rolesArr = Roles.Split(',')
+                .Select(r => r.Trim())
+                .ToList();
+            
+
             var tokenValue = filterContext.HttpContext.Request.Cookies["token"];
 
             if (tokenValue == null)
@@ -26,8 +35,8 @@ namespace AdminFrontend.Auth
                 return;
             }
 
-            var worker = _sessionQueryProvider.Post<WorkerDto, string>("api/SystemUsers/GetByToken", tokenValue.Value);
-            if(worker == null)
+            var user = _sessionQueryProvider.Post<SystemUser, string>("api/SystemUsers/GetByToken", tokenValue.Value);
+            if(user == null || !rolesArr.Contains(user.Role))
             {
                 filterContext.HttpContext.Response.Cookies[tokenValue.Name].Expires = DateTime.Now.AddDays(-1);
                 RedirectToAuth(filterContext);
@@ -35,7 +44,9 @@ namespace AdminFrontend.Auth
             }
             else
             {
-                ((RCPController)filterContext.Controller).UserId = worker.Id;
+                var contr = (RCPController)filterContext.Controller;
+                contr.UserId = user.Id.Value;
+                contr.UserRole = user.Role;
             }
         }
 

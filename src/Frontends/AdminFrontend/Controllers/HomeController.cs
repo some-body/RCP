@@ -1,12 +1,28 @@
-﻿using System.Web.Mvc;
+﻿using AdminFrontend.Auth;
+using System.Web.Mvc;
 
 namespace AdminFrontend.Controllers
 {
-    [Authorize]
-    public class HomeController : Controller
+    [RCPAuthorize]
+    public class HomeController : RCPController
     {
-        // GET: Home
         public ActionResult Index()
+        {
+            if (UserRole == "Admin")
+                return RedirectToAction("Admin");
+            else if (UserRole == "Teacher")
+                return RedirectToAction("Teacher");
+            else
+                return new HttpUnauthorizedResult();
+
+        }
+
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        public ActionResult Teacher()
         {
             return View();
         }
