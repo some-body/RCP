@@ -2,6 +2,7 @@
 using Domain.Dto;
 using System.Web;
 using System.Web.Mvc;
+using WorkersFrontend.Auth;
 using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
@@ -28,7 +29,7 @@ namespace WorkersFrontend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AuthViewModel model)
+        public ActionResult Index1(AuthViewModel model)
         {
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
 
@@ -56,6 +57,18 @@ namespace WorkersFrontend.Controllers
                 Response.SetCookie(tokenCookie);
                 return Redirect(redirectUrl);
             }
+        }
+
+        [HttpGet]
+        public ActionResult SignOut()
+        {
+            var tokenCookie = Request.Cookies["token"];
+            if (tokenCookie != null)
+            {
+                Response.Cookies.Remove("token");
+                _sessionQueryProvider.Post<int?, string>("api/Workers/SignOut", tokenCookie.Value);
+            }
+            return RedirectToAction("Index", "Home", null);
         }
     }
 }

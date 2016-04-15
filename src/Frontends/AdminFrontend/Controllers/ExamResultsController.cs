@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace AdminFrontend.Controllers
 {
     [RCPAuthorize(Roles = "Teacher")]
-    public class ExamResultsController : Controller
+    public class ExamResultsController : RCPController
     {
         public ActionResult Index()
         {

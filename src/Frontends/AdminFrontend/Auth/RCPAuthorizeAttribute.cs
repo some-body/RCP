@@ -52,7 +52,7 @@ namespace AdminFrontend.Auth
 
         private void RedirectToAuth(ActionExecutingContext filterContext)
         {
-            var authUrl = "/Auth?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
+            var authUrl = "/Auth/Index?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
             filterContext.Result = new RedirectResult(authUrl);
         }
     }

@@ -28,7 +28,7 @@ namespace AdminFrontend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AuthViewModel model)
+        public ActionResult Index1(AuthViewModel model)
         {
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
 
@@ -56,6 +56,18 @@ namespace AdminFrontend.Controllers
                 Response.SetCookie(tokenCookie);
                 return Redirect(redirectUrl);
             }
+        }
+
+        [HttpGet]
+        public ActionResult SignOut()
+        {
+            var tokenCookie = Request.Cookies["token"];
+            if (tokenCookie != null)
+            {
+                Response.Cookies.Remove("token");
+                _sessionQueryProvider.Post<int?, string>("api/SystemUsers/SignOut", tokenCookie.Value);
+            }
+            return RedirectToAction("Index", "Home", null);
         }
     }
 }
