@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionBackend", "src\Backe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkersBackend", "src\Backends\WorkersBackend\WorkersBackend.csproj", "{DA5C510E-2A7E-4490-AAD3-41D1762F253A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemUsersBackend", "src\Backends\SystemUsersBackend\SystemUsersBackend.csproj", "{03D03C10-0CE8-4889-AF46-647008EE5C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{DA5C510E-2A7E-4490-AAD3-41D1762F253A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA5C510E-2A7E-4490-AAD3-41D1762F253A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA5C510E-2A7E-4490-AAD3-41D1762F253A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D03C10-0CE8-4889-AF46-647008EE5C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D03C10-0CE8-4889-AF46-647008EE5C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D03C10-0CE8-4889-AF46-647008EE5C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D03C10-0CE8-4889-AF46-647008EE5C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,5 +99,6 @@ Global
 		{EDF51A3B-88CD-4310-9299-52EFBAD47E16} = {B5478B11-66C4-4FF3-AE9C-7C88737CAECF}
 		{21CAD00A-F593-4329-9B94-E42A030F85A6} = {B5478B11-66C4-4FF3-AE9C-7C88737CAECF}
 		{DA5C510E-2A7E-4490-AAD3-41D1762F253A} = {B5478B11-66C4-4FF3-AE9C-7C88737CAECF}
+		{03D03C10-0CE8-4889-AF46-647008EE5C1A} = {B5478B11-66C4-4FF3-AE9C-7C88737CAECF}
 	EndGlobalSection
 EndGlobal

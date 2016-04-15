@@ -126,6 +126,9 @@
   <data name="SessionBackendURL" xml:space="preserve">
     <value>http://localhost:5004</value>
   </data>
+  <data name="SystemUsersBackendURL" xml:space="preserve">
+    <value>http://localhost:5006</value>
+  </data>
   <data name="WorkersBackendURL" xml:space="preserve">
     <value>http://localhost:5005</value>
   </data>

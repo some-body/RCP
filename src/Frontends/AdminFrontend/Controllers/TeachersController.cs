@@ -11,9 +11,17 @@ namespace AdminFrontend.Controllers
     [RCPAuthorize(Roles = "Admin")]
     public class TeachersController : RCPController
     {
+        private 
+
+        public TeachersController()
+        {
+
+        }
+
         public ActionResult Index()
         {
-            // TODO: Реализовать.
+
+
             var model = new TeachersViewModel();
             return View(model);
         }

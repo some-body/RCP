@@ -88,6 +88,15 @@ namespace AdminFrontend.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localhost:5006.
+        /// </summary>
+        internal static string SystemUsersBackendURL {
+            get {
+                return ResourceManager.GetString("SystemUsersBackendURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://localhost:5005.
         /// </summary>
         internal static string WorkersBackendURL {

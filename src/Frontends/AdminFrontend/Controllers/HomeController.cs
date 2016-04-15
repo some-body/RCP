@@ -9,22 +9,21 @@ namespace AdminFrontend.Controllers
         public ActionResult Index()
         {
             if (UserRole == "Admin")
-                return RedirectToAction("Admin");
+                return Admin();
             else if (UserRole == "Teacher")
-                return RedirectToAction("Teacher");
+                return Teacher();
             else
                 return new HttpUnauthorizedResult();
-
         }
 
-        public ActionResult Admin()
+        private ActionResult Admin()
         {
-            return View();
+            return View("Admin");
         }
 
-        public ActionResult Teacher()
+        private ActionResult Teacher()
         {
-            return View();
+            return View("Teacher");
         }
     }
 }
