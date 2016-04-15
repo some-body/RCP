@@ -1,10 +1,9 @@
 ﻿@model AdminFrontend.ViewModels.TeachersViewModel
-
+@using AdminFrontend.Helpers
 @{
     ViewBag.Title = "Учителя";
 }
 
 <h2>Учителя</h2>
 
-// TODO:
-Список учителей и CRUD
+@Html.Table(Model.Teachers)
