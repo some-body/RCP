@@ -1,0 +1,46 @@
+﻿@using AdminFrontend.ViewModels
+@helper Table(TableViewModel model)
+{
+    <style>
+        .rcp-table {
+            border: 1px solid #000000;
+            width: 100%;
+        }
+        .rcp-table-head {
+            border-bottom: 2px double #000000;
+            background: #c8c8c8;
+        }
+        .rcp-table-icon {
+            margin-right: 10px;
+        }
+    </style>
+
+    <table class="rcp-table">
+        <thead class="rcp-table-head">
+            <tr>
+                <td></td>
+                <td></td>
+                @foreach (var colName in model.ColumnsNames)
+                {
+                    <td>@colName</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in model.Rows)
+            {
+                <tr>
+                    <!--Редактирование-->
+                    <td><a class="fa fa-pencil-square-o rcp-table-icon" title="Редактировать" href="@(model.EditAction + row.Id)"></a></td>
+                    <!--Удаление-->
+                    <td><a class="fa fa-times rcp-table-icon" title="Удалить" href="@(model.DeleteAction + row.Id)"></a></td>
+
+                    @foreach (var col in row.Columns)
+                    {
+                        <td>@col</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

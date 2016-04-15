@@ -27,9 +27,21 @@ namespace AdminFrontend.Controllers
                 .Where(e => e.Role == "Teacher")
                 .ToList();
 
+            var tableData = new TableViewModel
+            {
+                ColumnsNames = new string[] { "Имя", "Пароль" },
+                Rows = teachers.Select(t => new Row
+                {
+                    Id = t.Id.Value,
+                    Columns = new string[] { t.Login, t.PasswordHash }
+                }).ToList(),
+                EditAction = "/Teachers/Edit/", // new ActionLink("Edit", "Teachers"),
+                DeleteAction = "Teachers/Delete/" //new ActionLink("Delete", "Teachers")
+            };
+
             var model = new TeachersViewModel
             {
-                Teachers = teachers
+                TableData = tableData
             };
             return View(model);
         }

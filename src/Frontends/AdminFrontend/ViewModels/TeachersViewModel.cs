@@ -8,6 +8,6 @@ namespace AdminFrontend.ViewModels
 {
     public class TeachersViewModel
     {
-        public ICollection<SystemUser> Teachers { get; set; }
+        public TableViewModel TableData { get; set; }
     }
 }
