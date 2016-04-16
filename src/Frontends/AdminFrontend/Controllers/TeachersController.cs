@@ -26,8 +26,7 @@ namespace AdminFrontend.Controllers
         public ActionResult Index()
         {
             var teachers = _teachersQueryProvider.Get()
-                .Where(e => e.Role == "Teacher")
-                .ToList();
+                .Where(e => e.Role == "Teacher");
 
             var tableData = new TableViewModel
             {

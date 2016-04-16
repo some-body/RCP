@@ -6,16 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Tools;
 
 namespace WorkersBackend.Controllers
 {
     public class WorkersController : ApiController
     {
         private IRepository<Worker> _workersRepository;
+        private HashGenerator _hashGenerator;
 
         public WorkersController()
         {
             _workersRepository = new WorkersRepository();
+            _hashGenerator = new HashGenerator();
         }
 
         // GET: api/Workers
@@ -41,6 +44,10 @@ namespace WorkersBackend.Controllers
         // POST: api/Workers
         public QueryResult Post([FromBody]Worker entity)
         {
+            entity.PasswordHash = entity.PasswordHash != null
+                ? _hashGenerator.Generate(entity.PasswordHash)
+                : null;
+
             var result = new QueryResult();
             try
             {

@@ -5,8 +5,9 @@ using System.Web;
 
 namespace AdminFrontend.ViewModels
 {
-    public class WorkersForAdminViewModel
+    public class WorkersCourseViewModel
     {
-        public TableViewModel TableData { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

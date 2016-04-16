@@ -1,0 +1,55 @@
+﻿@model int
+
+<h2>@ViewBag.Title</h2>
+
+<div id="worker-edit-table">
+    <table>
+        <tr>
+            <td>ФИО</td>
+            <td><input data-bind="value: FullName" /></td>
+        </tr>
+        <tr>
+            <td>Логин</td>
+            <td><input data-bind="value: Login" /></td>
+        </tr>
+        <tr>
+            <td>Пароль</td>
+            <td><input type="password" data-bind="value: Password" /></td>
+        </tr>
+        @*<tr>
+                <td>
+                    <h3>Назначенные курсы</h3>
+                    <div data-bind="foreach: AllCourses">
+                        <input type="checkbox" data-bind="value: Name, checked: $root.isCourseChecked" />
+                    </div>
+                </td>
+            </tr>*@
+    </table>
+    <button data-bind="click: save">Сохранить</button>
+</div>
+
+<script type="text/javascript">
+    function init(data) {
+        let viewModel = ko.mapping.fromJS(data);
+        viewModel.save = function () {
+            let postData = ko.mapping.toJS(viewModel);
+            $.post(
+                '@Url.Action("Save", new { id = Model })',
+                postData,
+                function (result) {
+                    alert(result.msg);
+                    if (result.success) {
+                        window.location.replace(result.returnTo);
+                    }
+                }
+            );
+        }
+        ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
+    }
+
+    $.post(
+        '@Url.Action("GetWorkerInfoForAdmin", new { id = Model })',
+        null,
+        init
+    );
+</script>
