@@ -117,7 +117,6 @@ namespace AdminFrontend.Controllers
         [HttpPost]
         public JsonResult GetWorkerInfoForAdmin(int id)
         {
-            // TODO: Разобраться с нулевыми полями. При сохранении такие поля должны игнориться, а они, кажись, нет.
             if(id == -1)
             {
                 return Json(new
@@ -198,7 +197,7 @@ namespace AdminFrontend.Controllers
             {
                 TableData = tableData
             };
-
+            
             return View("Admin", model);
         }
 
