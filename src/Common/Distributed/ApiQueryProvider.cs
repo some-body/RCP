@@ -40,6 +40,11 @@
             MakePatchQuery(query, EntityToString(data));
         }
 
+        public virtual QueryResult Delete(int id)
+        {
+            var query = string.Format("/api/{0}/{1}", _apiName, id);
+            return MakeDeleteQuery(query);
+        }
         //protected virtual string EntityToString(TEntity entity)
         //{
         //    //return entity.ToString();

@@ -1,10 +1,6 @@
 ﻿@model AdminFrontend.ViewModels.TeacherEditViewModel
 
-@{
-    ViewBag.Title = "Редактирование учителя";
-}
-
-<h2>Редактирование учителя</h2>
+<h2>@ViewBag.Title</h2>
 
 <div id="teacher-edit-table">
     <table>
@@ -32,7 +28,10 @@
             '@Url.Action("Save", "Teachers")',
             data,
             function(result) {
-                alert(result);
+                alert(result.msg);
+                if (result.success) {
+                    window.location.replace(result.returnTo);
+                }
             }
         );
     });

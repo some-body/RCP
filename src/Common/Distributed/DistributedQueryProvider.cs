@@ -77,6 +77,18 @@ namespace Distributed
                 webClient.DownloadString(queryUrl);
         }
 
+        protected QueryResult MakeDeleteQuery(string uri)
+        {
+            var queryUrl = string.Concat(BackendUri, uri);
+            string stringResult = "";
+
+            using (var webClient = new WebClient())
+                stringResult = webClient.UploadString(queryUrl, "DELETE", "");
+
+            stringResult = StringEncodingConvert(stringResult, "WINDOWS-1251", "UTF-8");
+            return JsonConvert.DeserializeObject<QueryResult>(stringResult);
+        }
+
         protected virtual string EntityToString(object entity)
         {
             return JsonConvert.SerializeObject(entity);

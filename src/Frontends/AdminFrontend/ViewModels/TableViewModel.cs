@@ -30,5 +30,6 @@ namespace AdminFrontend.ViewModels
         public ICollection<Row> Rows { get; set; }
         public string EditAction { get; set; }
         public string DeleteAction { get; set; }
+        public string AddAction { get; set; }
     }
 }

@@ -38,7 +38,8 @@ namespace AdminFrontend.Controllers
                     Columns = new string[] { t.Login }
                 }).ToList(),
                 EditAction = "/Teachers/Edit/", // new ActionLink("Edit", "Teachers"),
-                DeleteAction = "Teachers/Delete/" //new ActionLink("Delete", "Teachers")
+                DeleteAction = "Teachers/Delete/", //new ActionLink("Delete", "Teachers")
+                AddAction = "Teachers/Add" //new ActionLink("Delete", "Teachers")
             };
 
             var model = new TeachersViewModel
@@ -55,11 +56,23 @@ namespace AdminFrontend.Controllers
             if (teacher.Role != "Teacher")
                 return new HttpStatusCodeResult(401);
 
+            ViewBag.Title = "Редактирование учителя";
             return View(new TeacherEditViewModel
             {
                 Id = teacher.Id.Value,
                 Login = teacher.Login,
                 Password = PasswordPlaceholder
+            });
+        }
+
+        public ActionResult Add()
+        {
+            ViewBag.Title = "Создание учителя";
+            return View("Edit", new TeacherEditViewModel
+            {
+                Id = null,
+                Login = "",
+                Password = ""
             });
         }
 
@@ -73,7 +86,7 @@ namespace AdminFrontend.Controllers
             {
                 Id = model.Id,
                 Login = model.Login,
-                PasswordHash = model.Password != PasswordPlaceholder 
+                PasswordHash = model.Password != PasswordPlaceholder
                     ? model.Password
                     : null,
                 Role = "Teacher"
@@ -83,7 +96,29 @@ namespace AdminFrontend.Controllers
             var msg = result.Success
                 ? "Успех"
                 : result.Message;
-            return Json(msg);
+
+            return Json(new
+            {
+                returnTo = Url.Action("Index"),
+                success = result.Success,
+                msg
+            });
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            var result = _teachersQueryProvider.Delete(id);
+
+            var msg = result.Success
+                ? "Успех"
+                : result.Message;
+
+            return Json(new
+            {
+                success = result.Success,
+                msg
+            });
         }
     }
 }

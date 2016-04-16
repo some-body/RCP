@@ -10,6 +10,13 @@
             border-bottom: 2px double #000000;
             background: #c8c8c8;
         }
+        .rcp-table-footer {
+            border: 1px solid #000000;
+            border-top: 2px double #000000;
+        }
+        .rcp-table-footer tr {
+            height: 40px;
+        }
         .rcp-table-btn-column {
             width: 5%;
             text-align: left;
@@ -23,6 +30,9 @@
         }
         .rcp-table-edit-btn {
             color: green;
+        }
+        .rcp-button {
+            /*cursor: pointer;*/
         }
     </style>
 
@@ -47,7 +57,7 @@
                     </td>
                     <!--Удаление-->
                     <td class="rcp-table-btn-column">
-                        <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" href="@(model.DeleteAction + row.Id)"></a>
+                        <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
                     </td>
                     @foreach (var col in row.Columns)
                     {
@@ -56,5 +66,33 @@
                 </tr>
             }
         </tbody>
+        <tfoot class="rcp-table-footer">
+            <tr>
+                <td class="rcp-table-btn-column">
+                    <form action="@model.AddAction">
+                        <button class="rcp-button">Добавить</button>
+                    </form>
+                </td>
+                <td colspan="@(model.ColumnsNames.Length + 1)"></td>
+            </tr>
+        </tfoot>
     </table>
+
+    <script type="text/javascript">
+        var deleteUrl = '@model.DeleteAction';
+        function deleteById(id) {
+
+            let url = deleteUrl + id
+            $.post(
+                url,
+                null,
+                function (result) {
+                    alert(result.msg);
+                    if (result.success) {
+                        location.reload();
+                    }
+                }
+            );
+        }
+    </script>
 }
