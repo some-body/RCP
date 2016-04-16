@@ -133,8 +133,9 @@
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\TeacherEditViewModel.cs" />
     <Compile Include="ViewModels\TeachersViewModel.cs" />
+    <Compile Include="ViewModels\WorkerEditByTeacherViewModel.cs" />
     <Compile Include="ViewModels\WorkerEditByAdminViewModel.cs" />
-    <Compile Include="ViewModels\WorkersCourseViewModel.cs" />
+    <Compile Include="ViewModels\AppointedCourseViewModel.cs" />
     <Compile Include="ViewModels\WorkersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Workers\EditByAdmin.cshtml" />
+    <Content Include="Views\Workers\EditByTeacher.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -18,9 +18,5 @@ namespace AdminFrontend.ViewModels
 
         [Required]
         public string Password { get; set; }
-
-        public ICollection<int> WorkersCoursesIds { get; set; }
-
-        //public ICollection<WorkersCourseViewModel> AllCourses { get; set; }
     }
 }

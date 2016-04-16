@@ -16,14 +16,6 @@
             <td>Пароль</td>
             <td><input type="password" data-bind="value: Password" /></td>
         </tr>
-        @*<tr>
-                <td>
-                    <h3>Назначенные курсы</h3>
-                    <div data-bind="foreach: AllCourses">
-                        <input type="checkbox" data-bind="value: Name, checked: $root.isCourseChecked" />
-                    </div>
-                </td>
-            </tr>*@
     </table>
     <button data-bind="click: save">Сохранить</button>
 </div>
@@ -34,12 +26,13 @@
         viewModel.save = function () {
             let postData = ko.mapping.toJS(viewModel);
             $.post(
-                '@Url.Action("Save", new { id = Model })',
+                '@Url.Action("SaveByAdmin", new { id = Model })',
                 postData,
                 function (result) {
-                    alert(result.msg);
                     if (result.success) {
                         window.location.replace(result.returnTo);
+                    } else {
+                        alert(result.msg);
                     }
                 }
             );

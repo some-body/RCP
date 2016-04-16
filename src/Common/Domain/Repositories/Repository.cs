@@ -73,7 +73,7 @@ namespace Domain.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(int id, T entity)
+        public virtual void Update(int id, T entity)
         {
             entity.Id = null;
 

@@ -59,20 +59,13 @@ namespace AdminFrontend.Controllers
         }
 
         [HttpPost]
-        public JsonResult Save(WorkerEditByAdminViewModel model)
+        public JsonResult SaveByAdmin(WorkerEditByAdminViewModel model)
         {
             if (model.Id == -1)
                 model.Id = null;
 
             if (!ModelState.IsValid)
                 return Json("Проверьте правильность заполненных полей");
-
-            var appointedCourses = model.WorkersCoursesIds == null
-                ? null
-                : model.WorkersCoursesIds.Select(c => new AppointedCourse
-                {
-                    CourseId = c
-                }).ToList();
 
             var worker = new Worker
             {
@@ -82,6 +75,38 @@ namespace AdminFrontend.Controllers
                     ? model.Password
                     : null,
                 FullName = model.FullName,
+                AppointedCourses = null
+            };
+
+            var result = _workersQueryProvider.Post(worker);
+            var msg = result.Success
+                ? "Успех"
+                : result.Message;
+
+            return Json(new
+            {
+                returnTo = Url.Action("Index"),
+                success = result.Success,
+                msg
+            });
+        }
+
+        [HttpPost]
+        public JsonResult SaveByTeacher(WorkerEditByTeacherViewModel model)
+        {
+            var appointedCourses = model.AppointedCourses != null
+                ? model.AppointedCourses.Select(c => new AppointedCourse
+                {
+                    CourseId = c
+                }).ToList()
+                : new List<AppointedCourse>();
+
+            var worker = new Worker
+            {
+                Id = model.Id,
+                Login = null,
+                PasswordHash = null,
+                FullName = null,
                 AppointedCourses = appointedCourses
             };
 
@@ -144,7 +169,6 @@ namespace AdminFrontend.Controllers
         {
             var worker = _workersQueryProvider.Get(id);
             var coursesIds = worker.AppointedCourses.Select(e => e.CourseId).ToList();
-            var appointedCourses = _examQueryProvider.Post<ICollection<CourseDto>, ICollection<int>>("api/Exam/GetCoursesByIds", coursesIds);
 
             var allCourses = _coursesQueryProvider.Get();
 
@@ -153,16 +177,14 @@ namespace AdminFrontend.Controllers
             {
                 Id = worker.Id.Value,
                 FullName = worker.FullName,
-                WorkersCoursesIds = appointedCourses != null
-                    ? appointedCourses.Select(c => c.Id).ToList()
-                    : new List<int>(),
                 AllCourses = allCourses != null
-                    ? allCourses.Select(c => new WorkersCourseViewModel
+                    ? allCourses.Select(c => new AppointedCourseViewModel
                     {
                         Id = c.Id,
-                        Name = c.Name
+                        Name = c.Name,
+                        IsChecked = coursesIds.Contains(c.Id)
                     }).ToList()
-                    : new List<WorkersCourseViewModel>()
+                    : new List<AppointedCourseViewModel>()
             });
         }
 
@@ -173,7 +195,7 @@ namespace AdminFrontend.Controllers
 
         private ActionResult EditByTeacher(int id)
         {
-            throw new NotImplementedException();
+            return View("EditByTeacher", id);
         }
 
         private ActionResult Admin()

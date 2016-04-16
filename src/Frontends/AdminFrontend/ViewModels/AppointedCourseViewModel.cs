@@ -5,9 +5,10 @@ using System.Web;
 
 namespace AdminFrontend.ViewModels
 {
-    public class WorkersCourseViewModel
+    public class AppointedCourseViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
