@@ -105,7 +105,8 @@ namespace Domain.Repositories
                     continue;
 
                 var value = property.GetValue(source);
-                property.SetValue(target, value);
+                if(value != null)
+                    property.SetValue(target, value);
             }
         }
 
