@@ -39,8 +39,14 @@
     <table class="rcp-table">
         <thead class="rcp-table-head">
             <tr>
-                <td></td>
-                <td></td>
+                @if (model.EditAction != null)
+                {
+                    <td></td>
+                }
+                @if (model.DeleteAction != null)
+                {
+                    <td></td>
+                }
                 @foreach (var colName in model.ColumnsNames)
                 {
                     <td>@colName</td>
@@ -51,14 +57,18 @@
             @foreach (var row in model.Rows)
             {
                 <tr>
-                    <!--Редактирование-->
-                    <td class="rcp-table-btn-column">
-                        <a class="fa fa-pencil-square-o rcp-table-icon rcp-table-edit-btn" title="Редактировать" href="@(model.EditAction + row.Id)"></a>
-                    </td>
-                    <!--Удаление-->
-                    <td class="rcp-table-btn-column">
-                        <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
-                    </td>
+                    @if (model.EditAction != null)
+                    {
+                        <td class="rcp-table-btn-column">
+                            <a class="fa fa-pencil-square-o rcp-table-icon rcp-table-edit-btn" title="Редактировать" href="@(model.EditAction + row.Id)"></a>
+                        </td>
+                    }
+                    @if (model.DeleteAction != null)
+                    {
+                        <td class="rcp-table-btn-column">
+                            <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
+                        </td>
+                    }
                     @foreach (var col in row.Columns)
                     {
                         <td>@col</td>
@@ -69,9 +79,12 @@
         <tfoot class="rcp-table-footer">
             <tr>
                 <td class="rcp-table-btn-column">
-                    <form action="@model.AddAction">
-                        <button class="rcp-button">Добавить</button>
-                    </form>
+                    @if (model.AddAction != null)
+                    {
+                        <form action="@model.AddAction">
+                            <button class="rcp-button">Добавить</button>
+                        </form>
+                    }
                 </td>
                 <td colspan="@(model.ColumnsNames.Length + 1)"></td>
             </tr>

@@ -135,8 +135,7 @@
     <Compile Include="ViewModels\TeachersViewModel.cs" />
     <Compile Include="ViewModels\WorkerEditByAdminViewModel.cs" />
     <Compile Include="ViewModels\WorkersCourseViewModel.cs" />
-    <Compile Include="ViewModels\WorkersForTeacherViewModel.cs" />
-    <Compile Include="ViewModels\WorkersForAdminViewModel.cs" />
+    <Compile Include="ViewModels\WorkersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -150,8 +149,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Admin.cshtml" />
-    <Content Include="Views\Workers\Admin.cshtml" />
-    <Content Include="Views\Workers\Teacher.cshtml" />
+    <Content Include="Views\Workers\Index.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\ExamResults\Index.cshtml" />

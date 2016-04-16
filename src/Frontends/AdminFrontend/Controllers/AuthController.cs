@@ -31,6 +31,14 @@ namespace AdminFrontend.Controllers
         public ActionResult Index1(AuthViewModel model)
         {
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
+            if (string.IsNullOrWhiteSpace(model.Login) || string.IsNullOrWhiteSpace(model.Password))
+            {
+                return RedirectToAction("Index", new RedirectViewModel
+                {
+                    ReturnToUrl = redirectUrl
+                });
+            }
+
 
             var loginDto = new LoginDto
             {

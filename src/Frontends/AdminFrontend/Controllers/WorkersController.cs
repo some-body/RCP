@@ -193,19 +193,37 @@ namespace AdminFrontend.Controllers
                 AddAction = "Workers/Add/"
             };
 
-            var model = new WorkersForAdminViewModel
+            var model = new WorkersViewModel
             {
                 TableData = tableData
             };
             
-            return View("Admin", model);
+            return View("Index", model);
         }
 
         private ActionResult Teacher()
         {
-            // TODO: Реализовать.
-            var model = new WorkersForTeacherViewModel();
-            return View("Teacher", model);
+            var workers = _workersQueryProvider.Get();
+
+            var tableData = new TableViewModel
+            {
+                ColumnsNames = new string[] { "ФИО" },
+                Rows = workers.Select(t => new Row
+                {
+                    Id = t.Id,
+                    Columns = new string[] { t.FullName }
+                }).ToList(),
+                EditAction = "Workers/Edit/",
+                DeleteAction = null,
+                AddAction = null
+            };
+
+            var model = new WorkersViewModel
+            {
+                TableData = tableData
+            };
+
+            return View("Index", model);
         }
     }
 }
