@@ -13,7 +13,7 @@ namespace SessionBackend.Controllers
     {
         public static IDictionary<string, WorkerTokenRecord> TokensList { get; private set; } = new Dictionary<string, WorkerTokenRecord>();
 
-        private const int ExpiresInSeconds = 200;
+        private const int ExpiresInSeconds = 20000;
 
         private IRepository<Worker> _workersRepository;
         private TokenGenerator _tokenGenerator;

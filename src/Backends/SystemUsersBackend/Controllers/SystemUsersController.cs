@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Distributed;
+using Domain.Entities;
 using Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -33,15 +34,37 @@ namespace SystemUsersBackend.Controllers
         }
 
         // POST: api/SystemUsers
-        public void Post([FromBody]SystemUser entity)
+        public QueryResult Post([FromBody]SystemUser entity)
         {
-            _systemUsersRepository.Save(entity);
+            var result = new QueryResult();
+            try
+            {
+                _systemUsersRepository.Save(entity);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
 
         // DELETE: api/SystemUsers/5
-        public void Delete(int id)
+        public QueryResult Delete(int id)
         {
-            _systemUsersRepository.RemoveById(id);
+            var result = new QueryResult();
+            try
+            {
+                _systemUsersRepository.RemoveById(id);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
     }
 }

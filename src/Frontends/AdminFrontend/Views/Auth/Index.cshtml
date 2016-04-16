@@ -6,14 +6,18 @@
 
 <h2>Авторизация</h2>
 
-@Html.BeginForm("Index1", "Auth", FormMethod.Post)
+@using (Html.BeginForm("Index1", "Auth", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.ReturnToUrl);
-    <div>
-        Логин: @Html.TextBoxFor(m => m.Login);
-    </div>
-    <div>
-        Пароль: @Html.TextBoxFor(m => m.Password);
-    </div>
+    <table>
+        <tr>
+            <td>Логин</td>
+            <td>@Html.TextBoxFor(m => m.Login)</td>
+        </tr>
+        <tr>
+            <td>Пароль</td>
+            <td>@Html.TextBoxFor(m => m.Password)</td>
+        </tr>
+    </table>
     <div><input type="submit" value="Вход" /></div>
 }

@@ -29,11 +29,11 @@ namespace AdminFrontend.Controllers
 
             var tableData = new TableViewModel
             {
-                ColumnsNames = new string[] { "Имя", "Пароль" },
+                ColumnsNames = new string[] { "Логин" },
                 Rows = teachers.Select(t => new Row
                 {
                     Id = t.Id.Value,
-                    Columns = new string[] { t.Login, t.PasswordHash }
+                    Columns = new string[] { t.Login }
                 }).ToList(),
                 EditAction = "/Teachers/Edit/", // new ActionLink("Edit", "Teachers"),
                 DeleteAction = "Teachers/Delete/" //new ActionLink("Delete", "Teachers")
@@ -44,6 +44,44 @@ namespace AdminFrontend.Controllers
                 TableData = tableData
             };
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var teacher = _teachersQueryProvider.Get(id);
+            if (teacher.Role != "Teacher")
+                return new HttpStatusCodeResult(401);
+
+            return View(new TeacherEditViewModel
+            {
+                Id = teacher.Id.Value,
+                Login = teacher.Login,
+                Password = "***"
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Save(TeacherEditViewModel model)
+        {
+            var teacher = new SystemUser
+            {
+                Id = model.Id,
+                Login = model.Login,
+                PasswordHash = model.Password,
+                Role = "Teacher"
+            };
+
+            try
+            {
+                _teachersQueryProvider.Post<
+            }
+            catch(Exception ex)
+            {
+                return new HttpStatusCodeResult(501);
+            }
+
+
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using Domain.Dto;
+﻿using Distributed;
+using Domain.Dto;
 using Domain.Entities;
 using Domain.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -37,15 +39,37 @@ namespace WorkersBackend.Controllers
         }
 
         // POST: api/Workers
-        public void Post([FromBody]Worker entity)
+        public QueryResult Post([FromBody]Worker entity)
         {
-            _workersRepository.Save(entity);
+            var result = new QueryResult();
+            try
+            {
+                _workersRepository.Save(entity);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
 
         // DELETE: api/Workers/5
-        public void Delete(int id)
+        public QueryResult Delete(int id)
         {
-            _workersRepository.RemoveById(id);
+            var result = new QueryResult();
+            try
+            {
+                _workersRepository.RemoveById(id);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
     }
 }

@@ -129,6 +129,7 @@
     <Compile Include="ViewModels\ExamResultsViewModel.cs" />
     <Compile Include="ViewModels\RedirectViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
+    <Compile Include="ViewModels\TeacherEditViewModel.cs" />
     <Compile Include="ViewModels\TeachersViewModel.cs" />
     <Compile Include="ViewModels\WorkersForTeacherViewModel.cs" />
     <Compile Include="ViewModels\WorkersForAdminViewModel.cs" />
@@ -151,6 +152,7 @@
     <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\ExamResults\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Teachers\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

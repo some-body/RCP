@@ -1,0 +1,23 @@
+﻿@model AdminFrontend.ViewModels.TeacherEditViewModel
+
+@{
+    ViewBag.Title = "Редактирование учителя";
+}
+
+<h2>Редактирование учителя</h2>
+
+@using (Html.BeginForm("Save", "Teachers", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <table>
+        <tr>
+            <td>Логин</td>
+            <td>@Html.TextBoxFor(m => m.Login)</td>
+        </tr>
+        <tr>
+            <td>Пароль</td>
+            <td>@Html.TextBoxFor(m => m.Password)</td>
+        </tr>
+    </table>
+    <div><input type="submit" value="Сохранить" /></div>
+}

@@ -1,6 +1,8 @@
-﻿using Domain.Dto;
+﻿using Distributed;
+using Domain.Dto;
 using Domain.Entities;
 using Domain.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -44,15 +46,37 @@ namespace PreparationBackend.Controllers
         }
 
         // POST: api/Courses
-        public void Post([FromBody]Course entity)
+        public QueryResult Post([FromBody]Course entity)
         {
-            _courseRepository.Save(entity);
+            var result = new QueryResult();
+            try
+            {
+                _courseRepository.Save(entity);
+                result.Success = true;
+            }
+            catch(Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
 
         // DELETE: api/Courses/5
-        public void Delete(int id)
+        public QueryResult Delete(int id)
         {
-            _courseRepository.RemoveById(id);
+            var result = new QueryResult();
+            try
+            {
+                _courseRepository.RemoveById(id);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+            return result;
         }
     }
 }

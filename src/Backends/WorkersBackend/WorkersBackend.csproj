@@ -106,6 +106,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Distributed\Distributed.csproj">
+      <Project>{26cba891-460f-4839-a35a-adf972dee527}</Project>
+      <Name>Distributed</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Domain\Domain.csproj">
       <Project>{58fcad76-8d1a-420d-b720-baf4032bd3df}</Project>
       <Name>Domain</Name>

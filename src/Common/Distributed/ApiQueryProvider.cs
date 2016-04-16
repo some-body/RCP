@@ -22,10 +22,10 @@
             return MakeGetQuery<TEntity>(query);
         }
 
-        public virtual void Post(TEntity data)
+        public virtual QueryResult Post(TEntity data)
         {
             var query = string.Format("/api/{0}", _apiName);
-            MakePostQuery(query, EntityToString(data));
+            return MakePostQuery<QueryResult>(query, EntityToString(data));
         }
 
         public virtual void Put(int id, TEntity data)
