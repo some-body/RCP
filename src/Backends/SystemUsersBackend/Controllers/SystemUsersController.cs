@@ -7,16 +7,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Tools;
 
 namespace SystemUsersBackend.Controllers
 {
     public class SystemUsersController : ApiController
     {
         private IRepository<SystemUser> _systemUsersRepository;
+        private HashGenerator _hashGenerator;
 
         public SystemUsersController()
         {
             _systemUsersRepository = new SystemUsersRepository();
+            _hashGenerator = new HashGenerator();
         }
 
         // GET: api/SystemUsers
@@ -36,6 +39,10 @@ namespace SystemUsersBackend.Controllers
         // POST: api/SystemUsers
         public QueryResult Post([FromBody]SystemUser entity)
         {
+            entity.PasswordHash = entity.PasswordHash != null
+                ? _hashGenerator.Generate(entity.PasswordHash)
+                : null;
+
             var result = new QueryResult();
             try
             {

@@ -30,7 +30,15 @@ namespace Domain.Repositories
 
         public virtual void Save(T entity)
         {
-            GetEntityList().Add(entity);
+            var list = GetEntityList();
+            if (entity.Id.HasValue && list.Any(e => e.Id == entity.Id.Value))
+            {
+                Update(entity.Id.Value, entity);
+            }
+            else
+            {
+                list.Add(entity);
+            }
             _dbContext.SaveChanges();
         }
 

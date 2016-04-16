@@ -14,6 +14,8 @@ namespace AdminFrontend.Controllers
     public class TeachersController : RCPController
     {
         private ApiQueryProvider<ICollection<SystemUser>, SystemUser> _teachersQueryProvider;
+        const string PasswordPlaceholder = "***";
+
 
         public TeachersController()
         {
@@ -57,31 +59,31 @@ namespace AdminFrontend.Controllers
             {
                 Id = teacher.Id.Value,
                 Login = teacher.Login,
-                Password = "***"
+                Password = PasswordPlaceholder
             });
         }
 
         [HttpPost]
-        public ActionResult Save(TeacherEditViewModel model)
+        public JsonResult Save(TeacherEditViewModel model)
         {
+            if (!ModelState.IsValid)
+                return Json("Проверьте правильность заполненных полей");
+
             var teacher = new SystemUser
             {
                 Id = model.Id,
                 Login = model.Login,
-                PasswordHash = model.Password,
+                PasswordHash = model.Password != PasswordPlaceholder 
+                    ? model.Password
+                    : null,
                 Role = "Teacher"
             };
 
-            try
-            {
-                _teachersQueryProvider.Post<
-            }
-            catch(Exception ex)
-            {
-                return new HttpStatusCodeResult(501);
-            }
-
-
+            var result = _teachersQueryProvider.Post(teacher);
+            var msg = result.Success
+                ? "Успех"
+                : result.Message;
+            return Json(msg);
         }
     }
 }

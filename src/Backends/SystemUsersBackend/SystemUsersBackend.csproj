@@ -114,6 +114,10 @@
       <Project>{58fcad76-8d1a-420d-b720-baf4032bd3df}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Tools\Tools.csproj">
+      <Project>{86d3eb93-3ad6-44da-b48b-a23e34469adc}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

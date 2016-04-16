@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Tools;
 
 namespace SessionBackend.Controllers
 {
@@ -17,17 +18,19 @@ namespace SessionBackend.Controllers
 
         private IRepository<Worker> _workersRepository;
         private TokenGenerator _tokenGenerator;
+        private HashGenerator _hashGenerator;
 
         public WorkersController()
         {
             _workersRepository = new WorkersRepository();
             _tokenGenerator = new TokenGenerator(ExpiresInSeconds);
+            _hashGenerator = new HashGenerator();
         }
 
         [HttpPost]
         public WorkerSignInDto SignIn([FromBody]LoginDto loginDto)
         {
-            var passwordHash = _tokenGenerator.Hash(loginDto.Password);
+            var passwordHash = _hashGenerator.Generate(loginDto.Password);
 
             var worker =  _workersRepository.GetAll()
                 .FirstOrDefault(w => w.Login == loginDto.Login && w.PasswordHash == passwordHash);

@@ -6,18 +6,36 @@
 
 <h2>Редактирование учителя</h2>
 
-@using (Html.BeginForm("Save", "Teachers", FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.Id)
+<div id="teacher-edit-table">
     <table>
         <tr>
             <td>Логин</td>
-            <td>@Html.TextBoxFor(m => m.Login)</td>
+            <td>@Html.TextBoxFor(m => m.Login, new { data_bind = "value: Login" })</td>
         </tr>
         <tr>
             <td>Пароль</td>
-            <td>@Html.TextBoxFor(m => m.Password)</td>
+            <td>@Html.TextBoxFor(m => m.Password, new { data_bind = "value: Password" })</td>
         </tr>
     </table>
-    <div><input type="submit" value="Сохранить" /></div>
-}
+    <button id="btn-submit">Сохранить</button>
+</div>
+
+<script type="text/javascript">
+    var viewModel = {
+        Id: ko.observable(@Model.Id),
+        Login: ko.observable('@Model.Login'),
+        Password: ko.observable('@Model.Password')
+    };
+    $('#btn-submit').click(function () {
+        var data = ko.mapping.toJS(viewModel);
+        $.post(
+            '@Url.Action("Save", "Teachers")',
+            data,
+            function(result) {
+                alert(result);
+            }
+        );
+    });
+
+    ko.applyBindings(viewModel, $('teacher-edit-table')[0]);
+</script>
