@@ -39,7 +39,7 @@ namespace WorkersFrontend.Controllers
                 var courses = _examQueryProvider.Post<ICollection<CourseDto>, ICollection<int>>(action, coursesIds);
                 return View(new CoursesViewModel
                 {
-                    Courses = courses
+                    Courses = courses ?? new List<CourseDto>()
                 });
             }
             else
@@ -67,6 +67,9 @@ namespace WorkersFrontend.Controllers
             var questions = _examQueryProvider.Get<ICollection<QuestionDto>>(action, data);
 
             var questionsIds = questions.Select(q => q.Id).ToList();
+            if (_examQuestionsForUser.ContainsKey(token))
+                _examQuestionsForUser.Remove(token);
+
             _examQuestionsForUser.Add(token, questionsIds);
 
             return Json(new ExamViewModel
@@ -78,8 +81,8 @@ namespace WorkersFrontend.Controllers
         public JsonResult SubmitExam(SubmitExamViewModel result)
         {
             // TODO: Работника проставлять из кук.
-            var token = "123";
-            var workerId = 123;
+            var token = Request.Cookies["token"].Value;
+            var workerId = UserId;
 
             // TODO: Сказать, что ошибка.
             if (!_examQuestionsForUser.ContainsKey(token))
@@ -99,6 +102,28 @@ namespace WorkersFrontend.Controllers
             var isPassed = _examQueryProvider.Post<bool, ExamResultDto>(action, examResultDto);
 
             _examQuestionsForUser.Remove(token);
+
+            if (isPassed)
+            {
+                var examResults = _examQueryProvider
+                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + workerId);
+
+                var existingWorker = _workersQueryProvider.Get(workerId);
+                var updatedAppointedCourses = existingWorker.AppointedCourses
+                        .Where(e => !examResults.Any(r => r.CourseId == e.CourseId && r.IsSuccess))
+                        .ToList();
+
+                var worker = new Worker
+                {
+                    Id = workerId,
+                    AppointedCourses = updatedAppointedCourses,
+                    FullName = null,
+                    Login = null,
+                    PasswordHash = null
+                };
+
+                _workersQueryProvider.Post(worker);
+            }
 
             return Json(isPassed);
         }

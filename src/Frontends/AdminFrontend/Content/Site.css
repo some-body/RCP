@@ -16,3 +16,35 @@ textarea {
     max-width: 280px;
 }
 
+.rcp-table {
+    border: 1px solid #000000;
+    width: 100%;
+}
+.rcp-table-head {
+    border-bottom: 2px double #000000;
+    background: #c8c8c8;
+}
+.rcp-table-footer {
+    border: 1px solid #000000;
+    border-top: 2px double #000000;
+}
+.rcp-table-footer tr {
+    height: 40px;
+}
+.rcp-table-btn-column {
+    width: 5%;
+    text-align: left;
+}
+tr .rcp-table-btn-column:first-of-type {
+    width: 10%;
+    text-align: center;
+}
+.rcp-table-delete-btn {
+    color: red;
+}
+.rcp-table-edit-btn {
+    color: green;
+}
+.rcp-button {
+    /*cursor: pointer;*/
+}

@@ -4,6 +4,7 @@ using System.Web.Http;
 using Domain.Dto;
 using Domain.Entities;
 using Domain.Repositories;
+using System;
 
 namespace ExamBackend.Controllers
 {
@@ -43,7 +44,6 @@ namespace ExamBackend.Controllers
         [HttpPost]
         public bool SaveExamResult(ExamResultDto result)
         {
-            // TODO: Проверять, что ответы верны.
             var course = _coursesRepository.GetById(result.CourseId);
             if (course == null)
                 return false;
@@ -70,6 +70,7 @@ namespace ExamBackend.Controllers
             {
                 WorkerId = result.WorkerId,
                 CourseId = result.CourseId,
+                Date = DateTime.Now.Date,
                 IsSuccess = isPassed
             };
 
@@ -77,6 +78,14 @@ namespace ExamBackend.Controllers
             _examResultsRepository.Save(examResult);
 
             return isPassed;
+        }
+
+        [HttpGet]
+        public IEnumerable<ExamResult> GetExamResults(int workerId)
+        {
+            return _examResultsRepository
+                .GetAll()
+                .Where(e => e.WorkerId == workerId);
         }
 
         [HttpPost]

@@ -169,10 +169,12 @@ namespace AdminFrontend.Controllers
         {
             var worker = _workersQueryProvider.Get(id);
             var coursesIds = worker.AppointedCourses.Select(e => e.CourseId).ToList();
-
             var allCourses = _coursesQueryProvider.Get();
 
-            ViewBag.Title = "Редактирование работника";
+            var examResults = _examQueryProvider
+                .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + id);
+
+            ViewBag.Title = "Информация о работнике";
             return Json(new
             {
                 Id = worker.Id.Value,
@@ -184,7 +186,15 @@ namespace AdminFrontend.Controllers
                         Name = c.Name,
                         IsChecked = coursesIds.Contains(c.Id)
                     }).ToList()
-                    : new List<AppointedCourseViewModel>()
+                    : new List<AppointedCourseViewModel>(),
+                ExamResults = examResults
+                    .OrderBy(e => e.Date)
+                    .Select(e => new
+                    {
+                        CourseName = allCourses.FirstOrDefault(c => c.Id == e.CourseId).Name,
+                        Date = e.Date.ToShortDateString(),
+                        Result = e.IsSuccess ? "Сдан" : "Не сдан"
+                    })
             });
         }
 

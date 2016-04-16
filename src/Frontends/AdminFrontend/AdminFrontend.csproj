@@ -112,7 +112,6 @@
     <Compile Include="Auth\RCPAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
-    <Compile Include="Controllers\ExamResultsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RCPController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
