@@ -10,8 +10,19 @@
             border-bottom: 2px double #000000;
             background: #c8c8c8;
         }
-        .rcp-table-icon {
-            margin-right: 10px;
+        .rcp-table-btn-column {
+            max-width: 10px;
+            text-align: left;
+        }
+        tr .rcp-table-btn-column:first-of-type {
+            max-width: 20px;
+            text-align: center;
+        }
+        .rcp-table-delete-btn {
+            color: red;
+        }
+        .rcp-table-edit-btn {
+            color: green;
         }
     </style>
 
@@ -31,10 +42,13 @@
             {
                 <tr>
                     <!--Редактирование-->
-                    <td><a class="fa fa-pencil-square-o rcp-table-icon" title="Редактировать" href="@(model.EditAction + row.Id)"></a></td>
+                    <td class="rcp-table-btn-column">
+                        <a class="fa fa-pencil-square-o rcp-table-icon rcp-table-edit-btn" title="Редактировать" href="@(model.EditAction + row.Id)"></a>
+                    </td>
                     <!--Удаление-->
-                    <td><a class="fa fa-times rcp-table-icon" title="Удалить" href="@(model.DeleteAction + row.Id)"></a></td>
-
+                    <td class="rcp-table-btn-column">
+                        <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" href="@(model.DeleteAction + row.Id)"></a>
+                    </td>
                     @foreach (var col in row.Columns)
                     {
                         <td>@col</td>
