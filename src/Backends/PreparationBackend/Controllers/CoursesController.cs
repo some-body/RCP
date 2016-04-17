@@ -41,7 +41,8 @@ namespace PreparationBackend.Controllers
                 Id = course.Id ?? 0,
                 Name = course.Name,
                 Description = course.Description,
-                MaterialTexxt = course.MaterialText
+                MaterialText = course.MaterialText,
+                Questions = course.Questions
             };
         }
 

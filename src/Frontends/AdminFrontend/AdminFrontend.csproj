@@ -126,6 +126,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ViewModels\AuthViewModel.cs" />
+    <Compile Include="ViewModels\CourseEditViewModel.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\ExamResultsViewModel.cs" />
     <Compile Include="ViewModels\RedirectViewModel.cs" />
@@ -152,11 +153,11 @@
     <Content Include="Views\Workers\Index.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
-    <Content Include="Views\ExamResults\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Workers\EditByAdmin.cshtml" />
     <Content Include="Views\Workers\EditByTeacher.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

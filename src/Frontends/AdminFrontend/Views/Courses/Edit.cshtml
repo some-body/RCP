@@ -1,0 +1,115 @@
+﻿@model int
+
+<h2>@ViewBag.Title</h2>
+
+<div id="course-edit-form">
+    <table>
+        <tr>
+            <td>Название</td>
+            <td><input data-bind="value: Name" /></td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td><input data-bind="value: Description" /></td>
+        </tr>
+        <tr>
+            <td>Материал для подготовки</td>
+            <td><textarea data-bind="text: MaterialText"></textarea></td>
+        </tr>
+    </table>
+
+    <div>
+        <h3>Вопросы</h3>
+        @*<div data-bind="template: 'question-template', foreach: Questions"></div>*@
+        <div data-bind="foreach: Questions">
+            <div>
+                <div>
+                    Текст вопроса
+                    <input data-bind="value: Text" />
+                    <button data-bind="click: function() { $root.deleteQuestion($data) }">Удалить вопрос</button>
+                </div>
+                <h5>Варианты ответов</h5>
+                <div data-bind="foreach: Answers">
+                    <div>
+                        <input type="checkbox" data-bind="checked: IsCorrect" />
+                        <input data-bind="value: Text" />
+                        <button data-bind="click: function() { $root.deleteAnswer($data) }">Удалить вариант ответа</button>
+                    </div>
+                </div>
+                <button data-bind="click: function() { $root.addAnswer($data) }">Добавить вариант ответа</button>
+                <hr />
+            </div>
+        </div>
+        <button data-bind="click: function() { $root.addQuestion() }">Добавть вопрос</button>
+    </div>
+    <hr />
+    <button data-bind="click: save">Сохранить</button>
+</div>
+
+<script type="text/html" id="question-template">
+    <hr />
+    <div>
+        <h4><input data-bind="value: Text" /></h4>
+        <button data-bind="click: $root.deleteQuestion($data)">Удалить вопрос</button>
+    </div>
+    <div>
+        <h5>Варианты ответов</h5>
+        <div data-bind="template: 'answer-template', foreach: Answers"></div>
+        <button data-bind="click: $root.addAnswer($data)">Добавить вариант ответа</button>
+    </div>
+</script>
+
+<script type="text/html" id="answer-template">
+    <input type="checkbox" data-bind="checked: IsCorrect" />
+    <input data-bind="value: Text" />
+    <button data-bind="click: $root.deleteAnswer($parent, $data)">Удалить вариант ответа</button>
+</script>
+
+<script type="text/javascript">
+    function init(data) {
+        var viewModel = ko.mapping.fromJS(data);
+        viewModel.deleteQuestion = function (question) {
+            viewModel.Questions.remove(question);
+        }
+        viewModel.deleteAnswer = function (question, answer) {
+            question.Answers.remove(answer);
+        }
+        viewModel.addQuestion = function () {
+            viewModel.Questions.push({
+                Id: ko.observable(0),
+                Text: ko.observable(''),
+                Answers: ko.observableArray([])
+            });
+        }
+        viewModel.addAnswer = function (question) {
+            question.Answers.push({
+                Id: ko.observable(0),
+                Text: ko.observable(''),
+                IsCorrect: ko.observable(false)
+            });
+        }
+        viewModel.save = function () {
+            let postData = ko.mapping.toJS(viewModel);
+            $.post(
+                '@Url.Action("Save", new { id = Model })',
+                postData,
+                function (result) {
+                    if (result.success) {
+                        window.location.replace(result.returnTo);
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            );
+        }
+
+        ko.applyBindings(viewModel, $('#course-edit-form')[0]);
+    }
+
+    $.post('@Url.Action("GetCourse", new { id = Model })',
+        {},
+        function (data) {
+            init(data);
+        }
+    );
+</script>
