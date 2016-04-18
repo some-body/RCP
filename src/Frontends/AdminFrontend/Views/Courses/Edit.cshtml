@@ -1,9 +1,13 @@
 ﻿@model int
 
+<style>
+
+</style>
+
 <h2>@ViewBag.Title</h2>
 
 <div id="course-edit-form">
-    <table>
+    <table class="rcp-edit-table">
         <tr>
             <td>Название</td>
             <td><input data-bind="value: Name" /></td>
@@ -14,7 +18,7 @@
         </tr>
         <tr>
             <td>Материал для подготовки</td>
-            <td><textarea data-bind="text: MaterialText"></textarea></td>
+            <td><textarea data-bind="value: MaterialText"></textarea></td>
         </tr>
     </table>
 
@@ -22,47 +26,53 @@
         <h3>Вопросы</h3>
         @*<div data-bind="template: 'question-template', foreach: Questions"></div>*@
         <div data-bind="foreach: Questions">
-            <div>
+            <div class="question-edit-container">
+                <a class="fa fa-times question-delete-btn rcp-delete-btn" title="Удалить" data-bind="click: function() { $root.deleteQuestion($data) }"></a>
                 <div>
+                    <h4>
+                        Вопрос #
+                        <span data-bind="text: $index() + 1"></span>
+                    </h4>
+                    
                     Текст вопроса
-                    <input data-bind="value: Text" />
-                    <button data-bind="click: function() { $root.deleteQuestion($data) }">Удалить вопрос</button>
-                </div>
-                <h5>Варианты ответов</h5>
-                <div data-bind="foreach: Answers">
-                    <div>
-                        <input type="checkbox" data-bind="checked: IsCorrect" />
-                        <input data-bind="value: Text" />
-                        <button data-bind="click: function() { $root.deleteAnswer($data) }">Удалить вариант ответа</button>
+                    <div class="question-text-container">
+                        <textarea data-bind="value: Text"></textarea>
                     </div>
                 </div>
-                <button data-bind="click: function() { $root.addAnswer($data) }">Добавить вариант ответа</button>
-                <hr />
+                <h5>Варианты ответов</h5>
+                <div class="answers-list-container" data-bind="foreach: Answers">
+                    <div class="answer-container">
+                        <input type="checkbox" data-bind="checked: IsCorrect" />
+                        <input data-bind="value: Text" />
+                        <a class="fa fa-times rcp-delete-btn" title="Удалить" data-bind="click: function() { $root.deleteAnswer($data) }"></a>
+                    </div>
+                </div>
+                <button class="rcp-button rcp-button-min" data-bind="click: function() { $root.addAnswer($data) }">Добавить вариант ответа</button>
             </div>
         </div>
-        <button data-bind="click: function() { $root.addQuestion() }">Добавть вопрос</button>
+        <button class="rcp-button rcp-button-min" data-bind="click: function() { $root.addQuestion() }">Добавть вопрос</button>
     </div>
     <hr />
-    <button data-bind="click: save">Сохранить</button>
+    <button class="rcp-button" data-bind="click: save">Сохранить</button>
 </div>
 
 <script type="text/html" id="question-template">
     <hr />
     <div>
         <h4><input data-bind="value: Text" /></h4>
-        <button data-bind="click: $root.deleteQuestion($data)">Удалить вопрос</button>
+        <button class="rcp-button" data-bind="click: $root.deleteQuestion($data)">Удалить вопрос</button>
     </div>
     <div>
         <h5>Варианты ответов</h5>
         <div data-bind="template: 'answer-template', foreach: Answers"></div>
-        <button data-bind="click: $root.addAnswer($data)">Добавить вариант ответа</button>
+        <button class="rcp-button" data-bind="click: $root.addAnswer($data)">Добавить вариант ответа</button>
     </div>
 </script>
 
 <script type="text/html" id="answer-template">
     <input type="checkbox" data-bind="checked: IsCorrect" />
     <input data-bind="value: Text" />
-    <button data-bind="click: $root.deleteAnswer($parent, $data)">Удалить вариант ответа</button>
+    <button class="rcp-button" data-bind="click: $root.deleteAnswer($parent, $data)">Удалить вариант ответа</button>
 </script>
 
 <script type="text/javascript">

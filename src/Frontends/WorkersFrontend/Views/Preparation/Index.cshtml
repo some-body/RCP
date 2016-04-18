@@ -16,9 +16,9 @@
     @foreach(var course in Model.Courses)
     {
         <div class="course-info">
-            <h2>
+            <h3>
                 @Html.ActionLink(course.Name, "Course", new { id = course.Id })
-            </h2>
+            </h3>
             <div>
                 @course.Description
             </div>

@@ -31,7 +31,7 @@
                     @if (model.DeleteAction != null)
                     {
                         <td class="rcp-table-btn-column">
-                            <a class="fa fa-times rcp-table-icon rcp-table-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
+                            <a class="fa fa-times rcp-table-icon rcp-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
                         </td>
                     }
                     @foreach (var col in row.Columns)
@@ -47,7 +47,7 @@
                     @if (model.AddAction != null)
                     {
                         <form action="@model.AddAction">
-                            <button class="rcp-button">Добавить</button>
+                            <button class="rcp-button rcp-button-min">Добавить</button>
                         </form>
                     }
                 </td>
