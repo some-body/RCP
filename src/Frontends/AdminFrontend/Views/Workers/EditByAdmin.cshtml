@@ -21,28 +21,34 @@
 </div>
 
 <script type="text/javascript">
-    function init(data) {
-        let viewModel = ko.mapping.fromJS(data);
-        viewModel.save = function () {
-            let postData = ko.mapping.toJS(viewModel);
-            $.post(
-                '@Url.Action("SaveByAdmin", new { id = Model })',
-                postData,
-                function (result) {
-                    if (result.success) {
-                        window.location.replace(result.returnTo);
-                    } else {
-                        alert(result.msg);
+    $(() => {
+        Fader.show();
+        function init(data) {
+            let viewModel = ko.mapping.fromJS(data);
+            viewModel.save = function () {
+                let postData = ko.mapping.toJS(viewModel);
+                Fader.show();
+                $.post(
+                    '@Url.Action("SaveByAdmin", new { id = Model })',
+                    postData,
+                    function (result) {
+                        Fader.hide();
+                        if (result.success) {
+                            window.location.replace(result.returnTo);
+                        } else {
+                            alert(result.msg);
+                        }
                     }
-                }
-            );
+                );
+            }
+            ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
+            Fader.hide();
         }
-        ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
-    }
 
-    $.post(
-        '@Url.Action("GetWorkerInfoForAdmin", new { id = Model })',
-        null,
-        init
-    );
+        $.post(
+            '@Url.Action("GetWorkerInfoForAdmin", new { id = Model })',
+            null,
+            init
+        );
+    });
 </script>

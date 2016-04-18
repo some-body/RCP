@@ -41,37 +41,43 @@
 </div>
 
 <script type="text/javascript">
-    function init(data) {
-        var viewModel = ko.mapping.fromJS(data);
-        viewModel.save = function () {
-            let filteredData = $.grep(viewModel.AllCourses(), function (el) {
-                return el.IsChecked();
-            });
-            let selectedData = $.map(filteredData, (el) => {
-                return el.Id();
-            });
-            let postData = {
-                AppointedCourses: selectedData
-            };
-            $.post(
-                '@Url.Action("SaveByTeacher", new { id = Model })',
-                postData,
-                function (result) {
-                    if (result.success) {
-                        window.location.replace(result.returnTo);
-                    } else {
-                        alert(result.msg);
+    $(() => {
+        Fader.show();
+        function init(data) {
+            var viewModel = ko.mapping.fromJS(data);
+            viewModel.save = function () {
+                Fader.show();
+                let filteredData = $.grep(viewModel.AllCourses(), function (el) {
+                    return el.IsChecked();
+                });
+                let selectedData = $.map(filteredData, (el) => {
+                    return el.Id();
+                });
+                let postData = {
+                    AppointedCourses: selectedData
+                };
+                $.post(
+                    '@Url.Action("SaveByTeacher", new { id = Model })',
+                    postData,
+                    function (result) {
+                        Fader.hide();
+                        if (result.success) {
+                            window.location.replace(result.returnTo);
+                        } else {
+                            alert(result.msg);
+                        }
                     }
-                }
-            );
+                );
+            }
+
+            ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
+            Fader.hide();
         }
 
-        ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
-    }
-
-    $.post(
-        '@Url.Action("GetWorkerInfoForTeacher", new { id = Model })',
-        null,
-        init
-    );
+        $.post(
+            '@Url.Action("GetWorkerInfoForTeacher", new { id = Model })',
+            null,
+            init
+        );
+    });
 </script>

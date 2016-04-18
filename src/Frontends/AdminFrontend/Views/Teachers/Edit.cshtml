@@ -24,13 +24,16 @@
     };
     $('#btn-submit').click(function () {
         var data = ko.mapping.toJS(viewModel);
+        Fader.show();
         $.post(
             '@Url.Action("Save", "Teachers")',
             data,
-            function(result) {
-                alert(result.msg);
+            function (result) {
+                Fader.hide();
                 if (result.success) {
                     window.location.replace(result.returnTo);
+                } else {
+                    alert(result.msg);
                 }
             }
         );

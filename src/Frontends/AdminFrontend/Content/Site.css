@@ -9,7 +9,23 @@
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+
+.rcp-button {
+    background-color: cadetblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+}
+.rcp-button-min {
+    padding: 5px 9px;
+    font-size: 16px;
+}
+
 
 .rcp-table {
     border: 1px solid #000000;
@@ -47,22 +63,7 @@ tr .rcp-table-btn-column:first-of-type {
 .rcp-table-edit-btn {
     color: green;
 }
-.rcp-button {
-    background-color: cadetblue; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-}
 
-.rcp-button-min {
-    padding: 5px 9px;
-    font-size: 16px;
-}
 
 .rcp-edit-table {
     width: 100%;
@@ -101,4 +102,15 @@ tr .rcp-table-btn-column:first-of-type {
 }
 #teacher-edit-table table {
     margin: 10px;
+}
+
+.fader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
 }

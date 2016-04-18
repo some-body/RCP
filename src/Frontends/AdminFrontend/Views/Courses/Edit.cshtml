@@ -1,9 +1,5 @@
 ﻿@model int
 
-<style>
-
-</style>
-
 <h2>@ViewBag.Title</h2>
 
 <div id="course-edit-form">
@@ -76,50 +72,56 @@
 </script>
 
 <script type="text/javascript">
-    function init(data) {
-        var viewModel = ko.mapping.fromJS(data);
-        viewModel.deleteQuestion = function (question) {
-            viewModel.Questions.remove(question);
-        }
-        viewModel.deleteAnswer = function (question, answer) {
-            question.Answers.remove(answer);
-        }
-        viewModel.addQuestion = function () {
-            viewModel.Questions.push({
-                Id: ko.observable(0),
-                Text: ko.observable(''),
-                Answers: ko.observableArray([])
-            });
-        }
-        viewModel.addAnswer = function (question) {
-            question.Answers.push({
-                Id: ko.observable(0),
-                Text: ko.observable(''),
-                IsCorrect: ko.observable(false)
-            });
-        }
-        viewModel.save = function () {
-            let postData = ko.mapping.toJS(viewModel);
-            $.post(
-                '@Url.Action("Save", new { id = Model })',
-                postData,
-                function (result) {
-                    if (result.success) {
-                        window.location.replace(result.returnTo);
-                    } else {
-                        alert(result.msg);
+    $(() => {
+        Fader.show();
+        function init(data) {
+            var viewModel = ko.mapping.fromJS(data);
+            viewModel.deleteQuestion = function (question) {
+                viewModel.Questions.remove(question);
+            }
+            viewModel.deleteAnswer = function (question, answer) {
+                question.Answers.remove(answer);
+            }
+            viewModel.addQuestion = function () {
+                viewModel.Questions.push({
+                    Id: ko.observable(0),
+                    Text: ko.observable(''),
+                    Answers: ko.observableArray([])
+                });
+            }
+            viewModel.addAnswer = function (question) {
+                question.Answers.push({
+                    Id: ko.observable(0),
+                    Text: ko.observable(''),
+                    IsCorrect: ko.observable(false)
+                });
+            }
+            viewModel.save = function () {
+                let postData = ko.mapping.toJS(viewModel);
+                Fader.show();
+                $.post(
+                    '@Url.Action("Save", new { id = Model })',
+                    postData,
+                    function (result) {
+                        if (result.success) {
+                            window.location.replace(result.returnTo);
+                        } else {
+                            alert(result.msg);
+                        }
+                        Fader.hide();
                     }
-                }
-            );
+                );
+            }
+
+            ko.applyBindings(viewModel, $('#course-edit-form')[0]);
+            Fader.hide();
         }
 
-        ko.applyBindings(viewModel, $('#course-edit-form')[0]);
-    }
-
-    $.post('@Url.Action("GetCourse", new { id = Model })',
-        {},
-        function (data) {
-            init(data);
-        }
-    );
+        $.post('@Url.Action("GetCourse", new { id = Model })',
+            {},
+            function (data) {
+                init(data);
+            }
+        );
+    });
 </script>

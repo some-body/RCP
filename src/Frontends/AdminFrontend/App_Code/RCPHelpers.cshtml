@@ -59,15 +59,17 @@
     <script type="text/javascript">
         var deleteUrl = '@model.DeleteAction';
         function deleteById(id) {
-
-            let url = deleteUrl + id
+            let url = deleteUrl + id;
+            Fader.show();
             $.post(
                 url,
                 null,
                 function (result) {
-                    alert(result.msg);
+                    Fader.hide();
                     if (result.success) {
                         location.reload();
+                    } else {
+                        alert(result.msg);
                     }
                 }
             );
