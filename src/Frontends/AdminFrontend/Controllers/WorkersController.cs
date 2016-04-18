@@ -154,7 +154,6 @@ namespace AdminFrontend.Controllers
 
             var worker = _workersQueryProvider.Get(id);
 
-            ViewBag.Title = "Редактирование работника";
             return Json(new
             {
                 Id = worker.Id.Value,
@@ -203,11 +202,13 @@ namespace AdminFrontend.Controllers
 
         private ActionResult EditByAdmin(int id)
         {
+            ViewBag.Title = "Редактирование работника";
             return View("EditByAdmin", id);
         }
 
         private ActionResult EditByTeacher(int id)
         {
+            ViewBag.Title = "Редактирование работника";
             return View("EditByTeacher", id);
         }
 

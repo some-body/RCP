@@ -6,12 +6,10 @@
     }
 </style>
 
-<h2>@ViewBag.Title</h2>
-
 <div id="worker-edit-table">
-    <h3 data-bind="text: FullName"></h3>
+    <h2 data-bind="text: FullName"></h2>
 
-    <h4>Назначенные курсы</h4>
+    <h3>Назначенные курсы</h3>
     <div data-bind="foreach: AllCourses">
         <div class="appointed-courses-container">
             <input type="checkbox" data-bind="checked: IsChecked" />
@@ -21,7 +19,7 @@
     </div>
     <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
 
-    <h4>Результаты экзаменов</h4>
+    <h3>Результаты экзаменов</h3>
     <table class="rcp-table">
         <thead class="rcp-table-head">
             <tr>
