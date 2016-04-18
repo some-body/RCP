@@ -1,5 +1,11 @@
 ﻿@model int
 
+<style>
+    .appointed-courses-container {
+        margin: 10px;
+    }
+</style>
+
 <h2>@ViewBag.Title</h2>
 
 <div id="worker-edit-table">
@@ -7,13 +13,13 @@
 
     <h4>Назначенные курсы</h4>
     <div data-bind="foreach: AllCourses">
-        <div>
+        <div class="appointed-courses-container">
             <input type="checkbox" data-bind="checked: IsChecked" />
             <span data-bind="text: Name"></span>
         </div>
         
     </div>
-    <button data-bind="click: save">Сохранить</button>
+    <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
 
     <h4>Результаты экзаменов</h4>
     <table class="rcp-table">

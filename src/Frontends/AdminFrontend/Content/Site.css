@@ -70,7 +70,8 @@ tr .rcp-table-btn-column:first-of-type {
 .rcp-edit-table tr td:first-of-type {
     width: 20%;
 }
-#course-edit-form textarea, #course-edit-form input:not([type='checkbox']) {
+#course-edit-form textarea, 
+#course-edit-form input:not([type='checkbox']) {
     width: 100%;
 }
 .question-edit-container {
@@ -78,8 +79,8 @@ tr .rcp-table-btn-column:first-of-type {
     padding: 10px;
     margin: 10px;
 }
-.question-edit-container textarea, .question-edit-container input:not([type='checkbox']) {
-    width: 100%;
+.question-edit-container input:not([type='checkbox']) {
+    width: 50% !important;
 }
 .question-delete-btn {
     float: right;
@@ -92,5 +93,12 @@ tr .rcp-table-btn-column:first-of-type {
     padding: 5px;
 }
 .answers-list-container {
+    margin: 10px;
+}
+
+#worker-edit-table table {
+    margin: 10px;
+}
+#teacher-edit-table table {
     margin: 10px;
 }
