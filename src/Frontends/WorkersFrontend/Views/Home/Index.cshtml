@@ -1,22 +1,9 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "RCP";
 }
 
-<!DOCTYPE html>
+<h2>RCP</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>RCP</title>
-</head>
-<body>
-    <div> 
-        <h1>Стартовая страница</h1>
-        <div>
-            <div>@Html.ActionLink("Экзамен", "Index", "Exam")</div>
-            <div>@Html.ActionLink("Подготовка", "Index", "Preparation")</div>
-        </div>
-    </div>
-</body>
-</html>
+<div>@Html.ActionLink("Экзамен", "Index", "Exam")</div>
+<div>@Html.ActionLink("Подготовка", "Index", "Preparation")</div>

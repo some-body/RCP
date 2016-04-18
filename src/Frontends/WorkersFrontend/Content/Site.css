@@ -16,3 +16,19 @@ textarea {
     max-width: 280px;
 }
 
+
+.rcp-button {
+    background-color: cadetblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+}
+.rcp-button-min {
+    padding: 5px 9px;
+    font-size: 16px;
+}
