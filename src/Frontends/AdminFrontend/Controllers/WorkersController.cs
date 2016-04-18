@@ -175,7 +175,8 @@ namespace AdminFrontend.Controllers
                 .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + id);
 
             ViewBag.Title = "Информация о работнике";
-            return Json(new
+
+            var result = Json(new
             {
                 Id = worker.Id.Value,
                 FullName = worker.FullName,
@@ -196,6 +197,8 @@ namespace AdminFrontend.Controllers
                         Result = e.IsSuccess ? "Сдан" : "Не сдан"
                     })
             });
+
+            return result;
         }
 
         private ActionResult EditByAdmin(int id)

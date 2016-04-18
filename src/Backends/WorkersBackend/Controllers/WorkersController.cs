@@ -44,13 +44,13 @@ namespace WorkersBackend.Controllers
         // POST: api/Workers
         public QueryResult Post([FromBody]Worker entity)
         {
-            entity.PasswordHash = entity.PasswordHash != null
-                ? _hashGenerator.Generate(entity.PasswordHash)
-                : null;
-
             var result = new QueryResult();
             try
             {
+                entity.PasswordHash = entity.PasswordHash != null
+                    ? _hashGenerator.Generate(entity.PasswordHash)
+                    : null;
+
                 _workersRepository.Save(entity);
                 result.Success = true;
             }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
+using System.Text;
 
 namespace Distributed
 {
@@ -19,12 +20,11 @@ namespace Distributed
 
             using (var webClient = new WebClient())
             {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-                data = StringEncodingConvert(data, "WINDOWS-1251", "UTF-8");
                 stringResult = webClient.UploadString(queryUrl, "POST", data);
             }
 
-            stringResult = StringEncodingConvert(stringResult, "WINDOWS-1251", "UTF-8");
             return JsonConvert.DeserializeObject<TResult>(stringResult);
         }
 
@@ -33,6 +33,7 @@ namespace Distributed
             var queryUrl = string.Concat(BackendUri, uri);
             using (var webClient = new WebClient())
             {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
                 webClient.UploadString(queryUrl, data);
             }
@@ -43,6 +44,7 @@ namespace Distributed
             var queryUrl = string.Concat(BackendUri, uri);
             using (var webClient = new WebClient())
             {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
                 webClient.UploadString(queryUrl, "PUT", data);
             }
@@ -53,6 +55,7 @@ namespace Distributed
             var queryUrl = string.Concat(BackendUri, uri);
             using (var webClient = new WebClient())
             {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
                 webClient.UploadString(queryUrl, "PATCH", data);
             }
@@ -64,9 +67,11 @@ namespace Distributed
             string stringResult = "";
 
             using (var webClient = new WebClient())
+            {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 stringResult = webClient.DownloadString(queryUrl);
+            }
 
-            stringResult = StringEncodingConvert(stringResult, "WINDOWS-1251", "UTF-8");
             return JsonConvert.DeserializeObject<TResult>(stringResult);
         }
 
@@ -74,7 +79,10 @@ namespace Distributed
         {
             var queryUrl = string.Concat(BackendUri, uri);
             using (var webClient = new WebClient())
+            {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 webClient.DownloadString(queryUrl);
+            }
         }
 
         protected QueryResult MakeDeleteQuery(string uri)
@@ -83,9 +91,11 @@ namespace Distributed
             string stringResult = "";
 
             using (var webClient = new WebClient())
+            {
+                webClient.Encoding = Encoding.GetEncoding("UTF-8");
                 stringResult = webClient.UploadString(queryUrl, "DELETE", "");
+            }
 
-            stringResult = StringEncodingConvert(stringResult, "WINDOWS-1251", "UTF-8");
             return JsonConvert.DeserializeObject<QueryResult>(stringResult);
         }
 
@@ -97,7 +107,7 @@ namespace Distributed
         private static string StringEncodingConvert(string strText, string strSrcEncoding, string strDestEncoding)
         {
             System.Text.Encoding srcEnc = System.Text.Encoding.GetEncoding(strSrcEncoding);
-            System.Text.Encoding destEnc = System.Text.Encoding.GetEncoding(strDestEncoding);
+            System.Text.Encoding destEnc = System.Text.Encoding.Default; //System.Text.Encoding.GetEncoding(strDestEncoding);
             byte[] bData = srcEnc.GetBytes(strText);
             return destEnc.GetString(bData);
         }
