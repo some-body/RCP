@@ -11,6 +11,6 @@
 <h2 class="home-page-header">Учительская</h2>
 
 <div class="home-buttons-container">
-    @Html.ActionLink("Работники", "Index", "Workers", new { @class = "button rcp-button home-page-btn" })
-    @Html.ActionLink("Курсы", "Index", "Courses", new { @class = "button rcp-button home-page-btn" })
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">Работники</a>
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Courses")">Курсы</a>
 </div>

@@ -36,8 +36,8 @@ namespace ExamBackend.Controllers
                     }).ToList()
                 })
                 .AsEnumerable();
-            
-            // TODO: Запретить кэширование.
+
+            Request.Headers.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue { NoCache = true };
             return questions;
         }
 

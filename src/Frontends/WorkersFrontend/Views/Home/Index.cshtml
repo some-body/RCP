@@ -12,6 +12,6 @@
 <h2 class="home-page-header">Главная</h2>
 
 <div class="home-buttons-container">
-        @Html.ActionLink("Экзамен", "Index", "Exam", new { @class = "button rcp-button home-page-btn" })
-        @Html.ActionLink("Подготовка", "Index", "Preparation", new { @class = "button rcp-button home-page-btn" })
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Exam")">Экзамен</a>
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Preparation")">Подготовка</a>
 </div>

@@ -3,9 +3,15 @@
     ViewBag.Title = "Админка";
 }
 
+<style>
+    .navbar {
+        display: none;
+    }
+</style>
+
 <h2>Админка</h2>
 
-<div>
-    <div>@Html.ActionLink("Работники", "Index", "Workers")</div>
-    <div>@Html.ActionLink("Учителя", "Index", "Teachers")</div>
+<div class="home-buttons-container">
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">Работники</a>
+    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Teachers")">Учителя</a>
 </div>
