@@ -29,9 +29,10 @@
     text-decoration: none !important;
 }
 
-
-.rcp-table {
+.rcp-table-container {
     border: 1px solid #000000;
+}
+.rcp-table {
     width: 100%;
 }
 .rcp-table-head {
@@ -100,10 +101,10 @@ tr .rcp-table-btn-column:first-of-type {
     margin: 10px;
 }
 
-#worker-edit-table table {
+#worker-edit-table .rcp-table-container {
     margin: 10px;
 }
-#teacher-edit-table table {
+#teacher-edit-table .rcp-table-container {
     margin: 10px;
 }
 

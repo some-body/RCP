@@ -20,22 +20,24 @@
     <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
 
     <h3>Результаты экзаменов</h3>
-    <table class="rcp-table">
-        <thead class="rcp-table-head">
-            <tr>
-                <td>Наименование курса</td>
-                <td>Дата</td>
-                <td>Результат</td>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: ExamResults">
-            <tr>
-                <td><span data-bind="text: CourseName"></span></td>
-                <td><span data-bind="text: Date"></span></td>
-                <td><span data-bind="text: Result"></span></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="rcp-table-container">
+        <table class="rcp-table">
+            <thead class="rcp-table-head">
+                <tr>
+                    <td>Наименование курса</td>
+                    <td>Дата</td>
+                    <td>Результат</td>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: ExamResults">
+                <tr>
+                    <td><span data-bind="text: CourseName"></span></td>
+                    <td><span data-bind="text: Date"></span></td>
+                    <td><span data-bind="text: Result"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script type="text/javascript">

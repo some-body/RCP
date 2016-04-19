@@ -1,61 +1,62 @@
 ﻿@using AdminFrontend.ViewModels
 @helper Table(TableViewModel model)
 {
-    <table class="rcp-table">
-        <thead class="rcp-table-head">
-            <tr>
-                @if (model.EditAction != null)
-                {
-                    <td></td>
-                }
-                @if (model.DeleteAction != null)
-                {
-                    <td></td>
-                }
-                @foreach (var colName in model.ColumnsNames)
-                {
-                    <td>@colName</td>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in model.Rows)
-            {
+    <div class="rcp-table-container">
+        <table class="rcp-table">
+            <thead class="rcp-table-head">
                 <tr>
                     @if (model.EditAction != null)
                     {
-                        <td class="rcp-table-btn-column">
-                            <a class="fa fa-pencil-square-o rcp-table-icon rcp-table-edit-btn" title="Редактировать" href="@(model.EditAction + row.Id)"></a>
-                        </td>
+                        <td></td>
                     }
                     @if (model.DeleteAction != null)
                     {
-                        <td class="rcp-table-btn-column">
-                            <a class="fa fa-times rcp-table-icon rcp-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
-                        </td>
+                        <td></td>
                     }
-                    @foreach (var col in row.Columns)
+                    @foreach (var colName in model.ColumnsNames)
                     {
-                        <td>@col</td>
+                        <td>@colName</td>
                     }
                 </tr>
-            }
-        </tbody>
-        <tfoot class="rcp-table-footer">
-            <tr>
-                <td class="rcp-table-btn-column">
-                    @if (model.AddAction != null)
-                    {
-                        <form action="@model.AddAction">
-                            <button class="rcp-button rcp-button-min">Добавить</button>
-                        </form>
-                    }
-                </td>
-                <td colspan="@(model.ColumnsNames.Length + 1)"></td>
-            </tr>
-        </tfoot>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach (var row in model.Rows)
+                {
+                    <tr>
+                        @if (model.EditAction != null)
+                        {
+                            <td class="rcp-table-btn-column">
+                                <a class="fa fa-pencil-square-o rcp-table-icon rcp-table-edit-btn" title="Редактировать" href="@(model.EditAction + row.Id)"></a>
+                            </td>
+                        }
+                        @if (model.DeleteAction != null)
+                        {
+                            <td class="rcp-table-btn-column">
+                                <a class="fa fa-times rcp-table-icon rcp-delete-btn" title="Удалить" onclick="deleteById(@row.Id)"></a>
+                            </td>
+                        }
+                        @foreach (var col in row.Columns)
+                        {
+                            <td>@col</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="rcp-table-footer">
+                <tr>
+                    <td class="rcp-table-btn-column">
+                        @if (model.AddAction != null)
+                        {
+                            <form action="@model.AddAction">
+                                <button class="rcp-button rcp-button-min">Добавить</button>
+                            </form>
+                        }
+                    </td>
+                    <td colspan="@(model.ColumnsNames.Length + 1)"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
     <script type="text/javascript">
         var deleteUrl = '@model.DeleteAction';
         function deleteById(id) {
