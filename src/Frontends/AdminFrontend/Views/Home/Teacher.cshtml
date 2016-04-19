@@ -2,9 +2,15 @@
     ViewBag.Title = "Учительская";
 }
 
-<h2>Учительская</h2>
+<style>
+    .navbar {
+        display: none;
+    }
+</style>
 
-<div>
-    <div>@Html.ActionLink("Работники", "Index", "Workers")</div>
-    <div>@Html.ActionLink("Курсы", "Index", "Courses")</div>
+<h2 class="home-page-header">Учительская</h2>
+
+<div class="home-buttons-container">
+    @Html.ActionLink("Работники", "Index", "Workers", new { @class = "button rcp-button home-page-btn" })
+    @Html.ActionLink("Курсы", "Index", "Courses", new { @class = "button rcp-button home-page-btn" })
 </div>

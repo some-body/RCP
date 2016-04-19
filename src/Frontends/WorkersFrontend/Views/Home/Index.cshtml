@@ -1,9 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "RCP";
+    ViewBag.Title = "Главная";
 }
 
-<h2>RCP</h2>
+<style>
+    .navbar {
+        display: none;
+    }
+</style>
 
-<div>@Html.ActionLink("Экзамен", "Index", "Exam")</div>
-<div>@Html.ActionLink("Подготовка", "Index", "Preparation")</div>
+<h2 class="home-page-header">Главная</h2>
+
+<div class="home-buttons-container">
+        @Html.ActionLink("Экзамен", "Index", "Exam", new { @class = "button rcp-button home-page-btn" })
+        @Html.ActionLink("Подготовка", "Index", "Preparation", new { @class = "button rcp-button home-page-btn" })
+</div>

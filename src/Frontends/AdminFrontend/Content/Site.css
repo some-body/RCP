@@ -9,14 +9,13 @@
     padding-right: 15px;
 }
 
-
 .rcp-button {
-    background-color: cadetblue; /* Green */
+    background-color: darkgray;
     border: none;
-    color: white;
+    color: white !important;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
+    text-decoration: none !important;
     display: inline-block;
     font-size: 16px;
     margin: 5px;
@@ -24,6 +23,10 @@
 .rcp-button-min {
     padding: 5px 9px;
     font-size: 16px;
+}
+.rcp-button:hover {
+    background-color: #808080;
+    text-decoration: none !important;
 }
 
 
@@ -113,4 +116,32 @@ tr .rcp-table-btn-column:first-of-type {
     opacity: 0.5;
     width: 100%;
     height: 100%;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+.home-buttons-container {
+    text-align: center;
+}
+
+.home-page-btn {
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    line-height: 300px;
+    font-size: 24pt;
+}
+
+.home-page-header {
+    text-align: center;
+    margin-bottom: 50px;
 }
