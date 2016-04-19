@@ -16,15 +16,15 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button hidden type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("RCP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Выход", "SignOut", "Auth")
+                @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn" })
              </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" hidden>
                 <ul class="nav navbar-nav">
                 </ul>
             </div>

@@ -118,15 +118,6 @@ tr .rcp-table-btn-column:first-of-type {
     height: 100%;
 }
 
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: initial;
-}
-
 .home-buttons-container {
     text-align: center;
 }
@@ -148,4 +139,12 @@ a.button {
 
 label {
     font-weight: normal !important;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.exit-btn {
+    float: right !important;
 }

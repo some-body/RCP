@@ -144,10 +144,8 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Auth\LogOn.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -162,6 +160,7 @@
     <Content Include="Views\Workers\EditByTeacher.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\SystemPassword\Index.cshtml" />
+    <Content Include="Views\Auth\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
