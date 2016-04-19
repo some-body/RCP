@@ -1,0 +1,51 @@
+﻿@model AdminFrontend.ViewModels.ChangePasswordViewModel
+
+@{
+    ViewBag.Title = "Смена системного пароля";
+}
+
+<h2>Смена системного пароля</h2>
+
+<div id="teacher-edit-table">
+    <table>
+        <tr>
+            <td>@Html.LabelFor(m => m.OldPassword)</td>
+            <td>@Html.TextBoxFor(m => m.OldPassword, new { data_bind = "value: OldPassword" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.NewPassword)</td>
+            <td>@Html.PasswordFor(m => m.NewPassword, new { data_bind = "value: NewPassword" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.NewPasswordConfirm)</td>
+            <td>@Html.PasswordFor(m => m.NewPasswordConfirm, new { data_bind = "value: NewPasswordConfirm" })</td>
+        </tr>
+    </table>
+    <button class="rcp-button rcp-button-min" id="btn-submit">Сохранить</button>
+</div>
+
+<script type="text/javascript">
+    var viewModel = {
+        OldPassword: ko.observable(@Model.OldPassword),
+        NewPassword: ko.observable('@Model.NewPassword'),
+        NewPasswordConfirm: ko.observable('@Model.NewPasswordConfirm')
+    };
+    $('#btn-submit').click(function () {
+        var data = ko.mapping.toJS(viewModel);
+        Fader.show();
+        $.post(
+            '@Url.Action("Save")',
+            data,
+            function (result) {
+                Fader.hide();
+                if (result.success) {
+                    window.location.replace(result.returnTo);
+                } else {
+                    alert(result.msg);
+                }
+            }
+        );
+    });
+
+    ko.applyBindings(viewModel, $('teacher-edit-table')[0]);
+</script>

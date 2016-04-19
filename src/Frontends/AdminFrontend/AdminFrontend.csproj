@@ -115,6 +115,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RCPController.cs" />
+    <Compile Include="Controllers\SystemPasswordController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\WorkersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -127,6 +128,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ViewModels\AuthViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\CourseEditViewModel.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\ExamResultsViewModel.cs" />
@@ -159,6 +161,7 @@
     <Content Include="Views\Workers\EditByAdmin.cshtml" />
     <Content Include="Views\Workers\EditByTeacher.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\SystemPassword\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
