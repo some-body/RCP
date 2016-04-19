@@ -12,8 +12,8 @@ namespace WorkersFrontend.Controllers
     [RCPAuthorize]
     public class ExamController : RCPController
     {
-        public static IDictionary<string, ICollection<int>> _examQuestionsForUser { get; private set; } 
-            = new Dictionary<string, ICollection<int>>();
+        public static IDictionary<string, ICollection<QuestionDto>> _examQuestionsForUser { get; private set; } 
+            = new Dictionary<string, ICollection<QuestionDto>>();
 
         private CustomApiQueryProvider _examQueryProvider;
         private ApiQueryProvider<ICollection<WorkerDto>, Worker> _workersQueryProvider;
@@ -60,17 +60,24 @@ namespace WorkersFrontend.Controllers
         {
             var token = Request.Cookies["token"].Value;
 
+            if (_examQuestionsForUser.ContainsKey(token))
+            {
+                return Json(new ExamViewModel
+                {
+                    Questions = _examQuestionsForUser[token]
+                }, JsonRequestBehavior.AllowGet);
+            }
             // TODO: Проверка на то, что курс с таким id есть у работника.
 
             var action = "api/Exam/GetRandomQuestionsForCourse";
             var data = "courseId=" + courseId.ToString();
             var questions = _examQueryProvider.Get<ICollection<QuestionDto>>(action, data);
 
-            var questionsIds = questions.Select(q => q.Id).ToList();
+            //var questionsIds = questions.Select(q => q.Id).ToList();
             if (_examQuestionsForUser.ContainsKey(token))
                 _examQuestionsForUser.Remove(token);
 
-            _examQuestionsForUser.Add(token, questionsIds);
+            _examQuestionsForUser.Add(token, questions);
 
             return Json(new ExamViewModel
             {
@@ -88,13 +95,13 @@ namespace WorkersFrontend.Controllers
             if (!_examQuestionsForUser.ContainsKey(token))
                 return Json(false);
 
-            var questionsIds = _examQuestionsForUser[token];
+            var questions = _examQuestionsForUser[token];
 
             var examResultDto = new ExamResultDto
             {
                 WorkerId = workerId,
                 CourseId = result.CourseId,
-                QuestionsIds = questionsIds,
+                QuestionsIds = questions.Select(q => q.Id).ToList(),
                 CheckedAnswersIds = result.CheckedAnswersIds
             };
 

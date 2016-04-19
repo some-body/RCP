@@ -5,6 +5,7 @@ using Domain.Dto;
 using Domain.Entities;
 using Domain.Repositories;
 using System;
+using Tools;
 
 namespace ExamBackend.Controllers
 {
@@ -20,11 +21,12 @@ namespace ExamBackend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<QuestionDto> GetRandomQuestionsForCourse(int courseId, int count = 10)
+        public IEnumerable<QuestionDto> GetRandomQuestionsForCourse(int courseId, int count = 3)
         {
             // TODO: Выбирать не все, а пачку
             var questions = _coursesRepository.GetById(courseId)
                 .Questions
+                .RandomSelect(count)
                 .Select(q => new QuestionDto
                 {
                     Id = q.Id ?? 0,
