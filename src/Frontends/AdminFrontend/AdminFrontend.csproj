@@ -113,6 +113,7 @@
     <Compile Include="Auth\RCPAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RCPController.cs" />
     <Compile Include="Controllers\SystemPasswordController.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\CourseEditViewModel.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\ExamResultsViewModel.cs" />
     <Compile Include="ViewModels\RedirectViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
@@ -161,6 +163,7 @@
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\SystemPassword\Index.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Errors\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

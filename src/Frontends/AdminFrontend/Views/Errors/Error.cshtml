@@ -1,0 +1,20 @@
+﻿@model AdminFrontend.ViewModels.ErrorViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Title</title>
+</head>
+<body>
+    <div>
+        @Model.Message
+    </div>
+    @Html.ActionLink("Вернуться на главную", "Index", "Home", null, null);
+</body>
+</html>

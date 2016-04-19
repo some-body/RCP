@@ -49,10 +49,12 @@ namespace AdminFrontend.Controllers
             var result = _sessionQueryProvider.Post<WorkerSignInDto, LoginDto>("api/SystemUsers/SignIn", loginDto);
             if(result == null)
             {
-                return RedirectToAction("Index", new RedirectViewModel
-                {
-                    ReturnToUrl = redirectUrl
-                });
+                var url = "/Auth/Index?ReturnToUrl=" + redirectUrl;
+                return Redirect(url);
+                //return RedirectToAction("Index", "Auth", new RedirectViewModel
+                //{
+                //    ReturnToUrl = redirectUrl
+                //});
             }
             else
             {
