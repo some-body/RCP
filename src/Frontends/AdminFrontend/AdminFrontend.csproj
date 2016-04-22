@@ -175,10 +175,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\RCPAuthorization\RCPAuthorization.csproj">
-      <Project>{34e15b25-3c4e-430e-9968-9e8a3f9d874d}</Project>
-      <Name>RCPAuthorization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Distributed\Distributed.csproj">
       <Project>{26cba891-460f-4839-a35a-adf972dee527}</Project>
       <Name>Distributed</Name>
