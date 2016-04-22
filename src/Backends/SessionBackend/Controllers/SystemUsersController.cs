@@ -32,18 +32,8 @@ namespace SessionBackend.Controllers
         {
             var passwordHash = _hashGenerator.Generate(loginDto.Password);
 
-            System.IO.File.AppendAllText("C:/St/log.txt", passwordHash);
-            //var temp = _systemUsersRepository.GetAll()
-            //    .Select(e => e.Login);
-
-            //foreach (var t in temp)
-            //{
-            //    System.IO.File.AppendAllText("C:/St/log.txt", t + "\r\n");
-            //}
-
             var user = _systemUsersRepository.GetAll()
                 .FirstOrDefault(w => w.Login == loginDto.Login && w.PasswordHash == passwordHash);
-
 
             if (user == null)
                 return null;

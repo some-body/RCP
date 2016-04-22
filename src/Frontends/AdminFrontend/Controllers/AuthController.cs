@@ -39,7 +39,6 @@ namespace AdminFrontend.Controllers
                 });
             }
 
-
             var loginDto = new LoginDto
             {
                 Login = model.Login,
