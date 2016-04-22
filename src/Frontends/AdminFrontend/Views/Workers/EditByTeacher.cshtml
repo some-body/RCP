@@ -10,34 +10,43 @@
     <h2 data-bind="text: FullName"></h2>
 
     <h3>Назначенные курсы</h3>
-    <div data-bind="foreach: AllCourses">
-        <div class="appointed-courses-container">
-            <input type="checkbox" data-bind="checked: IsChecked" />
-            <span data-bind="text: Name"></span>
+    <!-- ko if: CoursesAreAvailable() -->
+        <div data-bind="foreach: AllCourses">
+            <div class="appointed-courses-container">
+                <input type="checkbox" data-bind="checked: IsChecked" />
+                <span data-bind="text: Name"></span>
+            </div>
         </div>
-        
-    </div>
-    <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
+        <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
+    <!-- /ko -->
+    <!-- ko ifnot: CoursesAreAvailable() -->
+        <div>Недоступно</div>
+    <!-- /ko -->
 
     <h3>Результаты экзаменов</h3>
-    <div class="rcp-table-container">
-        <table class="rcp-table">
-            <thead class="rcp-table-head">
-                <tr>
-                    <td>Наименование курса</td>
-                    <td>Дата</td>
-                    <td>Результат</td>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: ExamResults">
-                <tr>
-                    <td><span data-bind="text: CourseName"></span></td>
-                    <td><span data-bind="text: Date"></span></td>
-                    <td><span data-bind="text: Result"></span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- ko if: ExamResultsAreAvailable() -->
+        <div class="rcp-table-container">
+            <table class="rcp-table">
+                <thead class="rcp-table-head">
+                    <tr>
+                        <td>Наименование курса</td>
+                        <td>Дата</td>
+                        <td>Результат</td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: ExamResults">
+                    <tr>
+                        <td><span data-bind="text: CourseName"></span></td>
+                        <td><span data-bind="text: Date"></span></td>
+                        <td><span data-bind="text: Result"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+    <!-- /ko -->
+    <!-- ko ifnot: ExamResultsAreAvailable() -->
+        <div>Недоступно</div>
+    <!-- /ko -->
 </div>
 
 <script type="text/javascript">

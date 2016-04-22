@@ -168,10 +168,30 @@ namespace AdminFrontend.Controllers
         {
             var worker = _workersQueryProvider.Get(id);
             var coursesIds = worker.AppointedCourses.Select(e => e.CourseId).ToList();
-            var allCourses = _coursesQueryProvider.Get();
 
-            var examResults = _examQueryProvider
-                .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + id);
+            ICollection<CourseDto> allCourses = null;
+            bool coursesAreAvailable = true;
+            try
+            {
+                allCourses = _coursesQueryProvider.Get();
+            }
+            catch
+            {
+                coursesAreAvailable = false;
+            }
+
+            ICollection<ExamResult> examResults = null;
+            bool examResultsAreAvailable = true;
+            try
+            {
+                examResults = _examQueryProvider
+                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + id);
+            }
+            catch
+            {
+                examResultsAreAvailable = false;
+                examResults = new List<ExamResult>();
+            }
 
             ViewBag.Title = "Информация о работнике";
 
@@ -194,7 +214,9 @@ namespace AdminFrontend.Controllers
                         CourseName = allCourses.FirstOrDefault(c => c.Id == e.CourseId).Name,
                         Date = e.Date.ToShortDateString(),
                         Result = e.IsSuccess ? "Сдан" : "Не сдан"
-                    })
+                    }),
+                CoursesAreAvailable = coursesAreAvailable,
+                ExamResultsAreAvailable = examResultsAreAvailable
             });
 
             return result;
