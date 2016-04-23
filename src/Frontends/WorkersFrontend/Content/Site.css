@@ -68,3 +68,7 @@ label {
 .exit-btn {
     float: right !important;
 }
+
+.footer {
+    text-align: center;
+}

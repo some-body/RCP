@@ -52,7 +52,7 @@ namespace SystemUsersBackend.Controllers
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = ex.Message;
+                result.Message = ex.GetBaseException().Message;
             }
             return result;
         }
@@ -69,7 +69,7 @@ namespace SystemUsersBackend.Controllers
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = ex.Message;
+                result.Message = ex.GetBaseException().Message;
             }
             return result;
         }

@@ -33,13 +33,17 @@ namespace Domain.Repositories
             var list = GetEntityList();
             if (entity.Id.HasValue && list.Any(e => e.Id == entity.Id.Value))
             {
+                System.IO.File.AppendAllText("C:/St/111.txt", "1\r\n");
                 Update(entity.Id.Value, entity);
+                System.IO.File.AppendAllText("C:/St/111.txt", "2\r\n");
             }
             else
             {
                 list.Add(entity);
             }
+            System.IO.File.AppendAllText("C:/St/111.txt", "тут я был\r\n");
             _dbContext.SaveChanges();
+            System.IO.File.AppendAllText("C:/St/111.txt", "тут 2 был\r\n");
         }
 
         public void Remove(T entity)
@@ -75,6 +79,7 @@ namespace Domain.Repositories
 
         public virtual void Update(int id, T entity)
         {
+            System.IO.File.AppendAllText("C:/St/111.txt", "Update\r\n");
             entity.Id = null;
 
             var existingEntity = GetEntityList().Find(id);
@@ -82,7 +87,7 @@ namespace Domain.Repositories
                 throw new EntityNotFoundException();
 
             UpdateEntityValues(entity, existingEntity);
-            _dbContext.SaveChanges();
+            //_dbContext.SaveChanges();
         }
 
         private void PatchEntityValues(T source, T target)

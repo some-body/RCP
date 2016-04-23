@@ -3,9 +3,9 @@ using System.Web.Mvc;
 
 namespace AdminFrontend.Controllers
 {
-    [RCPAuthorize]
     public class HomeController : RCPController
     {
+        [RCPAuthorize]
         public ActionResult Index()
         {
             if (UserRole == "Admin")
@@ -14,6 +14,11 @@ namespace AdminFrontend.Controllers
                 return Teacher();
             else
                 return new HttpUnauthorizedResult();
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
 
         private ActionResult Admin()

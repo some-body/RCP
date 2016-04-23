@@ -23,6 +23,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("RCP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("О системе", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                 @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn" })
             </div>
             <div class="navbar-collapse collapse" hidden>
@@ -35,6 +36,9 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <div class="footer">
+            @Html.ActionLink("О системе", "About", "Home")
+        </div>
     </div>
     <div class="fader" hidden></div>
 </body>
