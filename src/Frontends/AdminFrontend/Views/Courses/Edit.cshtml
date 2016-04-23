@@ -50,13 +50,13 @@
                     <div class="answer-container">
                         <input type="checkbox" data-bind="checked: IsCorrect" />
                         <input data-bind="value: Text" />
-                        <a class="fa fa-times rcp-delete-btn" title="Удалить" data-bind="click: function() { $root.deleteAnswer($data) }"></a>
+                        <a class="fa fa-times rcp-delete-btn" title="Удалить" data-bind="click: function() { $root.deleteAnswer($parent, $data) }"></a>
                     </div>
                 </div>
                 <button class="rcp-button rcp-button-min" data-bind="click: function() { $root.addAnswer($data) }">Добавить вариант ответа</button>
             </div>
         </div>
-        <button class="rcp-button rcp-button-min" data-bind="click: function() { $root.addQuestion() }">Добавть вопрос</button>
+        <button class="rcp-button rcp-button-min" data-bind="click: function() { $root.addQuestion() }">Добавить вопрос</button>
     </div>
     <hr />
     <button class="rcp-button" data-bind="click: save">Сохранить</button>

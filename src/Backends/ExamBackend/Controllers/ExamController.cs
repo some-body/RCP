@@ -61,12 +61,16 @@ namespace ExamBackend.Controllers
                 correctAnswersIds.AddRange(answers);
             }
 
-            var isPassed = correctAnswersIds
-                .OrderBy(a => a)
-                .SequenceEqual(
-                    result.CheckedAnswersIds
-                    .OrderBy(a => a)
-                );
+            var incorrect = result.CheckedAnswersIds.Except(correctAnswersIds).ToList();
+            var isPassed = !incorrect.Any();
+
+            //var isPassed = correctAnswersIds
+            //    .OrderBy(a => a)
+            //    .Take(result.CheckedAnswersIds.Count)
+            //    .SequenceEqual(
+            //        result.CheckedAnswersIds
+            //            .OrderBy(a => a)
+            //    );
 
             var examResult = new ExamResult
             {

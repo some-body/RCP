@@ -36,7 +36,7 @@
 
     $('#submit-exam-btn').click(() =>{
         Fader.show();
-        let viewModel = ko.dataFor($('#question-list'));
+        let viewModel = ko.dataFor($('#question-list')[0]);
 
         let resultData = {
             'CourseId': @Model.CourseId,
