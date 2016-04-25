@@ -1,10 +1,59 @@
 ﻿@using AdminFrontend.ViewModels
 @helper Table(TableViewModel model)
 {
+    <style>
+        .rcp-table-container {
+            border: 1px solid #000000;
+        }
+        .rcp-table {
+            width: 100%;
+        }
+        .rcp-table-head {
+            border-bottom: 2px double #000000;
+            background: #c8c8c8;
+        }
+        .rcp-table-footer {
+            border: 1px solid #000000;
+            border-top: 2px double #000000;
+        }
+        .rcp-table-footer tr {
+            height: 40px;
+        }
+        .rcp-table tbody tr {
+            height: 40px;
+        }
+        .rcp-table-btn-column {
+            width: 5%;
+            text-align: left;
+        }
+        tr .rcp-table-btn-column:first-of-type {
+            width: 10%;
+            text-align: center;
+        }
+        .rcp-delete-btn, .rcp-delete-btn:hover {
+            color: red;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .rcp-table-info-btn, .rcp-table-info-btn:hover {
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .rcp-table-edit-btn, .rcp-table-edit-btn:hover {
+            color: green;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+
     <div class="rcp-table-container">
         <table class="rcp-table">
             <thead class="rcp-table-head">
                 <tr>
+                    @if (model.InfoAction != null)
+                    {
+                        <td></td>
+                    }
                     @if (model.EditAction != null)
                     {
                         <td></td>
@@ -23,6 +72,12 @@
                 @foreach (var row in model.Rows)
                 {
                     <tr>
+                        @if (model.InfoAction != null)
+                        {
+                            <td class="rcp-table-btn-column">
+                                <a class="fa fa-info-circle rcp-table-icon rcp-table-info-btn" title="Информация" href="@(model.InfoAction + row.Id)"></a>
+                            </td>
+                        }
                         @if (model.EditAction != null)
                         {
                             <td class="rcp-table-btn-column">
@@ -44,15 +99,14 @@
             </tbody>
             <tfoot class="rcp-table-footer">
                 <tr>
-                    <td class="rcp-table-btn-column">
+                    <td class="rcp-table-btn-column" colspan="@(model.ColumnsNames.Length + 3)">
                         @if (model.AddAction != null)
                         {
-                            <form action="@model.AddAction">
+                            <form action="@model.AddAction" style="text-align: left;">
                                 <button class="rcp-button rcp-button-min">Добавить</button>
                             </form>
                         }
                     </td>
-                    <td colspan="@(model.ColumnsNames.Length + 1)"></td>
                 </tr>
             </tfoot>
         </table>

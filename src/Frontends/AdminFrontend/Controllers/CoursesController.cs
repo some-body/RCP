@@ -33,7 +33,8 @@ namespace AdminFrontend.Controllers
                     Id = c.Id,
                     Columns = new string[] { c.Name, c.Description }
                 }).ToList(),
-                EditAction = "/Courses/Edit/",
+                InfoAction = "Courses/ExamResults/",
+                EditAction = "Courses/Edit/",
                 DeleteAction = "Courses/Delete/",
                 AddAction = "Courses/Add"
             };
@@ -112,6 +113,12 @@ namespace AdminFrontend.Controllers
                 success = result.Success,
                 msg
             });
+        }
+
+        public ActionResult CourseInfo(int id)
+        {
+            // TODO
+            return RedirectToAction("Index");
         }
     }
 }
