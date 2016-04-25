@@ -3,15 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
 {
     public class ErrorsController : Controller
     {
-        // GET: Errors
-        public ActionResult Index()
+        public ActionResult Error404()
         {
-            return View();
+            return View("Error", new ErrorViewModel
+            {
+                Title = "Не найдено",
+                Message = "Запрашиваемый ресурс не найден"
+            });
+        }
+
+        public ActionResult Error401()
+        {
+            return View("Error", new ErrorViewModel
+            {
+                Title = "Нет доступа",
+                Message = "Доступ к запрашиваемому ресурсу запрещен"
+            });
+        }
+
+        public ActionResult Default()
+        {
+            return View("Error", new ErrorViewModel
+            {
+                Title = "Ошибка",
+                Message = "Во время выполнения запроса произошла ошибка"
+            });
         }
     }
 }

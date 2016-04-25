@@ -115,7 +115,7 @@ namespace AdminFrontend.Controllers
             });
         }
 
-        public ActionResult CourseInfo(int id)
+        public ActionResult ExamResults(int id)
         {
             // TODO
             return RedirectToAction("Index");
