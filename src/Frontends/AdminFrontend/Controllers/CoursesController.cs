@@ -12,12 +12,24 @@ namespace AdminFrontend.Controllers
     [RCPAuthorize(Roles = "Teacher")]
     public class CoursesController : RCPController
     {
+        private ApiQueryProvider<ICollection<WorkerDto>, Worker> _workersQueryProvider;
+        private CustomApiQueryProvider _workersRangeQueryProvider;
+
         private ApiQueryProvider<ICollection<CourseDto>, Course> _courseQueryProvider;
+        private CustomApiQueryProvider _examQueryProvider;
 
         public CoursesController()
         {
+            var workersBackendUrl = Properties.Resources.WorkersBackendURL;
+            _workersQueryProvider = new ApiQueryProvider<ICollection<WorkerDto>, Worker>(workersBackendUrl, "Workers");
+
             var backendUrl = Properties.Resources.PreparationBackendURL;
             _courseQueryProvider = new ApiQueryProvider<ICollection<CourseDto>, Course>(backendUrl, "Courses");
+
+            var examBackendUrl = Properties.Resources.ExamBackendURL;
+            _examQueryProvider = new CustomApiQueryProvider(examBackendUrl);
+
+            _workersRangeQueryProvider = new CustomApiQueryProvider(workersBackendUrl);
         }
 
         // GET: Courses
@@ -117,8 +129,28 @@ namespace AdminFrontend.Controllers
 
         public ActionResult ExamResults(int id)
         {
-            // TODO
-            return RedirectToAction("Index");
+            var examResults = _examQueryProvider
+                .Get<ICollection<ExamResult>>("api/Exam/GetExamResultsForCourse", "courseId=" + id);
+
+            var workersIds = examResults
+                .Select(e => e.WorkerId)
+                .Distinct()
+                .ToList();
+
+            var workers = _workersRangeQueryProvider
+                .Post<ICollection<WorkerDto>, ICollection<int>>("api/WorkersRange/GetWorkersByIds", workersIds);
+
+            var model = new ExamResultsViewModel
+            {
+                ExamResults = examResults.Select(e => new ExamResultViewModel
+                {
+                    FullName = workers.FirstOrDefault(w => w.Id == e.WorkerId)?.FullName ?? "-",
+                    ExamDate = e.Date.ToShortDateString(),
+                    Result = e.Percentage + " ,баллов, " + (e.IsSuccess ? "сдано" : "не сдано")
+                }).ToList()
+            };
+
+            return View(model);
         }
     }
 }

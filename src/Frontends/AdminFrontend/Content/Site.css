@@ -114,3 +114,49 @@ label {
 .footer {
     text-align: center;
 }
+
+
+
+/*TABLE*/
+.rcp-table-container {
+    border: 1px solid #000000;
+}
+.rcp-table {
+    width: 100%;
+}
+.rcp-table-head {
+    border-bottom: 2px double #000000;
+    background: #c8c8c8;
+}
+.rcp-table-footer {
+    border: 1px solid #000000;
+    border-top: 2px double #000000;
+}
+.rcp-table-footer tr {
+    height: 40px;
+}
+.rcp-table tbody tr {
+    height: 40px;
+}
+.rcp-table-btn-column {
+    width: 5%;
+    text-align: left;
+}
+tr .rcp-table-btn-column:first-of-type {
+    width: 10%;
+    text-align: center;
+}
+.rcp-delete-btn, .rcp-delete-btn:hover {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+.rcp-table-info-btn, .rcp-table-info-btn:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+.rcp-table-edit-btn, .rcp-table-edit-btn:hover {
+    color: green;
+    cursor: pointer;
+    text-decoration: none;
+}

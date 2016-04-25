@@ -1,0 +1,29 @@
+﻿@model AdminFrontend.ViewModels.ExamResultsViewModel
+
+@{
+    ViewBag.Title = "ExamResults";
+}
+
+<h2>Результаты экзаменов по курсу</h2>
+
+<div class="rcp-table-container">
+    <table class="rcp-table">
+        <thead class="rcp-table-head">
+            <tr>
+                <td>ФИО работника</td>
+                <td>Дата</td>
+                <td>Результат</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.ExamResults)
+            {
+                <tr>
+                    <td><span>@row.FullName</span></td>
+                    <td><span>@row.ExamDate</span></td>
+                    <td><span>@row.Result</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> 

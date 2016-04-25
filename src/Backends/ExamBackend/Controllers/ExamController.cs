@@ -82,18 +82,26 @@ namespace ExamBackend.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ExamResult> GetExamResults(int workerId)
+        public IEnumerable<ExamResult> GetExamResultsForWorker(int workerId)
         {
             return _examResultsRepository
                 .GetAll()
                 .Where(e => e.WorkerId == workerId);
         }
 
+        [HttpGet]
+        public IEnumerable<ExamResult> GetExamResultsForCourse(int courseId)
+        {
+            return _examResultsRepository
+                .GetAll()
+                .Where(e => e.CourseId == courseId);
+        }
+
         [HttpPost]
         public IEnumerable<CourseDto> GetCoursesByIds([FromBody] ICollection<int> ids)
         {
             if (ids == null || !ids.Any())
-                return null;
+                return new List<CourseDto>();
 
             return _coursesRepository
                 .GetAll()

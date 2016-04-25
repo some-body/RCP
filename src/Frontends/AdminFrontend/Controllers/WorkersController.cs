@@ -185,7 +185,7 @@ namespace AdminFrontend.Controllers
             try
             {
                 examResults = _examQueryProvider
-                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + id);
+                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResultsForWorker", "workerId=" + id);
             }
             catch
             {

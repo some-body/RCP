@@ -165,6 +165,7 @@
     <Content Include="Views\Auth\SignIn.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Courses\ExamResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
