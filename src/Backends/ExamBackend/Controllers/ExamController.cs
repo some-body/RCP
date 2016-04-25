@@ -50,33 +50,28 @@ namespace ExamBackend.Controllers
             if (course == null)
                 return false;
 
-            var correctAnswersIds = new List<int>();
+            int corrrectQuestionsCount = 0;
             foreach(var q in course.Questions)
             {
-                var answers = q.Answers
+                var incorrect = q.Answers
                     .Where(a => a.IsCorrect)
-                    .Select(a => a.Id.Value)
-                    .ToList();
+                    .Select(a => a.Id ?? 0)
+                    .Except(result.CheckedAnswersIds);
 
-                correctAnswersIds.AddRange(answers);
+                if (!incorrect.Any())
+                    corrrectQuestionsCount++;
             }
 
-            var incorrect = result.CheckedAnswersIds.Except(correctAnswersIds).ToList();
-            var isPassed = !incorrect.Any();
-
-            //var isPassed = correctAnswersIds
-            //    .OrderBy(a => a)
-            //    .Take(result.CheckedAnswersIds.Count)
-            //    .SequenceEqual(
-            //        result.CheckedAnswersIds
-            //            .OrderBy(a => a)
-            //    );
+            float questionsCount = course.Questions.Count;
+            int rank = (int)(100 * corrrectQuestionsCount / questionsCount);
+            bool isPassed = rank >= course.MinPercentage;
 
             var examResult = new ExamResult
             {
                 WorkerId = result.WorkerId,
                 CourseId = result.CourseId,
                 Date = DateTime.Now.Date,
+                Percentage = rank,
                 IsSuccess = isPassed
             };
 

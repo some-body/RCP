@@ -57,12 +57,13 @@ namespace AdminFrontend.Controllers
         {
             var course = id != -1
                 ? _courseQueryProvider.Get(id)
-                : new Course
+                : new Course()
                 {
                     Id = -1,
                     Name = "",
                     Description = "",
                     MaterialText = "",
+                    MinPercentage = 75,
                     Questions = new List<Question>()
                 };
 
