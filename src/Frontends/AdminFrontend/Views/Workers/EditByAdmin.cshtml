@@ -1,5 +1,13 @@
 ﻿@model int
 
+@{
+    ViewBag.Breadcrumbs = new List<AdminFrontend.Models.Breadcrump>
+    {
+        new AdminFrontend.Models.Breadcrump { Title = "Работники", Action = "Index", Controller = "Workers" },
+        new AdminFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
+}
+
 <div id="worker-edit-table">
     <table>
         <tr>

@@ -1,6 +1,11 @@
 ﻿@model WorkersFrontend.ViewModels.StartExamViewModel
 @{
     ViewBag.Title = "Экзамен";
+    ViewBag.Breadcrumbs = new List<WorkersFrontend.Models.Breadcrump>
+    {
+        new WorkersFrontend.Models.Breadcrump { Title = "Выбор курса для сдачи экзамена", Action = "Index", Controller = "Exam" },
+        new WorkersFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
 }
 
 <h2>Экзамен</h2>

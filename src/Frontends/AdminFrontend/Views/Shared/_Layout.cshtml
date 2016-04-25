@@ -12,6 +12,22 @@
     <script src="~/Scripts/knockout-mapping.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/rcp.js"></script>
+
+    <style>
+        .connector {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .unclickable{
+            cursor: default;
+        }
+        .unhighlighted:hover{
+            color: #999 !important;
+        }
+        .highlighted{
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,8 +38,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("RCP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @*@Html.ActionLink("О системе", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @{
+                    if (ViewBag.Breadcrumbs != null)
+                    {
+                        foreach (AdminFrontend.Models.Breadcrump breadcrumb in ViewBag.Breadcrumbs)
+                        {
+                            <span class="navbar-brand unclickable unhighlighted connector">></span>
+                            if (breadcrumb.Unclickable)
+                            {
+                                <span class="navbar-brand unclickable unhighlighted">@breadcrumb.Title</span>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(breadcrumb.Title, breadcrumb.Action, breadcrumb.Controller, new { area = "" }, new { @class = "navbar-brand" })
+                            }
+                        }
+                    }
+                }
                 @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn" })
             </div>
             <div class="navbar-collapse collapse" hidden>

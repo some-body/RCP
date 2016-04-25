@@ -1,10 +1,15 @@
 ﻿@model AdminFrontend.ViewModels.ExamResultsViewModel
 
 @{
-    ViewBag.Title = "ExamResults";
+    ViewBag.Title = "Результаты экзаменов";
+    ViewBag.Breadcrumbs = new List<AdminFrontend.Models.Breadcrump>
+    {
+        new AdminFrontend.Models.Breadcrump { Title = "Курсы", Action = "Index", Controller = "Courses" },
+        new AdminFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
 }
 
-<h2>Результаты экзаменов по курсу</h2>
+<h2>Результаты экзаменов</h2>
 
 <div class="rcp-table-container">
     <table class="rcp-table">

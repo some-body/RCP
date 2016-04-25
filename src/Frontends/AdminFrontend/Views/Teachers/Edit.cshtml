@@ -1,5 +1,13 @@
 ﻿@model AdminFrontend.ViewModels.TeacherEditViewModel
 
+@{ 
+    ViewBag.Breadcrumbs = new List<AdminFrontend.Models.Breadcrump>
+    {
+        new AdminFrontend.Models.Breadcrump { Title = "Учителя", Action = "Index", Controller = "Teachers" },
+        new AdminFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
+}
+
 <h2>@ViewBag.Title</h2>
 
 <div id="teacher-edit-table">

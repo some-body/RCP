@@ -1,6 +1,10 @@
 ﻿@model AdminFrontend.ViewModels.WorkersViewModel
 @{
     ViewBag.Title = "Работники";
+    ViewBag.Breadcrumbs = new List<AdminFrontend.Models.Breadcrump>
+    {
+        new AdminFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
 }
 
 <h2>Работники</h2>

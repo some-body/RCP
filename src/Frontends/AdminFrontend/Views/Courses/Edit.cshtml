@@ -1,5 +1,13 @@
 ﻿@model int
 
+@{
+    ViewBag.Breadcrumbs = new List<AdminFrontend.Models.Breadcrump>
+    {
+        new AdminFrontend.Models.Breadcrump { Title = "Курсы", Action = "Index", Controller = "Courses" },
+        new AdminFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
+}
+
 <h2>@ViewBag.Title</h2>
 
 <style>

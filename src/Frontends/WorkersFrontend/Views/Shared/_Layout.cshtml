@@ -11,6 +11,22 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/rcp.js"></script>
+
+    <style>
+        .connector {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .unclickable{
+            cursor: default;
+        }
+        .unhighlighted:hover{
+            color: #999 !important;
+        }
+        .highlighted{
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,6 +38,23 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("RCP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @{
+                    if (ViewBag.Breadcrumbs != null)
+                    {
+                        foreach (WorkersFrontend.Models.Breadcrump breadcrumb in ViewBag.Breadcrumbs)
+                        {
+                            <span class="navbar-brand unclickable unhighlighted connector">></span>
+                            if (breadcrumb.Unclickable)
+                            {
+                                <span class="navbar-brand unclickable">@breadcrumb.Title</span>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(breadcrumb.Title, breadcrumb.Action, breadcrumb.Controller, new { area = "" }, new { @class = "navbar-brand" })
+                            }
+                        }
+                    }
+                }
                 @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn" })
              </div>
             <div class="navbar-collapse collapse" hidden>

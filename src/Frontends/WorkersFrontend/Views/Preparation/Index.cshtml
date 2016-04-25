@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Курсы";
+    ViewBag.Breadcrumbs = new List<WorkersFrontend.Models.Breadcrump>
+    {
+        new WorkersFrontend.Models.Breadcrump { Title = ViewBag.Title, Unclickable = true }
+    };
 }
 
 <style>
@@ -13,7 +17,7 @@
 <h2>Курсы</h2>
 
 <div>
-    @foreach(var course in Model.Courses)
+    @foreach (var course in Model.Courses)
     {
         <div class="course-info">
             <h3>
