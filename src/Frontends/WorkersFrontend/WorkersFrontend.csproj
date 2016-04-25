@@ -111,6 +111,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Auth\RCPAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\PreparationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -144,7 +145,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\StartExam.cshtml" />
-    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Auth\SignIn.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Distributed\Distributed.csproj">

@@ -18,11 +18,12 @@ namespace WorkersFrontend.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(RedirectViewModel model)
+        public ActionResult SignIn(RedirectViewModel model)
         {
             var authViewModel = new AuthViewModel
             {
-                ReturnToUrl = model.ReturnToUrl
+                ReturnToUrl = model.ReturnToUrl,
+                Error = model.Error
             };
 
             return View(authViewModel);
@@ -33,6 +34,15 @@ namespace WorkersFrontend.Controllers
         {
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
 
+            if (string.IsNullOrWhiteSpace(model.Login) || string.IsNullOrWhiteSpace(model.Password))
+            {
+                return RedirectToAction("SignIn", new RedirectViewModel
+                {
+                    ReturnToUrl = redirectUrl,
+                    Error = "Логин и пароль не могут быть пустыми"
+                });
+            }
+
             var loginDto = new LoginDto
             {
                 Login = model.Login,
@@ -42,9 +52,10 @@ namespace WorkersFrontend.Controllers
             var result = _sessionQueryProvider.Post<WorkerSignInDto, LoginDto>("api/Workers/SignIn", loginDto);
             if(result == null)
             {
-                return RedirectToAction("Index", new RedirectViewModel
+                return RedirectToAction("SignIn", new RedirectViewModel
                 {
-                    ReturnToUrl = redirectUrl
+                    ReturnToUrl = redirectUrl,
+                    Error = "Неверная пара логин/пароль"
                 });
             }
             else
@@ -68,7 +79,7 @@ namespace WorkersFrontend.Controllers
                 Response.Cookies.Remove("token");
                 _sessionQueryProvider.Post<int?, string>("api/Workers/SignOut", tokenCookie.Value);
             }
-            return RedirectToAction("Index", "Home", null);
+            return RedirectToAction("SignIn", "Home", null);
         }
     }
 }

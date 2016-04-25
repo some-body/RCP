@@ -4,6 +4,7 @@ using Domain.Dto;
 using Domain.Entities;
 using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace AdminFrontend.Auth
@@ -52,8 +53,12 @@ namespace AdminFrontend.Auth
 
         private void RedirectToAuth(ActionExecutingContext filterContext)
         {
-            var authUrl = "/Auth/Index?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
+            var redirectParam = "ReturnToUrl=" + filterContext.HttpContext.Request.Url;
+            //var errorParam = "error=" + HttpUtility.UrlEncode("Данное действие требует авторизации");
+            var authUrl = "/Auth/SignIn?" + redirectParam;// + "&" + errorParam;
             filterContext.Result = new RedirectResult(authUrl);
+
+            //filterContext.Result = new RedirectToRouteResult()
         }
     }
 }

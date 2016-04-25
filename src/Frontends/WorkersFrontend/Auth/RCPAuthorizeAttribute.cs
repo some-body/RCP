@@ -41,7 +41,7 @@ namespace WorkersFrontend.Auth
 
         private void RedirectToAuth(ActionExecutingContext filterContext)
         {
-            var authUrl = "/Auth/Index?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
+            var authUrl = "/Auth/SignIn?ReturnToUrl=" + filterContext.HttpContext.Request.Url;
             filterContext.Result = new RedirectResult(authUrl);
         }
     }

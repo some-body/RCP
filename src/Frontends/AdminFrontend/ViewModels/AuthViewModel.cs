@@ -11,5 +11,7 @@ namespace AdminFrontend.ViewModels
 
         [Required(ErrorMessage = "Поле Логин обязательно для заполнения")]
         public string Password { get; set; }
+
+        public string Error { get; set; }
     }
 }

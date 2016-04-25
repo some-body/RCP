@@ -27,3 +27,10 @@
     </table>
     <div><input class="rcp-button rcp-button-min" type="submit" value="Вход" /></div>
 }
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <script>
+        alert('@Model.Error');
+    </script>
+}

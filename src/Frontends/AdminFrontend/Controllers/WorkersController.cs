@@ -213,8 +213,7 @@ namespace AdminFrontend.Controllers
                     {
                         CourseName = allCourses.FirstOrDefault(c => c.Id == e.CourseId).Name,
                         Date = e.Date.ToShortDateString(),
-                        Percentage = e.Percentage,
-                        Result = e.IsSuccess ? "сдано" : "не сдано"
+                        Result = e.Percentage + " ,баллов, " + (e.IsSuccess ? "сдано" : "не сдано")
                     }),
                 CoursesAreAvailable = coursesAreAvailable,
                 ExamResultsAreAvailable = examResultsAreAvailable

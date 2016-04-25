@@ -17,11 +17,12 @@ namespace AdminFrontend.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(RedirectViewModel model)
+        public ActionResult SignIn(RedirectViewModel model)
         {
             var authViewModel = new AuthViewModel
-            {
-                ReturnToUrl = model.ReturnToUrl
+            { 
+                ReturnToUrl = model.ReturnToUrl,
+                Error = model.Error
             };
 
             return View(authViewModel);
@@ -33,9 +34,10 @@ namespace AdminFrontend.Controllers
             var redirectUrl = HttpUtility.UrlDecode(model.ReturnToUrl);
             if (string.IsNullOrWhiteSpace(model.Login) || string.IsNullOrWhiteSpace(model.Password))
             {
-                return RedirectToAction("Index", new RedirectViewModel
+                return RedirectToAction("SignIn", new RedirectViewModel
                 {
-                    ReturnToUrl = redirectUrl
+                    ReturnToUrl = redirectUrl,
+                    Error = "Логин и пароль не могут быть пустыми"
                 });
             }
 
@@ -48,12 +50,13 @@ namespace AdminFrontend.Controllers
             var result = _sessionQueryProvider.Post<WorkerSignInDto, LoginDto>("api/SystemUsers/SignIn", loginDto);
             if(result == null)
             {
-                var url = "/Auth/Index?ReturnToUrl=" + redirectUrl;
-                return Redirect(url);
-                //return RedirectToAction("Index", "Auth", new RedirectViewModel
-                //{
-                //    ReturnToUrl = redirectUrl
-                //});
+                //var url = "/Auth/Index?ReturnToUrl=" + redirectUrl;
+                //return Redirect(url);
+                return RedirectToAction("SignIn", new RedirectViewModel
+                {
+                    ReturnToUrl = redirectUrl,
+                    Error = "Неверная пара логин/пароль"
+                });
             }
             else
             {

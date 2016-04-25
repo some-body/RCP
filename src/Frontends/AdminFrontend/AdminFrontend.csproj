@@ -162,7 +162,7 @@
     <Content Include="Views\Workers\EditByTeacher.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\SystemPassword\Index.cshtml" />
-    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Auth\SignIn.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
