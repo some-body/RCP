@@ -203,7 +203,7 @@ namespace AdminFrontend.Controllers
                     ? allCourses.Select(c => new AppointedCourseViewModel
                     {
                         Id = c.Id,
-                        Name = c.Name,
+                        Name = c.Name + ". " + c.Description + ".",
                         IsChecked = coursesIds.Contains(c.Id)
                     }).ToList()
                     : new List<AppointedCourseViewModel>(),
@@ -213,7 +213,7 @@ namespace AdminFrontend.Controllers
                     {
                         CourseName = allCourses.FirstOrDefault(c => c.Id == e.CourseId).Name,
                         Date = e.Date.ToShortDateString(),
-                        Result = e.Percentage + " ,баллов, " + (e.IsSuccess ? "сдано" : "не сдано")
+                        Result = e.Percentage + " баллов, " + (e.IsSuccess ? "сдано" : "не сдано")
                     }),
                 CoursesAreAvailable = coursesAreAvailable,
                 ExamResultsAreAvailable = examResultsAreAvailable

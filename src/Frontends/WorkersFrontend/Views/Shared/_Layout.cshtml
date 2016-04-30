@@ -57,7 +57,8 @@
                         }
                     }
                 }
-                @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn" })
+                @Html.ActionLink("Выход", "SignOut", "Auth", new { area = "" }, new { @class = "navbar-brand exit-btn right-menu-btn" })
+                @Html.ActionLink("О системе", "About", "Home", new { area = "" }, new { @class = "navbar-brand right-menu-btn" })
              </div>
             <div class="navbar-collapse collapse" hidden>
                 <ul class="nav navbar-nav">
