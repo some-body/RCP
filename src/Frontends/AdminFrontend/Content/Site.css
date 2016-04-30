@@ -131,7 +131,8 @@ label {
 }
 .rcp-table-head {
     border-bottom: 2px double #000000;
-    background: #c8c8c8;
+    background: rgb(51, 68, 179);
+    color: aliceblue;
 }
 .rcp-table-footer {
     border: 1px solid #000000;
@@ -167,10 +168,10 @@ tr .rcp-table-btn-column:first-of-type {
 }
 
 
+
 .central-container {
     text-align: center;
 }
-
 
 .form-input-title {
     font-size: 14pt;

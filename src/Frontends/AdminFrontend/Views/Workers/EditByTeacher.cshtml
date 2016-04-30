@@ -32,7 +32,7 @@
     <!-- /ko -->
 
     <h3>Результаты экзаменов</h3>
-    <!-- ko if: ExamResultsAreAvailable() -->
+    <!-- ko if: ExamResultsAreAvailable() && ExamResults.length > 0 -->
         <div class="rcp-table-container">
             <table class="rcp-table">
                 <thead class="rcp-table-head">
@@ -51,6 +51,9 @@
                 </tbody>
             </table>
         </div>    
+    <!-- /ko -->
+    <!-- ko if: ExamResults.length == 0 -->
+        <div>Результаты экзаменов отсутствуют</div>
     <!-- /ko -->
     <!-- ko ifnot: ExamResultsAreAvailable() -->
         <div>Недоступно</div>
