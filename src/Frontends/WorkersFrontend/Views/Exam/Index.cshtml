@@ -11,16 +11,27 @@
 <h2>Курсы, по которым необходимо пройти экзамен</h2>
 
 <div>
-    @foreach (var course in Model.Courses)
+
+    @if (Model.Courses.Any())
     {
-        <div class="course-info">
-            <h2>
-                @Html.ActionLink(course.Name, "StartExam", new { courseId = course.Id })
-            </h2>
-            <div>
-                @course.Description
+        foreach (var course in Model.Courses)
+        {
+            <div class="course-info">
+                <h2>
+                    @Html.ActionLink(course.Name, "StartExam", new { courseId = course.Id })
+                </h2>
+                <div>
+                    @course.Description
+                </div>
+                @if (Model.Courses.Last() != course)
+                {
+                    <hr />
+                }
             </div>
-            <hr />
-        </div>
+        }
+    }
+    else
+    {
+        <div>Нет курсов, по которым необходимо проходить экзамен</div>
     }
 </div>

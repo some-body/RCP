@@ -16,9 +16,8 @@ textarea {
     max-width: 280px;
 }
 
-
 .rcp-button {
-    background-color: darkgray; /* Green */
+    background-color: rgb(51, 68, 179);
     border: none;
     color: white !important;
     padding: 15px 32px;
@@ -33,14 +32,16 @@ textarea {
     font-size: 16px;
 }
 .rcp-button:hover {
-    background-color: #808080;
+    background-color: rgb(28, 47, 169);
     text-decoration: none !important;
 }
 
 .home-buttons-container {
     text-align: center;
 }
-
+.home-btn-container {
+    display: inline-block;
+}
 .home-page-btn {
     width: 300px;
     height: 300px;
@@ -48,7 +49,10 @@ textarea {
     vertical-align: middle;
     padding: 0;
     line-height: 300px;
-    font-size: 24pt;
+    font-size: 42pt;
+}
+.btn-bottom-title {
+    font-size: 16pt;
 }
 
 .home-page-header {
@@ -71,4 +75,25 @@ label {
 
 .footer {
     text-align: center;
+}
+
+
+.central-container {
+    text-align: center;
+}
+
+
+.form-input-title {
+    font-size: 14pt;
+    margin-top: 20px;
+}
+.form-input, .form-submit-btn {
+    width: 300px;
+}
+.form-submit-btn{
+    margin-top: 20px;
+}
+
+.form-input {
+    font-size: 18pt;
 }

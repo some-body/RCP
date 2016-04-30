@@ -1,16 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Учительская";
+    ViewBag.Title = "Управление контентом";
 }
 
-<style>
-    .navbar {
-        /*display: none;*/
-    }
-</style>
-
-<h2 class="home-page-header">Учительская</h2>
+<h2 class="home-page-header">@ViewBag.Title</h2>
 
 <div class="home-buttons-container">
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">Работники</a>
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Courses")">Курсы</a>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">
+            <i class="fa fa-users"></i>
+        </a>
+        <div class="btn-bottom-title">Работники</div>
+    </div>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Courses")">
+            <i class="fa fa-book"></i>
+        </a>
+        <div class="btn-bottom-title">Курсы</div>
+    </div>
 </div>

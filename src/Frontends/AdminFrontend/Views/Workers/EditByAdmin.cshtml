@@ -8,22 +8,16 @@
     };
 }
 
-<div id="worker-edit-table">
-    <table>
-        <tr>
-            <td>ФИО</td>
-            <td><input data-bind="value: FullName" /></td>
-        </tr>
-        <tr>
-            <td>Логин</td>
-            <td><input data-bind="value: Login" /></td>
-        </tr>
-        <tr>
-            <td>Пароль</td>
-            <td><input type="password" data-bind="value: Password" /></td>
-        </tr>
-    </table>
-    <button class="rcp-button rcp-button-min" data-bind="click: save">Сохранить</button>
+<div class="central-container" id="worker-edit-table">
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form-input-title">ФИО</div>
+    <div><input class="form-input" data-bind="value: FullName" /></div>
+    <div class="form-input-title">Логин</div>
+    <div><input class="form-input" data-bind="value: Login" /></div>
+    <div class="form-input-title">Пароль</div>
+    <div><input class="form-input" type="password" data-bind="value: Password" /></div>
+    <button class="rcp-button form-submit-btn" data-bind="click: save">Сохранить</button>
 </div>
 
 <script type="text/javascript">

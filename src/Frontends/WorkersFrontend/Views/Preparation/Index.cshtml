@@ -17,16 +17,26 @@
 <h2>Курсы</h2>
 
 <div>
-    @foreach (var course in Model.Courses)
+    @if (Model.Courses.Any())
     {
-        <div class="course-info">
-            <h3>
-                @Html.ActionLink(course.Name, "Course", new { id = course.Id })
-            </h3>
-            <div>
-                @course.Description
+        foreach (var course in Model.Courses)
+        {
+            <div class="course-info">
+                <h3>
+                    @Html.ActionLink(course.Name, "Course", new { id = course.Id })
+                </h3>
+                <div>
+                    @course.Description
+                </div>
+                @if (Model.Courses.Last() != course)
+                {
+                    <hr />
+                }
             </div>
-            <hr />
-        </div>
+        }
+    }
+    else
+    {
+        <div>Курсы отсутствуют</div>
     }
 </div>

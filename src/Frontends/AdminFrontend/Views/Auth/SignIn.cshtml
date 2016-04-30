@@ -10,23 +10,21 @@
     }
 </style>
 
-<h2>Авторизация</h2>
+<div class="central-container">
+    <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Index1", "Auth", FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.ReturnToUrl);
-    <table>
-        <tr>
-            <td>Логин</td>
-            <td>@Html.TextBoxFor(m => m.Login)</td>
-        </tr>
-        <tr>
-            <td>Пароль</td>
-            <td>@Html.PasswordFor(m => m.Password)</td>
-        </tr>
-    </table>
-    <div><input class="rcp-button rcp-button-min" type="submit" value="Вход" /></div>
-}
+    @using (Html.BeginForm("Index1", "Auth", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ReturnToUrl);
+        <div class="form-input-title">Логин</div>
+        <div>
+            @Html.TextBoxFor(m => m.Login, new { @class= "form-input" })
+        </div>
+        <div class="form-input-title">Пароль</div>
+        <div>@Html.PasswordFor(m => m.Password, new { @class = "form-input" })</div>
+        <div><input class="rcp-button form-submit-btn" type="submit" value="Вход" /></div>
+    }
+</div>
 
 @if (!string.IsNullOrWhiteSpace(Model.Error))
 {

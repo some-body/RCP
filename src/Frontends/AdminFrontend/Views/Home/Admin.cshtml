@@ -1,17 +1,26 @@
 ﻿@{
-    ViewBag.Title = "Админка";
+    ViewBag.Title = "Управление системой";
 }
 
-<style>
-    .navbar {
-        /*display: none;*/
-    }
-</style>
-
-<h2 class="home-page-header">Админка</h2>
+<h2 class="home-page-header">@ViewBag.Title</h2>
 
 <div class="home-buttons-container">
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">Работники</a>
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Teachers")">Учителя</a>
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "SystemPassword")">Смена пароля</a>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Workers")">
+            <i class="fa fa-users"></i>
+        </a>
+        <div class="btn-bottom-title">Работники</div>
+    </div>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Teachers")">
+            <i class="fa fa-graduation-cap"></i>
+        </a>
+        <div class="btn-bottom-title">Учителя</div>
+    </div>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "SystemPassword")">
+            <i class="fa fa-key"></i>
+        </a>
+        <div class="btn-bottom-title">Смена пароля</div>
+    </div>
 </div>

@@ -8,20 +8,15 @@
     };
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="central-container" id="teacher-edit-table">
+    <h2>@ViewBag.Title</h2>
 
-<div id="teacher-edit-table">
-    <table>
-        <tr>
-            <td>Логин</td>
-            <td>@Html.TextBoxFor(m => m.Login, new { data_bind = "value: Login" })</td>
-        </tr>
-        <tr>
-            <td>Пароль</td>
-            <td>@Html.PasswordFor(m => m.Password, new { data_bind = "value: Password" })</td>
-        </tr>
-    </table>
-    <button class="rcp-button rcp-button-min" id="btn-submit">Сохранить</button>
+    <div class="form-input-title">Логин</div>
+    <div>@Html.TextBoxFor(m => m.Login, new { data_bind = "value: Login", @class="form-input" })</div>
+    <div class="form-input-title">Пароль</div>
+    <div>@Html.PasswordFor(m => m.Password, new { data_bind = "value: Password", @class = "form-input" })</div>
+
+    <button class="rcp-button form-submit-btn" id="btn-submit">Сохранить</button>
 </div>
 
 <script type="text/javascript">

@@ -9,9 +9,19 @@
     }
 </style>
 
-<h2 class="home-page-header">Главная</h2>
+<h2 class="home-page-header">@ViewBag.Title</h2>
 
 <div class="home-buttons-container">
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Exam")">Экзамен</a>
-    <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Preparation")">Подготовка</a>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Exam")">
+            <i class="fa fa-pencil"></i>
+        </a>
+        <div class="btn-bottom-title">Экзамен</div>
+    </div>
+    <div class="home-btn-container">
+        <a class="button rcp-button home-page-btn" href="@Url.Action("Index", "Preparation")">
+            <i class="fa fa-book"></i>
+        </a>
+        <div class="btn-bottom-title">Подготовка</div>
+    </div>
 </div>

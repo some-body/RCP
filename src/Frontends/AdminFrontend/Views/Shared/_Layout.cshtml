@@ -15,8 +15,9 @@
 
     <style>
         .connector {
-            padding-left: 0;
-            padding-right: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-size: 16pt;
         }
         .unclickable{
             cursor: default;
@@ -44,7 +45,7 @@
                     {
                         foreach (AdminFrontend.Models.Breadcrump breadcrumb in ViewBag.Breadcrumbs)
                         {
-                            <span class="navbar-brand unclickable unhighlighted connector">></span>
+                            <span class="navbar-brand unclickable unhighlighted connector">»</span>
                             if (breadcrumb.Unclickable)
                             {
                                 <span class="navbar-brand unclickable unhighlighted">@breadcrumb.Title</span>
