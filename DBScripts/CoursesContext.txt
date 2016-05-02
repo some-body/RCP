@@ -1,0 +1,91 @@
+-- Table: public."Courses"
+
+-- DROP TABLE public."Courses";
+
+CREATE TABLE public."Courses"
+(
+  "Discriminator" varchar,
+  "Id" serial PRIMARY KEY,
+  "Name" text,
+  "Description" text,
+  "MaterialText" text,
+  "MinPercentage" integer
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."Courses"
+  OWNER TO postgres;
+
+
+
+
+
+
+-- Table: public."Questions"
+
+-- DROP TABLE public."Questions";
+
+CREATE TABLE public."Questions"
+(
+  "Discriminator" character varying,
+  "Id" integer NOT NULL DEFAULT nextval('"Questions_Id_seq"'::regclass),
+  "Text" text,
+  "Course_Id" integer,
+  CONSTRAINT "Questions_pkey" PRIMARY KEY ("Id"),
+  CONSTRAINT "FK_Questions_Courses_Course_Id" FOREIGN KEY ("Course_Id")
+      REFERENCES public."Courses" ("Id") MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."Questions"
+  OWNER TO postgres;
+
+-- Index: public."FKI_Questions_Courses_Course_Id"
+
+-- DROP INDEX public."FKI_Questions_Courses_Course_Id";
+
+CREATE INDEX "FKI_Questions_Courses_Course_Id"
+  ON public."Questions"
+  USING btree
+  ("Course_Id");
+
+
+
+
+
+
+
+-- Table: public."Answers"
+
+-- DROP TABLE public."Answers";
+
+CREATE TABLE public."Answers"
+(
+  "Discriminator" character varying,
+  "Id" integer NOT NULL DEFAULT nextval('"Answers_Id_seq"'::regclass),
+  "Text" text,
+  "IsCorrect" boolean,
+  "Question_Id" integer,
+  CONSTRAINT "Answers_pkey" PRIMARY KEY ("Id"),
+  CONSTRAINT "FK_Answers_Questions_Question_Id" FOREIGN KEY ("Question_Id")
+      REFERENCES public."Questions" ("Id") MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."Answers"
+  OWNER TO postgres;
+
+-- Index: public."FKI_Answers_Questions_Question_Id"
+
+-- DROP INDEX public."FKI_Answers_Questions_Question_Id";
+
+CREATE INDEX "FKI_Answers_Questions_Question_Id"
+  ON public."Answers"
+  USING btree
+  ("Question_Id");
+

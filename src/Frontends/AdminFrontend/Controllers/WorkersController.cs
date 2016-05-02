@@ -208,7 +208,7 @@ namespace AdminFrontend.Controllers
                     }).ToList()
                     : new List<AppointedCourseViewModel>(),
                 ExamResults = examResults
-                    .OrderBy(e => e.Date)
+                    .OrderByDescending(e => e.Date)
                     .Select(e => new
                     {
                         CourseName = allCourses.FirstOrDefault(c => c.Id == e.CourseId).Name,

@@ -1,0 +1,19 @@
+-- Table: public."ExamResults"
+
+-- DROP TABLE public."ExamResults";
+
+CREATE TABLE public."ExamResults"
+(
+  "Discriminator" varchar,
+  "Id" serial PRIMARY KEY,
+  "WorkerId" integer,
+  "CourseId" integer,
+  "Percentage" integer,
+  "IsSuccess" boolean,
+  "Date" timestamp with time zone
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."ExamResults"
+  OWNER TO postgres;

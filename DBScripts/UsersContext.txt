@@ -1,0 +1,67 @@
+-- Table: public."SystemUsers"
+
+-- DROP TABLE public."SystemUsers";
+
+CREATE TABLE public."SystemUsers"
+(
+  "Discriminator" varchar,
+  "Id" serial PRIMARY KEY,
+  "Role" varchar,
+  "Login" varchar,
+  "PasswordHash" varchar
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."SystemUsers"
+  OWNER TO postgres;
+
+
+
+
+
+-- Table: public."Workers"
+
+-- DROP TABLE public."Workers";
+
+CREATE TABLE public."Workers"
+(
+  "Discriminator" varchar,
+  "Id" serial PRIMARY KEY,
+  "FullName" varchar,
+  "Login" varchar,
+  "PasswordHash" varchar
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."Workers"
+  OWNER TO postgres;
+
+
+
+
+
+-- Table: public."AppointedCourses"
+
+-- DROP TABLE public."AppointedCourses";
+
+CREATE TABLE public."AppointedCourses"
+(
+  "Discriminator" character varying,
+  "Id" serial PRIMARY KEY,
+  "CourseId" integer,
+  "Worker_Id" integer,
+  CONSTRAINT "FK_AppointedCourses_Workers_Worker_Id" FOREIGN KEY ("Worker_Id")
+      REFERENCES public."Workers" ("Id") MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."AppointedCourses"
+  OWNER TO postgres;
+CREATE INDEX "FK_AppointedCourses_Workers_Worker_Id"
+  ON public."AppointedCourses"
+  USING btree
+  ("Worker_Id");

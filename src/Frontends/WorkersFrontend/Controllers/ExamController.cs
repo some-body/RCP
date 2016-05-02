@@ -113,7 +113,7 @@ namespace WorkersFrontend.Controllers
             if (isPassed)
             {
                 var examResults = _examQueryProvider
-                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResults", "workerId=" + workerId);
+                    .Get<ICollection<ExamResult>>("api/Exam/GetExamResultsForWorker", "workerId=" + workerId);
 
                 var existingWorker = _workersQueryProvider.Get(workerId);
                 var updatedAppointedCourses = existingWorker.AppointedCourses

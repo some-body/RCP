@@ -142,7 +142,9 @@ namespace AdminFrontend.Controllers
 
             var model = new ExamResultsViewModel
             {
-                ExamResults = examResults.Select(e => new ExamResultViewModel
+                ExamResults = examResults
+                .OrderByDescending(e => e.Date)
+                .Select(e => new ExamResultViewModel
                 {
                     FullName = workers.FirstOrDefault(w => w.Id == e.WorkerId)?.FullName ?? "-",
                     ExamDate = e.Date.ToShortDateString(),

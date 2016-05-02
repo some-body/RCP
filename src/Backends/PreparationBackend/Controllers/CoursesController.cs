@@ -57,7 +57,7 @@ namespace PreparationBackend.Controllers
             }
             catch(Exception ex)
             {
-                result.Success = false;
+                  result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
             return result;

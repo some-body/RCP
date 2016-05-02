@@ -79,7 +79,7 @@ namespace WorkersFrontend.Controllers
                 Response.Cookies.Remove("token");
                 _sessionQueryProvider.Post<int?, string>("api/Workers/SignOut", tokenCookie.Value);
             }
-            return RedirectToAction("SignIn", "Home", null);
+            return RedirectToAction("Index", "Home", null);
         }
     }
 }
