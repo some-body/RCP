@@ -2,7 +2,6 @@
 using Domain.Dto;
 using System.Web;
 using System.Web.Mvc;
-using WorkersFrontend.Auth;
 using WorkersFrontend.ViewModels;
 
 namespace WorkersFrontend.Controllers
