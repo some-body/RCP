@@ -6,6 +6,7 @@ using Domain.Entities;
 using Domain.Repositories;
 using System;
 using Tools;
+using ExamBackend.Tools;
 
 namespace ExamBackend.Controllers
 {
@@ -13,17 +14,18 @@ namespace ExamBackend.Controllers
     {
         private IRepository<ExamResult> _examResultsRepository;
         private IRepository<Course> _coursesRepository;
+        private ExamResultChecker _examResultChecker;
 
         public ExamController()
         {
             _examResultsRepository = new ExamResultsRepository();
             _coursesRepository = new CoursesRepository();
+            _examResultChecker = new ExamResultChecker(_coursesRepository);
         }
 
         [HttpGet]
-        public IEnumerable<QuestionDto> GetRandomQuestionsForCourse(int courseId, int count = 3)
+        public IEnumerable<QuestionDto> GetRandomQuestionsForCourse(int courseId, int count = 5)
         {
-            // TODO: Выбирать не все, а пачку
             var questions = _coursesRepository.GetById(courseId)
                 .Questions
                 .RandomSelect(count)
@@ -46,39 +48,14 @@ namespace ExamBackend.Controllers
         [HttpPost]
         public bool SaveExamResult(ExamResultDto result)
         {
-            var course = _coursesRepository.GetById(result.CourseId);
-            if (course == null)
+            var checkedResult = _examResultChecker.Check(result);
+
+            if (checkedResult == null)
                 return false;
 
-            int corrrectQuestionsCount = 0;
-            foreach(var q in course.Questions)
-            {
-                var incorrect = q.Answers
-                    .Where(a => a.IsCorrect)
-                    .Select(a => a.Id ?? 0)
-                    .Except(result.CheckedAnswersIds);
+            _examResultsRepository.Save(checkedResult);
 
-                if (!incorrect.Any())
-                    corrrectQuestionsCount++;
-            }
-
-            float questionsCount = course.Questions.Count;
-            int rank = (int)(100 * corrrectQuestionsCount / questionsCount);
-            bool isPassed = rank >= course.MinPercentage;
-
-            var examResult = new ExamResult
-            {
-                WorkerId = result.WorkerId,
-                CourseId = result.CourseId,
-                Date = DateTime.Now.Date,
-                Percentage = rank,
-                IsSuccess = isPassed
-            };
-
-            examResult.Id = null;
-            _examResultsRepository.Save(examResult);
-
-            return isPassed;
+            return checkedResult.IsSuccess;
         }
 
         [HttpGet]
