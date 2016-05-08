@@ -97,3 +97,21 @@ label {
 .form-input {
     font-size: 18pt;
 }
+
+.fader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: #fff;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.fader i {
+    font-size: 150px;
+    position: fixed;
+    top: calc(50% - 75px);
+    left: calc(50% - 150px);
+}
