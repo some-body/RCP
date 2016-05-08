@@ -64,6 +64,9 @@
                 alert(msg);
                 window.location.replace('@Url.Action("Index", "Exam", null)')
             }
-        );
+        )
+        .fail(function () {
+            window.location.replace('@Url.Action("Default", "Errors")');
+        });
     });
 </script>

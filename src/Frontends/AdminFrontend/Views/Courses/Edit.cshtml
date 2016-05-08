@@ -132,7 +132,10 @@
                         }
                         Fader.hide();
                     }
-                );
+                )
+                .fail(function () {
+                    window.location.replace('@Url.Action("Default", "Errors")');
+                });
             }
 
             ko.applyBindings(viewModel, $('#course-edit-form')[0]);
@@ -144,7 +147,9 @@
             function (data) {
                 init(data);
             }
-            // TODO: Добавить failed
-        );
+        )
+        .fail(function () {
+            window.location.replace('@Url.Action("Default", "Errors")');
+        });
     });
 </script>

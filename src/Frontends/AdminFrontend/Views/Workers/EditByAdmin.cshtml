@@ -39,7 +39,10 @@
                             alert(result.msg);
                         }
                     }
-                );
+                )
+                .fail(function () {
+                    window.location.replace('@Url.Action("Default", "Errors")');
+                });
             }
             ko.applyBindings(viewModel, $('#worker-edit-table')[0]);
             Fader.hide();
@@ -49,6 +52,9 @@
             '@Url.Action("GetWorkerInfoForAdmin", new { id = Model })',
             null,
             init
-        );
+        )
+        .fail(function () {
+            window.location.replace('@Url.Action("Default", "Errors")');
+        });
     });
 </script>

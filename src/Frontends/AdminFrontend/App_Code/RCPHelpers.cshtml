@@ -86,7 +86,10 @@
                         alert(result.msg);
                     }
                 }
-            );
+            )
+            .fail(function () {
+                window.location.replace('/Errors/Default');
+            });
         }
     </script>
 }

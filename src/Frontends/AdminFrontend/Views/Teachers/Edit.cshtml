@@ -39,7 +39,10 @@
                     alert(result.msg);
                 }
             }
-        );
+        )
+        .fail(function () {
+            window.location.replace('@Url.Action("Default", "Errors")');
+        });
     });
 
     ko.applyBindings(viewModel, $('teacher-edit-table')[0]);
