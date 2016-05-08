@@ -32,7 +32,7 @@ namespace SessionBackend.Controllers
         {
             var passwordHash = _hashGenerator.Generate(loginDto.Password);
 
-            var worker =  _workersRepository.GetAll()
+            var worker = _workersRepository.GetAll()
                 .FirstOrDefault(w => w.Login == loginDto.Login && w.PasswordHash == passwordHash);
 
             if (worker == null)

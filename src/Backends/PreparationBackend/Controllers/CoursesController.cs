@@ -5,6 +5,7 @@ using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 
 namespace PreparationBackend.Controllers
@@ -35,15 +36,23 @@ namespace PreparationBackend.Controllers
         // GET: api/Courses/5
         public PreparationCourseDto Get(int id)
         {
-            var course = _courseRepository.GetById(id);
-            return new PreparationCourseDto
+            try
             {
-                Id = course.Id ?? 0,
-                Name = course.Name,
-                Description = course.Description,
-                MaterialText = course.MaterialText,
-                Questions = course.Questions
-            };
+                var course = _courseRepository.GetById(id);
+                return new PreparationCourseDto
+                {
+                    Id = course.Id ?? 0,
+                    Name = course.Name,
+                    Description = course.Description,
+                    MaterialText = course.MaterialText,
+                    Questions = course.Questions
+                };
+            }
+            catch
+            {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                return null;
+            }
         }
 
         // POST: api/Courses
@@ -53,11 +62,13 @@ namespace PreparationBackend.Controllers
             try
             {
                 _courseRepository.Save(entity);
+                ActionContext.Response.StatusCode = HttpStatusCode.Created;
                 result.Success = true;
             }
             catch(Exception ex)
             {
-                  result.Success = false;
+                ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
+                result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
             return result;
@@ -74,6 +85,7 @@ namespace PreparationBackend.Controllers
             }
             catch (Exception ex)
             {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }

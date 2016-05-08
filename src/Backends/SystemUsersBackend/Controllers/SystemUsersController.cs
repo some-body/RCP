@@ -4,6 +4,7 @@ using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using Tools;
 
@@ -31,7 +32,15 @@ namespace SystemUsersBackend.Controllers
         // GET: api/SystemUsers/5
         public SystemUser Get(int id)
         {
-            return _systemUsersRepository.GetById(id);
+            try
+            {
+                return _systemUsersRepository.GetById(id);
+            }
+            catch
+            {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                return null;
+            }
         }
 
         // POST: api/SystemUsers
@@ -45,10 +54,12 @@ namespace SystemUsersBackend.Controllers
             try
             {
                 _systemUsersRepository.Save(entity);
+                ActionContext.Response.StatusCode = HttpStatusCode.Created;
                 result.Success = true;
             }
             catch (Exception ex)
             {
+                ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
@@ -66,6 +77,7 @@ namespace SystemUsersBackend.Controllers
             }
             catch (Exception ex)
             {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }

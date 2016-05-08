@@ -5,6 +5,7 @@ using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using Tools;
 
@@ -37,8 +38,16 @@ namespace WorkersBackend.Controllers
         // GET: api/Workers/5
         public Worker Get(int id)
         {
-            var worker = _workersRepository.GetById(id);
-            return worker;
+            try
+            {
+                var worker = _workersRepository.GetById(id);
+                return worker;
+            }
+            catch
+            {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                return null;
+            }
         }
 
         // POST: api/Workers
@@ -52,10 +61,12 @@ namespace WorkersBackend.Controllers
                     : null;
 
                 _workersRepository.Save(entity);
+                ActionContext.Response.StatusCode = HttpStatusCode.Created;
                 result.Success = true;
             }
             catch (Exception ex)
             {
+                ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
@@ -73,6 +84,7 @@ namespace WorkersBackend.Controllers
             }
             catch (Exception ex)
             {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }

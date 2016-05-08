@@ -7,6 +7,7 @@ using Domain.Repositories;
 using System;
 using Tools;
 using ExamBackend.Tools;
+using System.Net;
 
 namespace ExamBackend.Controllers
 {
@@ -61,17 +62,33 @@ namespace ExamBackend.Controllers
         [HttpGet]
         public IEnumerable<ExamResult> GetExamResultsForWorker(int workerId)
         {
-            return _examResultsRepository
-                .GetAll()
-                .Where(e => e.WorkerId == workerId);
+            try
+            {
+                return _examResultsRepository
+                    .GetAll()
+                    .Where(e => e.WorkerId == workerId);
+            }
+            catch
+            {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                return null;
+            }
         }
 
         [HttpGet]
         public IEnumerable<ExamResult> GetExamResultsForCourse(int courseId)
         {
-            return _examResultsRepository
-                .GetAll()
-                .Where(e => e.CourseId == courseId);
+            try
+            {
+                return _examResultsRepository
+                    .GetAll()
+                    .Where(e => e.CourseId == courseId);
+            }
+            catch
+            {
+                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                return null;
+            }
         }
 
         [HttpPost]
