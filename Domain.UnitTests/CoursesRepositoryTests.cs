@@ -16,7 +16,13 @@ namespace Domain.UnitTests
         public void GetAll_DbContextHasOneRecord_ReturnsTwoRecords()
         {
             // Arrange.
-            var dbContextMoq = new Mock<DbContext>();
+            var dbContextMoq = new Mock<CoursesContext>();
+            var coursesMoq = new Mock<DbSet<Course>>();
+            coursesMoq.
+
+            dbContextMoq
+                .Setup(ctx => ctx.Courses)
+
             var testCoursesSet = new List<Course>
             {
                 new Course
@@ -28,6 +34,8 @@ namespace Domain.UnitTests
                 }
             };
             
+
+
             //var courseRepo = new CoursesRepository(dbContextMoq.Object, 
             //    ctx => testCoursesSet.AsQueryable());
         }
