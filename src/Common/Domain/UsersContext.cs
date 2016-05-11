@@ -1,9 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System.Data.Entity;
 
 namespace Domain
 {
-    public class UsersContext : DbContext
+    public class UsersContext : DbContext, IUsersContext
     {
         public DbSet<SystemUser> SystemUsers { get; set; }
         public DbSet<Worker> Workers { get; set; }

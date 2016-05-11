@@ -1,9 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System.Data.Entity;
 
 namespace Domain
 {
-    public class ExamContext : DbContext
+    public class ExamContext : DbContext, IExamContext
     {
         public DbSet<ExamResult> ExamResults { get; set; }
 

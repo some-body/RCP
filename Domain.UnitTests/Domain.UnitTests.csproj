@@ -75,6 +75,10 @@
       <Project>{58fcad76-8d1a-420d-b720-baf4032bd3df}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestUtils\TestUtils.csproj">
+      <Project>{221ea3c3-94fb-46f1-a746-74e5a0d1b927}</Project>
+      <Name>TestUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

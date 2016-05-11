@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -12,11 +13,17 @@ namespace Domain.Repositories
             _dbContext = new CoursesContext();
         }
 
+        public CoursesRepository(ISaveContext context)
+        {
+            _dbContext = context;
+        }
+
         public override void Update(int id, Course entity)
         {
             if (entity.Questions != null)
             {
-                var existingCourse = GetEntityList().FirstOrDefault(e => e.Id == id);
+                var list = GetEntityList();
+                var existingCourse = list.FirstOrDefault(e => e.Id == id);
 
                 if (existingCourse != null)
                     existingCourse.Questions.Clear();
@@ -24,9 +31,9 @@ namespace Domain.Repositories
             base.Update(id, entity);
         }
 
-        protected override DbSet<Course> GetEntityList()
+        protected override IDbSet<Course> GetEntityList()
         {
-            return ((CoursesContext)_dbContext).Courses;
+            return ((ICoursesContext)_dbContext).Courses;
         }
     }
 }

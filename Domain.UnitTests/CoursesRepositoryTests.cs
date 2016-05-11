@@ -1,11 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain.Repositories;
 using Moq;
 using System.Data.Entity;
 using System.Collections.Generic;
 using Domain.Entities;
 using System.Linq;
+using TestUtils;
+using Domain.Contexts;
 
 namespace Domain.UnitTests
 {
@@ -13,15 +14,50 @@ namespace Domain.UnitTests
     public class CoursesRepositoryTests
     {
         [TestMethod]
-        public void GetAll_DbContextHasOneRecord_ReturnsTwoRecords()
+        public void GetAll_DbContextHasOneRecord_ReturnsOneRecords()
         {
             // Arrange.
-            var dbContextMoq = new Mock<CoursesContext>();
-            var coursesMoq = new Mock<DbSet<Course>>();
-            coursesMoq.
+            var coursesRepo = SetupRepo();
 
-            dbContextMoq
-                .Setup(ctx => ctx.Courses)
+            // Act.
+            var data = coursesRepo.GetAll();
+            var actual = data.Count();
+
+            // Assert.
+            int expected = 1;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Save_SaveCourseWithId1_UpdatingCourse()
+        {
+            // Arrange.
+            var coursesRepo = SetupRepo();
+
+            // Act.
+            var courseToSave = new Course
+            {
+                Id = 1,
+                Name = "TestName2",
+                Description = "TestDescription2",
+                MaterialText = "TestMaterialText2"
+            };
+
+            coursesRepo.Save(courseToSave);
+
+            // Assert.
+            var expectedName = "TestName2";
+
+            var result = coursesRepo.GetById(1);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedName, result.Name);
+        }
+
+        private CoursesRepository SetupRepo()
+        {
+            var dbContextMoq = new Mock<ICoursesContext>();
+            var coursesMoq = new Mock<DbSet<Course>>();
 
             var testCoursesSet = new List<Course>
             {
@@ -33,11 +69,13 @@ namespace Domain.UnitTests
                     MaterialText = "TestMaterialText1"
                 }
             };
-            
+            coursesMoq.SetupIQueryable(testCoursesSet.AsQueryable());
 
+            dbContextMoq
+                .Setup(ctx => ctx.Courses)
+                .Returns(coursesMoq.Object);
 
-            //var courseRepo = new CoursesRepository(dbContextMoq.Object, 
-            //    ctx => testCoursesSet.AsQueryable());
+            return new CoursesRepository(dbContextMoq.Object);
         }
     }
 }

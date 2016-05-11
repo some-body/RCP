@@ -26,7 +26,7 @@ namespace Domain.Repositories
             base.Update(id, entity);
         }
 
-        protected override DbSet<Worker> GetEntityList()
+        protected override IDbSet<Worker> GetEntityList()
         {
             return ((UsersContext)_dbContext).Workers;
         }

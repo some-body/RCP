@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Domain.Repositories
     public abstract class Repository<T> : IRepository<T>
         where T : Entity
     {
-        protected static DbContext _dbContext;
+        protected static ISaveContext _dbContext;
 
         static Repository()
         {
@@ -65,7 +66,7 @@ namespace Domain.Repositories
         public void Patch(int id, T entity)
         {
             entity.Id = null;
-            var existingEntity = GetEntityList().Find(id);
+            var existingEntity = GetEntityList().FirstOrDefault(e => e.Id == id);
             if (existingEntity == null)
                 throw new EntityNotFoundException();
 
@@ -77,7 +78,7 @@ namespace Domain.Repositories
         {
             entity.Id = null;
 
-            var existingEntity = GetEntityList().Find(id);
+            var existingEntity = GetEntityList().FirstOrDefault(e => e.Id == id);
             if (existingEntity == null)
                 throw new EntityNotFoundException();
 
@@ -110,7 +111,7 @@ namespace Domain.Repositories
             }
         }
 
-        protected abstract DbSet<T> GetEntityList();
+        protected abstract IDbSet<T> GetEntityList();
 
         /*
         public static Repository<TEntity> For<TEntity>() where TEntity : Entity

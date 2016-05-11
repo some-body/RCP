@@ -10,7 +10,7 @@ namespace Domain.Repositories
             _dbContext = new ExamContext();
         }
 
-        protected override DbSet<ExamResult> GetEntityList()
+        protected override IDbSet<ExamResult> GetEntityList()
         {
             return ((ExamContext)_dbContext).ExamResults;
         }

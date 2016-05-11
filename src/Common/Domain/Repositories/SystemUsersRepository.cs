@@ -10,7 +10,7 @@ namespace Domain.Repositories
             _dbContext = new UsersContext();
         }
 
-        protected override DbSet<SystemUser> GetEntityList()
+        protected override IDbSet<SystemUser> GetEntityList()
         {
             return ((UsersContext)_dbContext).SystemUsers;
         }

@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\IExamContext.cs" />
+    <Compile Include="Contexts\IUsersContext.cs" />
+    <Compile Include="Contexts\ISaveContext.cs" />
+    <Compile Include="Contexts\ICoursesContext.cs" />
     <Compile Include="Dto\ExamResultDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\PreparationCourseDto.cs" />
