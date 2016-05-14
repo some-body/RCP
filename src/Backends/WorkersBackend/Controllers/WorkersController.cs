@@ -45,7 +45,7 @@ namespace WorkersBackend.Controllers
             }
             catch
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 return null;
             }
         }
@@ -61,12 +61,12 @@ namespace WorkersBackend.Controllers
                     : null;
 
                 _workersRepository.Save(entity);
-                ActionContext.Response.StatusCode = HttpStatusCode.Created;
+                //ActionContext.Response.StatusCode = HttpStatusCode.Created;
                 result.Success = true;
             }
             catch (Exception ex)
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
+                //ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
@@ -84,7 +84,7 @@ namespace WorkersBackend.Controllers
             }
             catch (Exception ex)
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }

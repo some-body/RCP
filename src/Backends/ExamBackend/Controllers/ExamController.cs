@@ -70,7 +70,7 @@ namespace ExamBackend.Controllers
             }
             catch
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 return null;
             }
         }
@@ -86,7 +86,7 @@ namespace ExamBackend.Controllers
             }
             catch
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 return null;
             }
         }

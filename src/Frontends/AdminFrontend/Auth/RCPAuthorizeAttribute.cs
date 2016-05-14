@@ -21,7 +21,7 @@ namespace AdminFrontend.Auth
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var rolesArr = Roles.Split(',')
+           var rolesArr = Roles.Split(',')
                 .Select(r => r.Trim())
                 .ToList();
             

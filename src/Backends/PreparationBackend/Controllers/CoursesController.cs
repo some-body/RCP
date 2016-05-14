@@ -50,7 +50,7 @@ namespace PreparationBackend.Controllers
             }
             catch
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 return null;
             }
         }
@@ -62,12 +62,12 @@ namespace PreparationBackend.Controllers
             try
             {
                 _courseRepository.Save(entity);
-                ActionContext.Response.StatusCode = HttpStatusCode.Created;
+                //ActionContext.Response.StatusCode = HttpStatusCode.Created;
                 result.Success = true;
             }
             catch(Exception ex)
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
+                //ActionContext.Response.StatusCode = HttpStatusCode.InternalServerError;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
@@ -85,7 +85,7 @@ namespace PreparationBackend.Controllers
             }
             catch (Exception ex)
             {
-                ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
+                //ActionContext.Response.StatusCode = HttpStatusCode.NotFound;
                 result.Success = false;
                 result.Message = ex.GetBaseException().Message;
             }
