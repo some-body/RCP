@@ -98,6 +98,15 @@ namespace AdminFrontend.Controllers
             if (!ModelState.IsValid)
                 return Json("Проверьте правильность заполненных полей");
 
+            if (model.Questions == null)
+                model.Questions = new List<Question>();
+
+            foreach(var q in model.Questions)
+            {
+                if (q.Answers == null)
+                    q.Answers = new List<Answer>();
+            }
+
             var result = _courseQueryProvider.Post(model);
             var msg = result.Success
                 ? "Успех"

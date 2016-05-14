@@ -54,7 +54,7 @@ CREATE TABLE public."AppointedCourses"
   "Worker_Id" integer,
   CONSTRAINT "FK_AppointedCourses_Workers_Worker_Id" FOREIGN KEY ("Worker_Id")
       REFERENCES public."Workers" ("Id") MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (
   OIDS=FALSE

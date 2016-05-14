@@ -29,13 +29,13 @@ ALTER TABLE public."Courses"
 CREATE TABLE public."Questions"
 (
   "Discriminator" character varying,
-  "Id" integer NOT NULL DEFAULT nextval('"Questions_Id_seq"'::regclass),
+  "Id" serial NOT NULL,
   "Text" text,
   "Course_Id" integer,
   CONSTRAINT "Questions_pkey" PRIMARY KEY ("Id"),
   CONSTRAINT "FK_Questions_Courses_Course_Id" FOREIGN KEY ("Course_Id")
       REFERENCES public."Courses" ("Id") MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (
   OIDS=FALSE
@@ -65,14 +65,14 @@ CREATE INDEX "FKI_Questions_Courses_Course_Id"
 CREATE TABLE public."Answers"
 (
   "Discriminator" character varying,
-  "Id" integer NOT NULL DEFAULT nextval('"Answers_Id_seq"'::regclass),
+  "Id" serial NOT NULL,
   "Text" text,
   "IsCorrect" boolean,
   "Question_Id" integer,
   CONSTRAINT "Answers_pkey" PRIMARY KEY ("Id"),
   CONSTRAINT "FK_Answers_Questions_Question_Id" FOREIGN KEY ("Question_Id")
       REFERENCES public."Questions" ("Id") MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (
   OIDS=FALSE
