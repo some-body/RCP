@@ -14,7 +14,7 @@ namespace Domain.UnitTests
     public class CoursesRepositoryTests
     {
         [TestMethod]
-        public void GetAll_DbContextHasOneRecord_ReturnsOneRecords()
+        public void Courses_GetAll_DbContextHasOneRecord_ReturnsOneRecords()
         {
             // Arrange.
             var coursesRepo = SetupRepo();
@@ -29,7 +29,7 @@ namespace Domain.UnitTests
         }
 
         [TestMethod]
-        public void Save_SaveCourseWithId1_UpdatingCourse()
+        public void Courses_Save_SaveCourseWithId1_UpdatingCourse()
         {
             // Arrange.
             var coursesRepo = SetupRepo();

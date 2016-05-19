@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System.Data.Entity;
 
 namespace Domain.Repositories
@@ -10,9 +11,14 @@ namespace Domain.Repositories
             _dbContext = new UsersContext();
         }
 
+        public SystemUsersRepository(ISaveContext context)
+        {
+            _dbContext = context;
+        }
+
         protected override IDbSet<SystemUser> GetEntityList()
         {
-            return ((UsersContext)_dbContext).SystemUsers;
+            return ((IUsersContext)_dbContext).SystemUsers;
         }
     }
 }

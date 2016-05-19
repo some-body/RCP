@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Contexts;
+using Domain.Entities;
 using System.Data.Entity;
 using System.Linq;
 
@@ -9,6 +10,11 @@ namespace Domain.Repositories
         public WorkersRepository()
         {
             _dbContext = new UsersContext();
+        }
+
+        public WorkersRepository(ISaveContext context)
+        {
+            _dbContext = context;
         }
 
         public override void Update(int id, Worker entity)
@@ -28,7 +34,7 @@ namespace Domain.Repositories
 
         protected override IDbSet<Worker> GetEntityList()
         {
-            return ((UsersContext)_dbContext).Workers;
+            return ((IUsersContext)_dbContext).Workers;
         }
     }
 }
